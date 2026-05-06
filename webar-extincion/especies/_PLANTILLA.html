@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║           WildAR — PLANTILLA PARA NUEVA ESPECIE             ║
+  ║  Instrucciones:                                             ║
+  ║  1. Copia este archivo con el nombre: {especie}.html        ║
+  ║  2. Busca todos los comentarios <!-- EDITAR -->             ║
+  ║  3. Reemplaza los valores con los de tu nueva especie       ║
+  ║  4. Agrega un enlace en index.html                          ║
+  ╚══════════════════════════════════════════════════════════════╝
+  -->
+  <title>WildAR — <!-- EDITAR: Nombre de la especie --></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/ar-page.css"/>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+</head>
+<body>
+
+  <div id="cam-permission">
+    <div class="perm-icon">📷</div>
+    <h1 class="perm-title">Acceso a la cámara</h1>
+    <!-- EDITAR: ajusta el texto con el nombre de tu especie -->
+    <p class="perm-text">Esta experiencia AR necesita tu cámara para mostrar [NOMBRE ESPECIE] en tu entorno.</p>
+    <button class="perm-btn" onclick="startAR()">Activar AR</button>
+  </div>
+
+  <div id="loading-screen" class="hidden">
+    <div class="loading-logo">◈ WildAR</div>
+    <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
+    <!-- EDITAR -->
+    <p class="loading-text">Cargando [NOMBRE ESPECIE]...</p>
+  </div>
+
+  <a-scene id="ar-scene" class="hidden"
+    embedded
+    arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+    vr-mode-ui="enabled: false"
+    renderer="logarithmicDepthBuffer: true; colorManagement: true;">
+
+    <a-marker preset="hiro" smooth="true" smoothCount="10">
+
+      <!--
+        EDITAR: Personaliza los colores del anillo según el hábitat:
+        - Selva: #2d7a4f (verde)
+        - Océano: #006699 (azul)
+        - Desierto: #b8860b (dorado)
+        - Montaña: #4a4a6a (gris-morado)
+      -->
+      <a-ring color="#2d7a4f" radius-inner="0.4" radius-outer="0.5"
+        position="0 0.01 0" rotation="-90 0 0"
+        animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 6000; easing: linear">
+      </a-ring>
+
+      <!--
+        EDITAR: Cambia el emoji por el que mejor represente tu especie.
+        Ejemplos: 🦅 🐘 🦓 🐻 🦁 🦚 🐊 🦋 🌊
+      -->
+      <a-text value="🦋" font="https://cdn.aframe.io/fonts/mozillavr.fnt"
+        position="0 1.5 0" align="center" scale="3 3 3"
+        animation="property: position; from: 0 1.5 0; to: 0 1.8 0; dir: alternate; loop: true; dur: 2000; easing: easeInOutSine">
+      </a-text>
+
+      <!-- EDITAR: Nombre común en mayúsculas -->
+      <a-plane color="#1a0a00" opacity="0.85" width="2.2" height="0.6"
+        position="0 0.8 0">
+        <a-text value="NOMBRE ESPECIE" color="#fdf6e3"
+          position="0 0.12 0.01" align="center"
+          font="https://cdn.aframe.io/fonts/mozillavr.fnt"
+          scale="1.3 1.3 1.3">
+        </a-text>
+        <!-- EDITAR: Nombre científico -->
+        <a-text value="Genus species" color="#c8480a"
+          position="0 -0.08 0.01" align="center"
+          font="https://cdn.aframe.io/fonts/mozillavr.fnt"
+          scale="0.8 0.8 0.8">
+        </a-text>
+      </a-plane>
+
+      <!--
+        EDITAR: Estado de conservación
+        Opciones de color:
+        - Crítico: #c0392b (rojo)
+        - Vulnerable: #e67e22 (naranja)
+        - Amenazado: #d4a017 (dorado)
+        Texto: "EN PELIGRO CRÍTICO" / "VULNERABLE" / "AMENAZADO"
+      -->
+      <a-plane color="#e67e22" opacity="0.95" width="0.9" height="0.25"
+        position="0 0.3 0">
+        <a-text value="VULNERABLE" color="white"
+          position="0 0 0.01" align="center"
+          font="https://cdn.aframe.io/fonts/mozillavr.fnt"
+          scale="0.5 0.5 0.5">
+        </a-text>
+      </a-plane>
+
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <!-- UI Overlay -->
+  <div id="ui-overlay">
+    <div class="top-bar">
+      <a href="../index.html" class="back-btn">← Volver</a>
+      <div class="page-logo">◈ WildAR</div>
+      <span class="ar-badge">AR Live</span>
+    </div>
+
+    <div class="ar-hint" id="ar-hint">
+      <div class="ar-hint-ring"></div>
+      <!-- EDITAR -->
+      <p>Apunta a un marcador Hiro<br/>para ver [NOMBRE ESPECIE]</p>
+    </div>
+
+    <div class="info-panel" id="info-panel">
+      <div class="panel-handle"></div>
+
+      <div class="panel-header">
+        <div class="panel-titles">
+          <!-- EDITAR -->
+          <h1 class="species-name">Nombre Especie</h1>
+          <p class="species-sci">Genus species</p>
+        </div>
+        <!--
+          EDITAR: status-critico / status-vulnerable / status-amenazado
+          Texto: "Crítico" / "Vulnerable" / "Amenazado"
+        -->
+        <span class="status-badge status-vulnerable">Vulnerable</span>
+      </div>
+
+      <button class="audio-btn" id="audio-btn" onclick="toggleAudio()">
+        <span class="audio-icon">🔊</span>
+        <span id="audio-label">Escuchar información</span>
+      </button>
+
+      <div class="panel-tabs">
+        <button class="tab-btn active" onclick="showTab('info', this)">Info</button>
+        <button class="tab-btn" onclick="showTab('amenazas', this)">Amenazas</button>
+        <button class="tab-btn" onclick="showTab('curiosidades', this)">Curiosidades</button>
+      </div>
+
+      <!-- Tab Info — EDITAR todos los valores -->
+      <div class="tab-content active" id="tab-info">
+        <div class="info-grid">
+          <div class="info-chip">
+            <div class="info-chip-icon">🌍</div>
+            <div class="info-chip-label">Hábitat</div>
+            <div class="info-chip-value"><!-- EDITAR --></div>
+          </div>
+          <div class="info-chip">
+            <div class="info-chip-icon">📍</div>
+            <div class="info-chip-label">Región</div>
+            <div class="info-chip-value"><!-- EDITAR --></div>
+          </div>
+          <div class="info-chip">
+            <div class="info-chip-icon">⚖️</div>
+            <div class="info-chip-label">Peso</div>
+            <div class="info-chip-value"><!-- EDITAR --></div>
+          </div>
+          <div class="info-chip">
+            <div class="info-chip-icon">📏</div>
+            <div class="info-chip-label">Longitud</div>
+            <div class="info-chip-value"><!-- EDITAR --></div>
+          </div>
+        </div>
+        <p class="description-text">
+          <!-- EDITAR: Descripción breve (2-4 oraciones) -->
+        </p>
+      </div>
+
+      <!-- Tab Amenazas — EDITAR -->
+      <div class="tab-content" id="tab-amenazas">
+        <p class="section-heading">Principales amenazas</p>
+        <ul class="threat-list">
+          <li><!-- EDITAR amenaza 1 --></li>
+          <li><!-- EDITAR amenaza 2 --></li>
+          <li><!-- EDITAR amenaza 3 --></li>
+          <li><!-- EDITAR amenaza 4 --></li>
+        </ul>
+        <div class="info-chip">
+          <div class="info-chip-label">Población estimada</div>
+          <div class="info-chip-value" style="font-size: 1.3rem; color: #e67e22;"><!-- EDITAR --></div>
+        </div>
+      </div>
+
+      <!-- Tab Curiosidades — EDITAR -->
+      <div class="tab-content" id="tab-curiosidades">
+        <p class="section-heading">Datos fascinantes</p>
+        <div class="fact-card"><!-- EDITAR curiosidad 1 --></div>
+        <div class="fact-card"><!-- EDITAR curiosidad 2 --></div>
+        <div class="fact-card"><!-- EDITAR curiosidad 3 --></div>
+      </div>
+
+      <!-- EDITAR: agrega enlaces a otras especies de tu proyecto -->
+      <div class="other-species">
+        <p class="other-species-label">Otras especies</p>
+        <div class="species-nav">
+          <a href="jaguar.html" class="species-nav-link">
+            <span class="nav-animal">🐆</span>
+            <span>Jaguar</span>
+          </a>
+          <a href="axolote.html" class="species-nav-link">
+            <span class="nav-animal">🦎</span>
+            <span>Ajolote</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/ar-common.js"></script>
+  <script>
+    // EDITAR: Texto completo que se leerá en voz alta
+    const SPECIES_TEXT = `[NOMBRE ESPECIE], [nombre científico], es una especie [estado de conservación]. 
+    Habita en [hábitat]. 
+    Su principal amenaza es [amenaza principal]. 
+    [Dato interesante adicional].`;
+  </script>
+</body>
+</html>

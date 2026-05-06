@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WildAR — Especies en Peligro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">WildAR</span>
+      </div>
+      <nav class="nav">
+        <a href="#especies">Especies</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="https://github.com" target="_blank">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-badge">Realidad Aumentada Educativa</div>
+    <h1 class="hero-title">
+      El mundo que<br/>
+      <em>está desapareciendo</em>
+    </h1>
+    <p class="hero-sub">Escanea un QR. Conoce la especie. Actúa.</p>
+    <div class="hero-scroll">↓ Explora las especies</div>
+    <div class="hero-bg-animal">🌿</div>
+  </section>
+
+  <section class="como-funciona" id="como-funciona">
+    <h2 class="section-title">Cómo funciona</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Elige una especie</h3>
+        <p>Selecciona cualquier animal de nuestro catálogo y descarga su QR.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Escanea el código</h3>
+        <p>Usa la cámara de tu móvil. No necesitas instalar ninguna app.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Experiencia AR</h3>
+        <p>Visualiza la especie en tu entorno con datos interactivos en tiempo real.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="especies-section" id="especies">
+    <h2 class="section-title">Especies</h2>
+    <p class="section-sub">Cada código QR abre una experiencia inmersiva única</p>
+    <div class="especies-grid">
+
+      <article class="especie-card" data-especie="jaguar">
+        <div class="card-image" style="background: linear-gradient(135deg, #2d1b00, #8b4513);">
+          <div class="card-animal">🐆</div>
+          <div class="card-status vulnerable">Vulnerable</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Jaguar</h3>
+          <p class="card-sci">Panthera onca</p>
+          <p class="card-habitat">🌳 Selva tropical · Mesoamérica</p>
+          <div class="card-qr-wrap">
+            <canvas class="qr-canvas" id="qr-jaguar"></canvas>
+            <p class="qr-label">Escanear para AR</p>
+          </div>
+          <a href="especies/jaguar.html" class="card-btn">Ver experiencia →</a>
+        </div>
+      </article>
+
+      <article class="especie-card" data-especie="axolote">
+        <div class="card-image" style="background: linear-gradient(135deg, #001a33, #0066cc);">
+          <div class="card-animal">🦎</div>
+          <div class="card-status critico">Crítico</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Ajolote</h3>
+          <p class="card-sci">Ambystoma mexicanum</p>
+          <p class="card-habitat">💧 Lagos · Ciudad de México</p>
+          <div class="card-qr-wrap">
+            <canvas class="qr-canvas" id="qr-axolote"></canvas>
+            <p class="qr-label">Escanear para AR</p>
+          </div>
+          <a href="especies/axolote.html" class="card-btn">Ver experiencia →</a>
+        </div>
+      </article>
+
+      <article class="especie-card" data-especie="vaquita">
+        <div class="card-image" style="background: linear-gradient(135deg, #003333, #008080);">
+          <div class="card-animal">🐬</div>
+          <div class="card-status critico">Crítico</div>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Vaquita Marina</h3>
+          <p class="card-sci">Phocoena sinus</p>
+          <p class="card-habitat">🌊 Golfo de California · México</p>
+          <div class="card-qr-wrap">
+            <canvas class="qr-canvas" id="qr-vaquita"></canvas>
+            <p class="qr-label">Escanear para AR</p>
+          </div>
+          <a href="especies/vaquita.html" class="card-btn">Ver experiencia →</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">◈ WildAR</div>
+      <p>Proyecto educativo de conservación · Código abierto</p>
+      <p class="footer-small">Construido con A-Frame · AR.js · Amor por la naturaleza</p>
+    </div>
+  </footer>
+
+  <script>
+    const baseURL = window.location.href.replace('index.html','').replace(/\/$/, '');
+    const qrData = [
+      { id: 'qr-jaguar',  url: `${baseURL}/especies/jaguar.html`  },
+      { id: 'qr-axolote', url: `${baseURL}/especies/axolote.html` },
+      { id: 'qr-vaquita', url: `${baseURL}/especies/vaquita.html` },
+    ];
+    qrData.forEach(({ id, url }) => {
+      const canvas = document.getElementById(id);
+      QRCode.toCanvas(canvas, url, {
+        width: 140, margin: 1,
+        color: { dark: '#1a0a00', light: '#fdf6e3' }
+      });
+    });
+  </script>
+</body>
+</html>
