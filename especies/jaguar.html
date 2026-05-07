@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#000000"/>
+
+<!--
+██╗    ██╗██╗██╗     ██████╗  █████╗ ██████╗
+██║    ██║██║██║     ██╔══██╗██╔══██╗██╔══██╗
+██║ █╗ ██║██║██║     ██║  ██║███████║██████╔╝
+██║███╗██║██║██║     ██║  ██║██╔══██║██╔══██╗
+╚███╔███╔╝██║███████╗██████╔╝██║  ██║██║  ██║
+ ╚══╝╚══╝ ╚═╝╚══════╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+
+════════════════════════════════════════════════
+  PLANTILLA DE ESPECIE — instrucciones rápidas
+  Solo edita la sección CONFIG (líneas ~60-110)
+  Todo lo demás es automático
+════════════════════════════════════════════════
+-->
+
+<!-- ✏ Cambia el nombre en el título -->
+<title>WildAR · Jaguar</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Urbanist:ital,wght@0,300;0,400;0,600;0,800;1,300&display=swap" rel="stylesheet">
+
+<!-- A-Frame + AR.js -->
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+<style>
+/* ══════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  /* ── COLOR DEL ESTADO (cambia según la especie) ──────────────
+     Crítico    → #FF3B30  (rojo)
+     Vulnerable → #FF9F0A  (ámbar)
+     Amenazado  → #30D158  (verde)
+  ──────────────────────────────────────────────────────────── */
+  --c: #FF9F0A;          /* ✏ color principal del estado */
+  --c2: #FF6B00;         /* ✏ color secundario (un tono más oscuro del anterior) */
+
+  --black: #000;
+  --white: #fff;
+  --glass: rgba(0,0,0,0.55);
+  --glass2: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.12);
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.45);
+
+  --panel-h: 62vh;   /* altura del panel de información */
+  --ease: cubic-bezier(0.16,1,0.3,1);
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Urbanist', sans-serif;
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ══════════════════════════════════════════
+   ESCENA AR — ocupa toda la pantalla
+══════════════════════════════════════════ */
+a-scene {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0;
+}
+
+/* ══════════════════════════════════════════
+   PANTALLAS DE CARGA Y PERMISO
+══════════════════════════════════════════ */
+#screen-perm,
+#screen-load {
+  position: fixed; inset: 0; z-index: 500;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0;
+  background: #000;
+  padding: 40px;
+  text-align: center;
+}
+#screen-load { gap: 16px; }
+
+.perm-ring {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.8rem;
+  margin-bottom: 28px;
+  position: relative;
+}
+.perm-ring::before {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--c);
+  opacity: .4;
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+.perm-ring::after {
+  content: '';
+  position: absolute; inset: -14px;
+  border-radius: 50%;
+  border: 1px solid var(--c);
+  opacity: .15;
+  animation: pulse-ring 2s ease-in-out infinite .4s;
+}
+
+.perm-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem; letter-spacing: .06em;
+  margin-bottom: 10px;
+}
+.perm-sub {
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 280px;
+  margin-bottom: 36px;
+}
+
+.btn-primary {
+  background: var(--c);
+  color: #000;
+  border: none;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1rem; font-weight: 800;
+  letter-spacing: .06em;
+  padding: 16px 40px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform .15s, opacity .15s;
+}
+.btn-primary:active { transform: scale(.96); opacity: .85; }
+
+/* loader */
+.loader-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.4rem; letter-spacing: .12em;
+  color: var(--c);
+}
+.loader-bar {
+  width: 160px; height: 2px;
+  background: var(--border);
+  border-radius: 1px; overflow: hidden;
+}
+.loader-bar-fill {
+  height: 100%;
+  background: var(--c);
+  animation: load-fill 1.6s var(--ease) forwards;
+}
+.loader-text {
+  font-size: .72rem;
+  color: var(--muted);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════════
+   HUD — top bar (siempre visible en AR)
+══════════════════════════════════════════ */
+#hud {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  padding: env(safe-area-inset-top, 12px) 20px 0;
+  display: none; /* se muestra al iniciar AR */
+}
+.hud-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0;
+}
+.hud-back {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: var(--white);
+  font-size: 1rem;
+  transition: background .2s;
+}
+.hud-back:active { background: rgba(255,255,255,.15); }
+
+.hud-center {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.hud-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .95rem; letter-spacing: .14em;
+  color: rgba(255,255,255,.7);
+}
+.hud-status {
+  font-size: .62rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--c);
+  display: flex; align-items: center; gap: 5px;
+}
+.hud-status::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--c);
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+.hud-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1rem;
+  transition: background .2s;
+}
+.hud-btn:active { background: rgba(255,255,255,.15); }
+
+/* ══════════════════════════════════════════
+   AR HINT — "apunta al marcador"
+══════════════════════════════════════════ */
+#ar-hint {
+  position: fixed; inset: 0; z-index: 150;
+  display: none;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px;
+  pointer-events: none;
+  transition: opacity .5s;
+}
+#ar-hint.hidden { opacity: 0; }
+.hint-ring {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.35);
+  animation: scan-pulse 2s ease-in-out infinite;
+}
+.hint-ring-inner {
+  position: absolute;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 1px solid var(--c);
+  opacity: .6;
+}
+.hint-text {
+  font-size: .8rem;
+  color: rgba(255,255,255,.6);
+  text-align: center;
+  line-height: 1.6;
+  letter-spacing: .02em;
+}
+.hint-wrap { position: relative; display: flex; align-items: center; justify-content: center; }
+
+/* ══════════════════════════════════════════
+   INFO PANEL — sube desde abajo
+══════════════════════════════════════════ */
+#panel {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  height: var(--panel-h);
+  display: none;
+  transform: translateY(100%);
+  transition: transform .5s var(--ease);
+}
+#panel.open { transform: translateY(0); }
+
+.panel-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.75) 8%,
+    rgba(0,0,0,.96) 20%
+  );
+  backdrop-filter: blur(2px);
+}
+
+.panel-inner {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 24px calc(env(safe-area-inset-bottom, 0px) + 32px);
+  scrollbar-width: none;
+}
+.panel-inner::-webkit-scrollbar { display: none; }
+
+/* Handle */
+.panel-handle {
+  display: flex; justify-content: center;
+  padding: 12px 0 8px;
+  cursor: pointer;
+}
+.panel-handle-bar {
+  width: 36px; height: 4px;
+  background: rgba(255,255,255,.2);
+  border-radius: 2px;
+}
+
+/* Header de especie */
+.sp-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+.sp-emoji-wrap {
+  width: 64px; height: 64px; flex-shrink: 0;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--c2), var(--c));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--c) 40%, transparent);
+}
+.sp-title-block { flex: 1; min-width: 0; }
+.sp-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: color-mix(in srgb, var(--c) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+  color: var(--c);
+  font-size: .62rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px;
+  margin-bottom: 6px;
+}
+.sp-badge::before {
+  content: ''; width: 5px; height: 5px;
+  border-radius: 50%; background: var(--c);
+}
+.sp-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.1rem; letter-spacing: .04em;
+  line-height: 1; margin-bottom: 2px;
+}
+.sp-sci {
+  font-style: italic;
+  font-size: .8rem;
+  color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* KPIs */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 18px 0;
+}
+.kpi {
+  background: var(--glass2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 10px 12px;
+}
+.kpi-ico { font-size: .9rem; margin-bottom: 3px; }
+.kpi-lbl {
+  font-size: .58rem;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+.kpi-val {
+  font-size: .82rem; font-weight: 700;
+  line-height: 1.2;
+}
+.kpi-val.hot { color: var(--c); }
+
+/* Tabs */
+.tabs {
+  display: flex; gap: 4px;
+  background: var(--glass2);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 4px;
+  margin-bottom: 18px;
+}
+.tab {
+  flex: 1; padding: 8px 4px;
+  background: none; border: none;
+  color: var(--muted);
+  font-family: 'Urbanist', sans-serif;
+  font-size: .78rem; font-weight: 600;
+  border-radius: 9px; cursor: pointer;
+  transition: all .2s;
+  letter-spacing: .02em;
+}
+.tab.on {
+  background: var(--c);
+  color: #000;
+}
+
+/* Tab content */
+.tab-pane { display: none; animation: fadeup .3s var(--ease); }
+.tab-pane.on { display: block; }
+
+/* Descripción */
+.desc-text {
+  font-size: .88rem;
+  color: rgba(255,255,255,.72);
+  line-height: 1.8;
+}
+
+/* Amenazas */
+.threat-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.threat-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .85rem;
+  color: rgba(255,255,255,.75);
+  line-height: 1.55;
+}
+.threat-item:last-child { border: none; }
+.threat-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; color: var(--c);
+  flex-shrink: 0; width: 20px; text-align: center;
+}
+
+/* Curiosidades */
+.fact-card {
+  background: var(--glass2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--c);
+  border-radius: 0 12px 12px 0;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  font-size: .85rem;
+  color: rgba(255,255,255,.78);
+  line-height: 1.65;
+}
+.fact-card:last-child { margin-bottom: 0; }
+.fact-tag {
+  font-size: .58rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em;
+  color: var(--c);
+  margin-bottom: 5px;
+}
+
+/* Audio */
+.audio-row {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--glass2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-top: 18px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.audio-row:active { background: rgba(255,255,255,.1); }
+.audio-play {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--c);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem;
+  transition: transform .15s;
+}
+.audio-row:active .audio-play { transform: scale(.92); }
+.audio-info { flex: 1; }
+.audio-title { font-size: .82rem; font-weight: 600; margin-bottom: 1px; }
+.audio-sub { font-size: .7rem; color: var(--muted); }
+.audio-wave {
+  display: flex; align-items: center; gap: 2px;
+  height: 20px;
+}
+.audio-wave span {
+  display: block; width: 3px; border-radius: 2px;
+  background: var(--c); opacity: .5;
+}
+.audio-wave.playing span { opacity: 1; }
+.audio-wave span:nth-child(1) { height: 6px;  animation: wave 1.2s ease-in-out infinite 0s; }
+.audio-wave span:nth-child(2) { height: 12px; animation: wave 1.2s ease-in-out infinite .15s; }
+.audio-wave span:nth-child(3) { height: 18px; animation: wave 1.2s ease-in-out infinite .3s; }
+.audio-wave span:nth-child(4) { height: 10px; animation: wave 1.2s ease-in-out infinite .45s; }
+.audio-wave span:nth-child(5) { height: 6px;  animation: wave 1.2s ease-in-out infinite .6s; }
+
+/* ══════════════════════════════════════════
+   KEYFRAMES
+══════════════════════════════════════════ */
+@keyframes pulse-ring {
+  0%,100% { transform: scale(1); opacity: .4; }
+  50%      { transform: scale(1.1); opacity: .8; }
+}
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: .3; }
+}
+@keyframes scan-pulse {
+  0%,100% { transform: scale(1); opacity: .6; }
+  50%      { transform: scale(1.12); opacity: 1; }
+}
+@keyframes load-fill {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+@keyframes fadeup {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes wave {
+  0%,100% { transform: scaleY(.4); }
+  50%      { transform: scaleY(1); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
+    ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝
+    ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+    ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+    ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
+
+     ✏ EDITA SOLO ESTE BLOQUE PARA CADA ESPECIE
+     Solo cambia los valores entre los comentarios de inicio y fin
+══════════════════════════════════════════════════════════════ -->
+<script>
+const ESPECIE = {
+  /* ── IDENTIDAD ─────────────────────────── */
+  nombre:    "Jaguar",                          /* ✏ Nombre común */
+  cientifico:"Panthera onca",                   /* ✏ Nombre científico */
+  emoji:     "🐆",                              /* ✏ Emoji representativo */
+  numero:    "01",                              /* ✏ Número en tu catálogo */
+  categoria: "Mamífero",                        /* ✏ Mamífero / Ave / Reptil / Pez / Insecto / Planta */
+
+  /* ── ESTADO DE CONSERVACIÓN ────────────── */
+  /* Opciones: "EN PELIGRO CRÍTICO" / "VULNERABLE" / "AMENAZADO" */
+  estado:    "VULNERABLE",                      /* ✏ */
+  uicn:      "VU",                              /* ✏ CR / EN / VU / NT */
+
+  /* ── DATOS CLAVE ────────────────────────── */
+  habitat:   "Selva tropical",                  /* ✏ */
+  region:    "Mesoamérica",                     /* ✏ */
+  poblacion: "~64,000",                         /* ✏ ej: "< 10" / "~5,000" */
+  tamaño:    "1.1–1.85 m",                      /* ✏ longitud o envergadura */
+  peso:      "56–96 kg",                        /* ✏ */
+  dieta:     "Carnívoro",                       /* ✏ */
+
+  /* ── DESCRIPCIÓN (2-3 oraciones) ─────────── */
+  descripcion: `El jaguar es el felino más grande de América y un depredador ápex esencial
+para el equilibrio de los ecosistemas tropicales. Su poderosa mandíbula puede
+perforar el cráneo de sus presas y su mordida es la más fuerte entre los felinos.
+En México es considerado animal sagrado por múltiples culturas indígenas.`,
+
+  /* ── AMENAZAS (mínimo 3, máximo 6) ──────── */
+  amenazas: [
+    "Pérdida de hábitat por deforestación para ganadería y agricultura extensiva.",
+    "Caza furtiva: pieles y huesos traficados ilegalmente hacia mercados en Asia.",
+    "Conflicto con ganaderos por depredación de ganado.",
+    "Fragmentación del territorio por carreteras y urbanización.",
+    "Cambio climático que reduce la cobertura forestal y desplaza a sus presas.",
+  ],
+
+  /* ── CURIOSIDADES (mínimo 2, máximo 5) ──── */
+  curiosidades: [
+    { titulo: "El rugido americano", texto: "Es el único felino del continente americano capaz de rugir gracias a una estructura especial en su laringe." },
+    { titulo: "Mandíbula legendaria", texto: "Ejerce hasta 1,500 lb/pulg² de presión — suficiente para romper el caparazón de una tortuga o el cráneo de un caimán." },
+    { titulo: "Nado experto", texto: "A diferencia de la mayoría de felinos, ama el agua. Caza peces, tortugas y hasta caimanes directamente en ríos y lagunas." },
+    { titulo: "Nombre ancestral", texto: "Su nombre viene del tupí-guaraní 'yaguara': bestia que mata de un salto." },
+  ],
+
+  /* ── AUDIO (texto que se leerá en voz alta) ── */
+  audio: `El jaguar, Panthera onca, es el felino más grande de América y está clasificado
+como Vulnerable por la UICN. Con cerca de 64 mil individuos en estado silvestre,
+habita en selvas tropicales de México, Centroamérica y América del Sur.
+Sus principales amenazas son la deforestación, la caza furtiva y el conflicto con ganaderos.
+Dato fascinante: es el único felino americano capaz de rugir, y un experto nadador.`,
+
+  /* ── NAVEGACIÓN ─────────────────────────── */
+  anterior: "axolote.html",                     /* ✏ especie anterior */
+  siguiente: "vaquita.html",                    /* ✏ especie siguiente */
+  /* ✏ 3 especies relacionadas para mostrar al final */
+  relacionadas: [
+    { nombre: "Ajolote",       emoji: "🦎", archivo: "axolote.html" },
+    { nombre: "Vaquita Marina",emoji: "🐬", archivo: "vaquita.html" },
+    { nombre: "Quetzal",       emoji: "🦜", archivo: "quetzal.html" },
+  ],
+};
+</script>
+<!-- ══════════════════════════════════════════════════════════
+     FIN DEL BLOQUE CONFIG
+══════════════════════════════════════════════════════════════ -->
+
+
+<!-- ══ PANTALLA: PERMISO DE CÁMARA ══ -->
+<div id="screen-perm">
+  <div class="perm-ring" id="perm-emoji">📷</div>
+  <h1 class="perm-title">ACTIVAR CÁMARA</h1>
+  <p class="perm-sub">
+    Esta experiencia de Realidad Aumentada necesita acceso a tu cámara
+    para mostrar la especie en tu entorno real.
+  </p>
+  <button class="btn-primary" onclick="iniciarAR()">INICIAR AR</button>
+</div>
+
+<!-- ══ PANTALLA: CARGANDO ══ -->
+<div id="screen-load" style="display:none">
+  <div class="loader-logo">◈ WildAR</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  <p class="loader-text">Cargando especie…</p>
+</div>
+
+<!-- ══ ESCENA A-FRAME ══ -->
+<a-scene id="ar-scene" style="display:none"
+  embedded
+  arjs="sourceType:webcam; videoTexture:true; debugUIEnabled:false;"
+  vr-mode-ui="enabled:false"
+  renderer="logarithmicDepthBuffer:true; colorManagement:true; alpha:true"
+  loading-screen="enabled:false">
+
+  <a-marker id="marker" preset="hiro" smooth="true" smoothCount="8">
+
+    <!--
+      ── OBJETO AR ──────────────────────────────────────────────────
+      Este bloque se genera automáticamente desde ESPECIE.emoji
+      Puedes reemplazarlo por un modelo 3D .glb si tienes uno:
+        <a-gltf-model src="models/jaguar.glb" scale=".5 .5 .5"
+          animation="property:rotation; to:0 360 0; loop:true; dur:8000">
+        </a-gltf-model>
+      ─────────────────────────────────────────────────────────────
+    -->
+
+    <!-- Plataforma giratoria -->
+    <a-ring id="ring1" color="#ffffff" opacity="0.12"
+      radius-inner="0.55" radius-outer="0.6"
+      rotation="-90 0 0" position="0 0.01 0"
+      animation="property:rotation; from:-90 0 0; to:-90 360 0; loop:true; dur:8000; easing:linear">
+    </a-ring>
+    <a-ring id="ring2" opacity="0.06"
+      radius-inner="0.72" radius-outer="0.75"
+      rotation="-90 0 0" position="0 0.01 0"
+      animation="property:rotation; from:-90 0 0; to:-90 -360 0; loop:true; dur:12000; easing:linear">
+    </a-ring>
+
+    <!-- Emoji flotante (auto-generado por JS) -->
+    <a-text id="ar-emoji"
+      value="🐆"
+      position="0 1.6 0"
+      align="center"
+      scale="4 4 4"
+      animation="property:position; from:0 1.5 0; to:0 1.8 0; dir:alternate; loop:true; dur:2200; easing:easeInOutSine"
+      animation__rot="property:rotation; from:0 -15 0; to:0 15 0; dir:alternate; loop:true; dur:3000; easing:easeInOutSine">
+    </a-text>
+
+    <!-- Nombre en AR -->
+    <a-plane id="ar-nameplate"
+      color="#000000" opacity="0.82"
+      width="2.6" height="0.55"
+      position="0 0.65 0">
+      <a-text id="ar-name"
+        value="JAGUAR"
+        color="#ffffff"
+        position="0 0.1 0.01"
+        align="center"
+        font="https://cdn.aframe.io/fonts/mozillavr.fnt"
+        scale="1.6 1.6 1.6">
+      </a-text>
+      <a-text id="ar-sci"
+        value="Panthera onca"
+        color="#888888"
+        position="0 -0.1 0.01"
+        align="center"
+        font="https://cdn.aframe.io/fonts/mozillavr.fnt"
+        scale="0.7 0.7 0.7">
+      </a-text>
+    </a-plane>
+
+    <!-- Pastilla de estado -->
+    <a-plane id="ar-status-pill"
+      color="#FF9F0A" opacity="0.95"
+      width="1.1" height="0.22"
+      position="0 0.22 0">
+      <a-text id="ar-status-text"
+        value="VULNERABLE"
+        color="#000000"
+        position="0 0 0.01"
+        align="center"
+        font="https://cdn.aframe.io/fonts/mozillavr.fnt"
+        scale="0.55 0.55 0.55">
+      </a-text>
+    </a-plane>
+
+  </a-marker>
+  <a-entity camera></a-entity>
+</a-scene>
+
+
+<!-- ══ HUD (barra superior en AR) ══ -->
+<div id="hud">
+  <div class="hud-bar">
+    <a class="hud-back" id="hud-back" href="../index.html">←</a>
+    <div class="hud-center">
+      <span class="hud-logo">◈ WildAR</span>
+      <span class="hud-status" id="hud-status">EN VIVO</span>
+    </div>
+    <div class="hud-btn" onclick="togglePanel()">☰</div>
+  </div>
+</div>
+
+<!-- ══ AR HINT ══ -->
+<div id="ar-hint">
+  <div class="hint-wrap">
+    <div class="hint-ring"></div>
+    <div class="hint-ring-inner"></div>
+  </div>
+  <p class="hint-text">Apunta la cámara a un<br/><strong>marcador Hiro</strong> para ver la especie</p>
+</div>
+
+<!-- ══ INFO PANEL ══ -->
+<div id="panel">
+  <div class="panel-bg"></div>
+  <div class="panel-inner">
+
+    <div class="panel-handle" onclick="togglePanel()">
+      <div class="panel-handle-bar"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="sp-header">
+      <div class="sp-emoji-wrap" id="ui-emoji">🐆</div>
+      <div class="sp-title-block">
+        <div class="sp-badge" id="ui-badge">VULNERABLE</div>
+        <h1 class="sp-name" id="ui-nombre">JAGUAR</h1>
+        <p class="sp-sci" id="ui-sci">Panthera onca</p>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpis">
+      <div class="kpi">
+        <div class="kpi-ico">🌍</div>
+        <div class="kpi-lbl">Hábitat</div>
+        <div class="kpi-val" id="ui-habitat">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-ico">📍</div>
+        <div class="kpi-lbl">Región</div>
+        <div class="kpi-val" id="ui-region">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-ico">👥</div>
+        <div class="kpi-lbl">Población</div>
+        <div class="kpi-val hot" id="ui-poblacion">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-ico">📏</div>
+        <div class="kpi-lbl">Tamaño</div>
+        <div class="kpi-val" id="ui-tamaño">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-ico">⚖️</div>
+        <div class="kpi-lbl">Peso</div>
+        <div class="kpi-val" id="ui-peso">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-ico">📋</div>
+        <div class="kpi-lbl">UICN</div>
+        <div class="kpi-val hot" id="ui-uicn">—</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab on" onclick="showTab('info',this)">Info</button>
+      <button class="tab" onclick="showTab('amenazas',this)">Amenazas</button>
+      <button class="tab" onclick="showTab('curiosidades',this)">Curiosidades</button>
+    </div>
+
+    <!-- Tab: Info -->
+    <div class="tab-pane on" id="tab-info">
+      <p class="desc-text" id="ui-desc">—</p>
+    </div>
+
+    <!-- Tab: Amenazas -->
+    <div class="tab-pane" id="tab-amenazas">
+      <ul class="threat-list" id="ui-amenazas"></ul>
+    </div>
+
+    <!-- Tab: Curiosidades -->
+    <div class="tab-pane" id="tab-curiosidades">
+      <div id="ui-curiosidades"></div>
+    </div>
+
+    <!-- Audio -->
+    <div class="audio-row" onclick="toggleAudio()">
+      <div class="audio-play" id="audio-play-btn">▶</div>
+      <div class="audio-info">
+        <div class="audio-title" id="audio-title">Escuchar información</div>
+        <div class="audio-sub">Narración en español</div>
+      </div>
+      <div class="audio-wave" id="audio-wave">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT — motor de la experiencia
+══════════════════════════════════════════ -->
+<script>
+/* ── 1. Aplica CONFIG al DOM ─────────────────────────────── */
+function aplicarConfig() {
+  const E = ESPECIE;
+
+  // Título
+  document.title = `WildAR · ${E.nombre}`;
+
+  // AR scene
+  document.getElementById('ar-emoji').setAttribute('value', E.emoji);
+  document.getElementById('ar-name').setAttribute('value', E.nombre.toUpperCase());
+  document.getElementById('ar-sci').setAttribute('value', E.cientifico);
+  document.getElementById('ar-status-text').setAttribute('value', E.estado);
+
+  // UI panel
+  document.getElementById('ui-emoji').textContent    = E.emoji;
+  document.getElementById('ui-badge').textContent    = E.estado;
+  document.getElementById('ui-nombre').textContent   = E.nombre.toUpperCase();
+  document.getElementById('ui-sci').textContent      = E.cientifico;
+  document.getElementById('ui-habitat').textContent  = E.habitat;
+  document.getElementById('ui-region').textContent   = E.region;
+  document.getElementById('ui-poblacion').textContent= E.poblacion;
+  document.getElementById('ui-tamaño').textContent   = E.tamaño;
+  document.getElementById('ui-peso').textContent     = E.peso;
+  document.getElementById('ui-uicn').textContent     = E.uicn;
+  document.getElementById('ui-desc').textContent     = E.descripcion;
+
+  // Emoji en pantalla de permiso
+  document.getElementById('perm-emoji').textContent  = E.emoji;
+
+  // Amenazas
+  const ul = document.getElementById('ui-amenazas');
+  ul.innerHTML = E.amenazas.map((a, i) =>
+    `<li class="threat-item"><span class="threat-n">${String(i+1).padStart(2,'0')}</span><span>${a}</span></li>`
+  ).join('');
+
+  // Curiosidades
+  const cd = document.getElementById('ui-curiosidades');
+  cd.innerHTML = E.curiosidades.map(c =>
+    `<div class="fact-card"><div class="fact-tag">${c.titulo}</div>${c.texto}</div>`
+  ).join('');
+
+  // Navegación
+  document.getElementById('hud-back').href = '../index.html';
+}
+
+aplicarConfig();
+
+/* ── 2. Iniciar AR ─────────────────────────────────────── */
+function iniciarAR() {
+  document.getElementById('screen-perm').style.display = 'none';
+  document.getElementById('screen-load').style.display = 'flex';
+
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false })
+    .catch(() => {}) // A-Frame pide de nuevo si falla aquí
+    .finally(() => {
+      setTimeout(() => {
+        document.getElementById('screen-load').style.display = 'none';
+        document.getElementById('ar-scene').style.display    = 'block';
+        document.getElementById('hud').style.display         = 'block';
+        document.getElementById('ar-hint').style.display     = 'flex';
+        // Abre el panel automáticamente tras 1 seg
+        setTimeout(() => abrirPanel(), 1000);
+        setupMarker();
+      }, 1800);
+    });
+}
+
+/* ── 3. Eventos del marcador ─────────────────────────────── */
+function setupMarker() {
+  const marker = document.getElementById('marker');
+  const hint   = document.getElementById('ar-hint');
+  const status = document.getElementById('hud-status');
+
+  marker.addEventListener('markerFound', () => {
+    hint.classList.add('hidden');
+    status.textContent = '✓ DETECTADO';
+  });
+  marker.addEventListener('markerLost', () => {
+    hint.classList.remove('hidden');
+    status.textContent = 'EN VIVO';
+  });
+}
+
+/* ── 4. Panel toggle ─────────────────────────────────────── */
+let panelOpen = false;
+function togglePanel() {
+  panelOpen ? cerrarPanel() : abrirPanel();
+}
+function abrirPanel() {
+  document.getElementById('panel').style.display = 'block';
+  requestAnimationFrame(() => document.getElementById('panel').classList.add('open'));
+  panelOpen = true;
+}
+function cerrarPanel() {
+  document.getElementById('panel').classList.remove('open');
+  setTimeout(() => document.getElementById('panel').style.display = 'none', 500);
+  panelOpen = false;
+}
+
+/* ── 5. Tabs ─────────────────────────────────────────────── */
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  document.getElementById('tab-' + id).classList.add('on');
+  btn.classList.add('on');
+}
+
+/* ── 6. Audio TTS ────────────────────────────────────────── */
+let synth = window.speechSynthesis;
+let utter = null;
+let playing = false;
+
+function toggleAudio() {
+  if (playing) { stopAudio(); return; }
+
+  utter = new SpeechSynthesisUtterance(ESPECIE.audio);
+  utter.lang  = 'es-MX';
+  utter.rate  = 0.88;
+  utter.pitch = 1;
+
+  const setVoice = () => {
+    const voices = synth.getVoices();
+    const v = voices.find(v => v.lang === 'es-MX')
+           || voices.find(v => v.lang.startsWith('es'));
+    if (v) utter.voice = v;
+    synth.speak(utter);
+  };
+  synth.getVoices().length ? setVoice() : (synth.onvoiceschanged = setVoice);
+
+  utter.onend = utter.onerror = stopAudio;
+
+  playing = true;
+  document.getElementById('audio-play-btn').textContent = '■';
+  document.getElementById('audio-title').textContent = 'Reproduciendo…';
+  document.getElementById('audio-wave').classList.add('playing');
+}
+
+function stopAudio() {
+  synth.cancel();
+  playing = false;
+  document.getElementById('audio-play-btn').textContent = '▶';
+  document.getElementById('audio-title').textContent = 'Escuchar información';
+  document.getElementById('audio-wave').classList.remove('playing');
+}
+
+document.addEventListener('visibilitychange', () => { if (document.hidden) stopAudio(); });
+</script>
+
+</body>
+</html>
