@@ -1,248 +1,225 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Biodiversidad</title>
-    
-    <!-- 
-        WEB PERFORMANCE & UX ARCHITECTURE
-        - 0 External Requests (System Fonts, Inline SVGs)
-        - Ultra-lightweight (Instant load on Edge/3G)
-        - Purely informative / Visual Bridge
-    -->
-
-    <!-- Google Analytics placeholder -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=TU_ID_AQUI"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'TU_ID_AQUI');
-    </script>
+    <title>WebAR</title>
 
     <style>
         :root {
-            --bg-deep: #020804;
-            --jungle-dark: #0A1F14;
-            --emerald: #10B981;
-            --gold: #D4AF37;
-            --text-primary: #FFFFFF;
-            --text-secondary: rgba(255, 255, 255, 0.6);
-            --glass: rgba(255, 255, 255, 0.04);
+            --bg-black: #000000;
+            --card-gray: #1A1A1A;
+            --wild-orange: #FF9500;
+            --text-white: #FFFFFF;
+            --text-dim: rgba(255, 255, 255, 0.6);
         }
 
         * {
             box-sizing: border-box;
-            margin: 0; padding: 0;
-            /* Ultra-optimized font stack */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-primary);
+            background-color: var(--bg-black);
+            color: var(--text-white);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
-            line-height: 1.5;
-            background: radial-gradient(circle at 50% -10%, var(--jungle-dark) 0%, var(--bg-deep) 100%);
-        }
-
-        /* Decorative Background Elements (CSS only) */
-        .ambient-light {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 40%);
+            align-items: center;
+            justify-content: center;
         }
 
         main {
-            position: relative;
-            z-index: 10;
-            flex-grow: 1;
             width: 100%;
-            max-width: 440px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem;
-            display: flex;
-            flex-direction: column;
+            max-width: 900px;
+            /* Ancho para permitir las 3 tarjetas horizontales en tablets/desktop */
+            padding: 2rem 1.5rem;
+            text-align: center;
         }
 
         header {
-            text-align: center;
-            margin-bottom: 3.5rem;
+            margin-bottom: 3rem;
         }
 
-        .museum-badge {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: var(--gold);
+        .header-title {
+            font-size: 1.4rem;
             font-weight: 800;
-            margin-bottom: 1rem;
-            display: block;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+            display: inline-block;
+            width: 100%;
         }
 
-        h1 {
-            font-size: 2.6rem;
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
-            background: linear-gradient(to bottom, #FFF, #CCC);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .header-subtitle {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            color: var(--text-white);
         }
 
-        /* Information Steps */
-        .info-grid {
-            display: flex;
-            flex-direction: column;
+        /* Contenedor de Tarjetas */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 4rem;
+            margin: 2.5rem 0;
         }
 
         .step-card {
-            background: var(--glass);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 28px;
-            padding: 1.5rem;
+            background: var(--card-gray);
+            border: 1px solid var(--wild-orange);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 1.2rem;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 0 15px rgba(255, 149, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .step-visual {
-            width: 52px; height: 52px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 2px solid var(--emerald);
-            border-radius: 16px;
+        .step-card:active {
+            transform: scale(0.98);
+        }
+
+        .icon-box {
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            color: var(--emerald);
-            font-weight: 900;
-            font-size: 1.3rem;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
         }
 
-        .step-text h2 {
-            font-size: 1rem;
+        .icon-box svg {
+            width: 70px;
+            height: 70px;
+            stroke: var(--wild-orange);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-title {
+            font-size: 1.1rem;
             font-weight: 800;
-            margin-bottom: 4px;
-            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
 
-        .step-text p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 500;
+        .step-desc {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.4;
         }
 
-        /* Action Button */
+        /* Botón Final Estilo Wildar */
         .footer-action {
-            margin-top: auto;
+            margin-top: 2rem;
         }
 
-        .btn-start {
+        .btn-wildar {
             width: 100%;
-            background: var(--text-primary);
-            color: var(--bg-deep);
-            border: none;
-            padding: 1.4rem;
-            border-radius: 24px;
-            font-size: 1.2rem;
+            max-width: 320px;
+            background: transparent;
+            color: var(--wild-orange);
+            border: 2px solid var(--wild-orange);
+            padding: 1.2rem;
+            border-radius: 50px;
+            font-size: 1rem;
             font-weight: 900;
-            letter-spacing: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: transform 0.2s;
+            box-shadow: 0 0 20px rgba(255, 149, 0, 0.2);
+            transition: all 0.3s ease;
         }
 
-        .btn-start:active {
-            transform: scale(0.96);
+        .btn-wildar:hover {
+            background: var(--wild-orange);
+            color: var(--bg-black);
+            box-shadow: 0 0 30px rgba(255, 149, 0, 0.4);
         }
 
-        .btn-start svg {
-            width: 24px; height: 24px;
-            fill: none; stroke: currentColor; stroke-width: 3;
-        }
+        @media (max-width: 600px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
 
-        /* Decorative Leaf SVG (Inline) */
-        .leaf-svg {
-            position: absolute;
-            top: -20px; right: -10px;
-            width: 60px; height: 60px;
-            opacity: 0.1;
-            fill: var(--emerald);
+            .header-title {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
-<body>
 
-    <div class="ambient-light"></div>
+<body>
 
     <main>
         <header>
-            <div style="margin-bottom: 1rem;">
-                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-            </div>
-            <span class="museum-badge">Museo de Ciencia de Chiapas</span>
-            <h1>Especies en extinción</h1>
+            <div class="header-title">Museo de Ciencia y Tecnología</div>
+            <div class="header-subtitle">¿Cómo usar la Experiencia WebAR?</div>
         </header>
 
-        <div class="info-grid">
-            <!-- Step 1 -->
+        <div class="cards-container">
+            <!-- Paso 1 -->
             <div class="step-card">
-                <div class="step-visual">1</div>
-                <div class="step-text">
-                    <h2>Escanea el código QR</h2>
-                    <p>Enfoca el código ubicado en la especie.</p>
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                        <circle cx="12" cy="13" r="4" />
+                    </svg>
                 </div>
+                <div class="step-label">Paso 1</div>
+                <div class="step-title">Escanear el Código QR</div>
+                <div class="step-desc"></div>
             </div>
 
-            <!-- Step 2 -->
+            <!-- Paso 2 -->
             <div class="step-card">
-                <div class="step-visual">2</div>
-                <div class="step-text">
-                    <h2>Acepta los permisos</h2>
-                    <p>Permite el uso de la cámara cuando se te lo solicite.</p>
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 1v22M5 12h14" />
+                        <circle cx="12" cy="12" r="10" stroke-dasharray="4 4" />
+                        <path d="M15 8l-3-3-3 3M9 16l3 3 3-3" />
+                    </svg>
                 </div>
+                <div class="step-label">Paso 2</div>
+                <div class="step-title">Permitir Acceso a la Cámara</div>
+                <div class="step-desc"></div>
             </div>
 
-            <!-- Step 3 -->
+            <!-- Paso 3 -->
             <div class="step-card">
-                <div class="step-visual">3</div>
-                <div class="step-text">
-                    <h2>Visualiza la información</h2>
-                    <p>Descubre la biodiversidad de Chiapas.</p>
+                <div class="icon-box">
+                    <!-- Icono Estilizado Jaguar/Animal (SVG Simplified) -->
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        <circle cx="12" cy="12" r="3" fill="var(--wild-orange)" />
+                    </svg>
                 </div>
+                <div class="step-label">Paso 3</div>
+                <div class="step-title">Interactuar con el Animal</div>
+                <div class="step-desc"></div>
             </div>
         </div>
 
         <div class="footer-action">
-            <button class="btn-start">
-                ¡COMENZAR!
-                <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
+            <button class="btn-wildar">
+                ¡INICIAR EXPERIENCIA!
             </button>
         </div>
     </main>
 
 </body>
+
 </html>
