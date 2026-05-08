@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#000"/>
+<title>Especie</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:ital,wght@0,300;0,400;0,600;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<!-- Base de datos de todas las especies -->
+<script src="especies.js"></script>
+
+<style>
+:root { --A:#FF9100; --B:#FFCA28; --glow:255,145,0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Raleway',sans-serif;color:#fff;-webkit-tap-highlight-color:transparent;}
+
+#cam-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;object-position:center;z-index:0;background:#111;transform:translateZ(0);}
+
+#page{position:fixed;inset:0;z-index:10;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:calc(env(safe-area-inset-top,0px) + 18px) 16px calc(env(safe-area-inset-bottom,0px) + 32px) 16px;}
+#page::-webkit-scrollbar{display:none;}
+
+.btn-back{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);text-decoration:none;color:#fff;font-size:.9rem;font-family:'Share Tech Mono',monospace;margin-bottom:18px;transition:background .2s;cursor:pointer;}
+.btn-back:active{background:rgba(255,255,255,.18);}
+
+.sp-head{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+.sp-orb{width:66px;height:66px;flex-shrink:0;border-radius:18px;background:linear-gradient(145deg,var(--B),var(--A));display:flex;align-items:center;justify-content:center;font-size:2.2rem;box-shadow:0 6px 24px rgba(var(--glow),.5),inset 0 1px 0 rgba(255,255,255,.3);position:relative;}
+.sp-orb::after{content:'';position:absolute;inset:-5px;border-radius:22px;border:1px dashed rgba(var(--glow),.4);}
+.sp-meta{flex:1;min-width:0;}
+.sp-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(var(--glow),.14);border:1px solid rgba(var(--glow),.45);color:var(--A);font-family:'Share Tech Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-bottom:5px;}
+.sp-pill::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--A);animation:blink 1.4s ease-in-out infinite;}
+.sp-nombre{font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;line-height:1;letter-spacing:.01em;margin-bottom:4px;text-shadow:0 2px 14px rgba(0,0,0,.7);}
+.sp-cient{font-style:italic;font-weight:300;font-size:.8rem;color:rgba(255,255,255,.5);}
+
+.cat-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.cat-line{flex:1;height:1px;background:linear-gradient(to right,rgba(var(--glow),.4),transparent);}
+.cat-line.r{background:linear-gradient(to left,rgba(var(--glow),.4),transparent);}
+.cat-txt{font-family:'Share Tech Mono',monospace;font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);white-space:nowrap;}
+
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px;}
+.kpi{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:11px 13px;position:relative;overflow:hidden;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(var(--glow),.38),transparent);}
+.kpi-ico{font-size:.85rem;margin-bottom:3px;}
+.kpi-lbl{font-family:'Share Tech Mono',monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px;}
+.kpi-val{font-size:.88rem;font-weight:600;line-height:1.2;}
+.kpi-val.alert{color:var(--A);}
+
+.tab-row{display:flex;gap:6px;margin-bottom:14px;}
+.tab-btn{flex:1;padding:10px 4px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.28);color:rgba(255,255,255,.5);font-family:'Share Tech Mono',monospace;font-size:.46rem;letter-spacing:.06em;text-transform:uppercase;text-align:center;cursor:pointer;line-height:1.4;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:all .2s;-webkit-tap-highlight-color:transparent;}
+.tab-btn.active{background:rgba(var(--glow),.18);border-color:rgba(var(--glow),.6);color:var(--A);box-shadow:0 0 14px rgba(var(--glow),.18);}
+.tab-btn:active{opacity:.7;}
+
+.tab-section{display:none;animation:fade-in .28s ease both;}
+.tab-section.visible{display:block;}
+@keyframes fade-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.content-card{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:16px 15px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);margin-bottom:14px;position:relative;overflow:hidden;}
+.content-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(var(--glow),.35),transparent);}
+
+.desc-txt{font-size:.93rem;font-weight:300;line-height:1.85;color:rgba(255,255,255,.82);}
+.desc-txt::first-letter{font-family:'Cinzel',serif;font-size:2.5rem;font-weight:900;float:left;line-height:.82;margin:.06em .1em 0 0;color:var(--A);text-shadow:0 0 18px rgba(var(--glow),.6);}
+
+.threat{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.85rem;font-weight:300;color:rgba(255,255,255,.78);line-height:1.6;}
+.threat:last-child{border:none;padding-bottom:0;}
+.threat-n{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--A);width:22px;flex-shrink:0;text-align:right;margin-top:1px;text-shadow:0 0 8px rgba(var(--glow),.5);}
+
+.facts{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.fact{background:rgba(0,0,0,.28);border:1px solid rgba(var(--glow),.20);border-radius:12px;padding:13px 14px;position:relative;overflow:hidden;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.fact::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(var(--glow),.45),transparent);}
+.fact-tag{font-family:'Share Tech Mono',monospace;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--B);margin-bottom:5px;}
+.fact-body{font-size:.88rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.82);}
+
+.sec-label{font-family:'Share Tech Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--A);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.sec-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.07);}
+.others{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;}
+.other{display:flex;flex-direction:column;align-items:center;gap:5px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:12px 8px;color:#fff;cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:background .2s;}
+.other:active{background:rgba(255,255,255,.14);}
+.other-ico{font-size:1.6rem;}
+.other-nom{font-family:'Cinzel',serif;font-size:.6rem;text-align:center;line-height:1.35;}
+
+/* Error 404 */
+.error-wrap{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  min-height:80vh;gap:14px;text-align:center;
+}
+.error-ico{font-size:4rem;opacity:.4}
+.error-txt{color:rgba(255,255,255,.5);font-size:.9rem;line-height:1.6}
+.error-btn{
+  margin-top:8px;
+  padding:12px 28px;border-radius:999px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-family:'Raleway',sans-serif;
+  font-size:.88rem;cursor:pointer;
+}
+
+#veil{position:fixed;inset:0;z-index:9999;background:#000;opacity:0;pointer-events:none;transition:opacity .35s ease;}
+#veil.show{opacity:1;pointer-events:all;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+</style>
+</head>
+<body>
+
+<video id="cam-bg" autoplay playsinline muted></video>
+
+<div id="page">
+  <!-- El contenido se inyecta aquí por JS -->
+</div>
+
+<div id="veil"></div>
+
+<script>
+const COLS = {
+  "EN PELIGRO CRÍTICO":{ A:"#FF1744", B:"#FF6D00", glow:"255,23,68"  },
+  "VULNERABLE":        { A:"#FF9100", B:"#FFCA28", glow:"255,145,0"  },
+  "AMENAZADO":         { A:"#00E5FF", B:"#00BFA5", glow:"0,229,255"  },
+};
+
+/* ── Lee ?id= de la URL ── */
+const params = new URLSearchParams(window.location.search);
+const id     = params.get('id');
+const E      = ESPECIES.find(e => e.id === id);
+const page   = document.getElementById('page');
+
+/* ── Especie no encontrada ── */
+if(!E){
+  page.innerHTML = `
+    <div class="error-wrap">
+      <div class="error-ico">🌿</div>
+      <p class="error-txt">Especie no encontrada.<br/>Vuelve al catálogo e inténtalo de nuevo.</p>
+      <button class="error-btn" onclick="navegar('catalogo.html')">← Ir al catálogo</button>
+    </div>`;
+} else {
+
+  /* ── Colores ── */
+  const co = COLS[E.estado] || COLS["VULNERABLE"];
+  const R  = document.documentElement;
+  R.style.setProperty('--A',    co.A);
+  R.style.setProperty('--B',    co.B);
+  R.style.setProperty('--glow', co.glow);
+  document.title = E.nombre;
+
+  /* ── Relacionadas (3 especies distintas del catálogo) ── */
+  const rel = ESPECIES
+    .filter(x => x.id !== E.id)
+    .sort(() => Math.random() - .5)
+    .slice(0, 3);
+
+  /* ── HTML ── */
+  page.innerHTML = `
+    <div class="btn-back" onclick="navegar('catalogo.html')">←</div>
+
+    <div class="sp-head">
+      <div class="sp-orb" id="ui-orb">${E.emoji}</div>
+      <div class="sp-meta">
+        <div class="sp-pill">${E.estado}</div>
+        <div class="sp-nombre">${E.nombre}</div>
+        <div class="sp-cient">${E.cient}</div>
+      </div>
+    </div>
+
+    <div class="cat-row">
+      <div class="cat-line"></div>
+      <span class="cat-txt">${E.categoria}</span>
+      <div class="cat-line r"></div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="kpi-ico">🌿</div><div class="kpi-lbl">Hábitat</div><div class="kpi-val">${E.habitat}</div></div>
+      <div class="kpi"><div class="kpi-ico">👥</div><div class="kpi-lbl">Población estimada</div><div class="kpi-val alert">${E.poblacion}</div></div>
+      <div class="kpi"><div class="kpi-ico">📏</div><div class="kpi-lbl">Longitud</div><div class="kpi-val">${E.tamaño}</div></div>
+      <div class="kpi"><div class="kpi-ico">⚖️</div><div class="kpi-lbl">Peso adulto</div><div class="kpi-val">${E.peso}</div></div>
+    </div>
+
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="desc">Sobre esta especie</button>
+      <button class="tab-btn"        data-tab="amenazas">Principales amenazas</button>
+      <button class="tab-btn"        data-tab="datos">Datos fascinantes</button>
+    </div>
+
+    <div class="tab-section visible" id="tab-desc">
+      <div class="content-card">
+        <p class="desc-txt">${E.desc}</p>
+      </div>
+      <div class="sec-label">Explorar otras especies</div>
+      <div class="others">
+        ${rel.map(r=>`
+          <div class="other" onclick="navegar('especie.html?id=${r.id}')">
+            <span class="other-ico">${r.emoji}</span>
+            <span class="other-nom">${r.nombre}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="tab-section" id="tab-amenazas">
+      <div class="content-card">
+        ${E.amenazas.map((a,i)=>`
+          <div class="threat">
+            <span class="threat-n">${String(i+1).padStart(2,'0')}</span>
+            <span>${a}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="tab-section" id="tab-datos">
+      <div class="facts">
+        ${E.curiosidades.map(c=>`
+          <div class="fact">
+            <div class="fact-tag">${c.t}</div>
+            <div class="fact-body">${c.txt}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+  `;
+
+  /* ── Tabs ── */
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('visible'));
+      btn.classList.add('active');
+      const sec = document.getElementById('tab-' + btn.dataset.tab);
+      if(sec){ void sec.offsetWidth; sec.classList.add('visible'); }
+      page.scrollTo({ top: 0, behavior:'smooth' });
+    });
+  });
+
+  /* ── Sonido ambiente ── */
+  const PRESETS = {
+    selva:  { type:'bandpass', freq:900,  Q:.5,  gain:.15, lfo:null },
+    oceano: { type:'lowpass',  freq:380,  Q:1.4, gain:.18, lfo:.1  },
+    lluvia: { type:'highpass', freq:2200, Q:.2,  gain:.12, lfo:null },
+    viento: { type:'bandpass', freq:180,  Q:.3,  gain:.14, lfo:.25 },
+    cueva:  { type:'lowpass',  freq:200,  Q:2,   gain:.10, lfo:null },
+  };
+  let audioCtx = null;
+  function startAmbient(){
+    try{
+      audioCtx = new(window.AudioContext||window.webkitAudioContext)();
+      if(audioCtx.state==='suspended') audioCtx.resume();
+      const p=PRESETS[E.sonido||'selva'];
+      const n=audioCtx.sampleRate*4, buf=audioCtx.createBuffer(1,n,audioCtx.sampleRate), d=buf.getChannelData(0);
+      for(let i=0;i<n;i++) d[i]=Math.random()*2-1;
+      const src=audioCtx.createBufferSource(); src.buffer=buf; src.loop=true;
+      const fi=audioCtx.createBiquadFilter(); fi.type=p.type; fi.frequency.value=p.freq; fi.Q.value=p.Q;
+      const ga=audioCtx.createGain(); ga.gain.setValueAtTime(0,audioCtx.currentTime); ga.gain.linearRampToValueAtTime(p.gain,audioCtx.currentTime+2);
+      if(p.lfo){const lo=audioCtx.createOscillator(),lg=audioCtx.createGain();lo.frequency.value=p.lfo;lg.gain.value=p.freq*.4;lo.connect(lg);lg.connect(fi.frequency);lo.start();}
+      src.connect(fi); fi.connect(ga); ga.connect(audioCtx.destination); src.start();
+    }catch(e){}
+  }
+  window.addEventListener('touchend', function f(){ startAmbient(); window.removeEventListener('touchend',f); },{ once:true, passive:true });
+  window.addEventListener('click',    function f(){ if(!audioCtx) startAmbient(); window.removeEventListener('click',f); },{ once:true });
+}
+
+/* ── Cámara ── */
+(async function(){
+  try{
+    const s = await navigator.mediaDevices.getUserMedia({
+      video:{ facingMode:{ ideal:'environment' }, width:{ ideal:1920 }, height:{ ideal:1080 } },
+      audio:false
+    });
+    const v = document.getElementById('cam-bg');
+    v.srcObject = s; v.play();
+  }catch(e){}
+})();
+
+/* ── Transición ── */
+function navegar(url){
+  const v = document.getElementById('veil');
+  v.classList.add('show');
+  setTimeout(() => window.location.href = url, 360);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const v = document.getElementById('veil');
+  v.style.opacity='1'; v.style.transition='none';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    v.style.transition='opacity .4s ease';
+    v.style.opacity='0';
+  }));
+});
+</script>
+
+</body>
+</html>
