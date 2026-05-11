@@ -48,18 +48,26 @@
             background-image: 
                 linear-gradient(rgba(245, 166, 35, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(245, 166, 35, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+            background-size: 40px 40px;
             z-index: -1;
         }
 
-        /* Outer Frame adjusted */
+        /* Responsive Outer Frame */
         .outer-frame {
             position: fixed;
-            top: 20px; left: 20px; right: 20px; bottom: 20px;
-            border: 10px solid #D84315;
-            border-radius: 3rem;
+            top: 15px; left: 15px; right: 15px; bottom: 15px;
+            border: 6px solid #D84315;
+            border-radius: 2rem;
             pointer-events: none;
             z-index: 50;
+        }
+
+        @media (min-width: 768px) {
+            .outer-frame {
+                top: 25px; left: 25px; right: 25px; bottom: 25px;
+                border-width: 10px;
+                border-radius: 3.5rem;
+            }
         }
 
         .text-gradient {
@@ -68,29 +76,30 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Solid Orange Button - No Gradient */
+        /* Solid Orange Button */
         .btn-solid {
             background-color: #F5A623;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+            transition: all 0.2s ease;
         }
 
-        .btn-solid:active { transform: scale(0.96); }
+        .btn-solid:active { transform: scale(0.95); }
 
-        /* No aura/glow for the jaguar as requested */
-        .emoji-central {
-            animation: float-center 4s ease-in-out infinite;
+        /* Floating animation for Jaguar */
+        .emoji-float {
+            animation: float-simple 4s ease-in-out infinite;
         }
 
-        @keyframes float-center {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-20px) scale(1.05); }
+        @keyframes float-simple {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
         }
 
-        /* Main Container for the split layout */
+        /* Viewport safety padding */
         main {
             height: 100vh;
-            padding: 60px;
+            width: 100vw;
+            padding: 30px;
         }
     </style>
 </head>
@@ -99,43 +108,40 @@
     <div class="grid-overlay"></div>
     <div class="outer-frame"></div>
 
-    <!-- Main Content: Letters Left, Jaguar Right -->
-    <main class="flex flex-col md:flex-row items-center justify-center gap-10 lg:gap-20 z-10 relative w-full h-screen max-w-6xl mx-auto">
+    <!-- Main Content: Mobile Centered, Desktop Split -->
+    <main class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-16 lg:gap-24 z-10 relative max-w-7xl mx-auto overflow-hidden">
         
-        <!-- Left Side: Letters & Button -->
-        <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-6 animate__animated animate__fadeInLeft">
+        <!-- Text & Action Block -->
+        <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-5 animate__animated animate__fadeInLeft">
             
-            <!-- Title -->
             <header>
-                <h1 class="font-cinzel text-4xl md:text-5xl lg:text-7xl font-black text-gradient leading-none">
+                <h1 class="font-cinzel text-4xl md:text-5xl lg:text-7xl font-black text-gradient leading-[0.9] md:leading-none">
                     ESPECIES <br class="hidden md:block"> EXTINCIÓN
                 </h1>
             </header>
             
-            <!-- Steps -->
-            <ul class="space-y-3 font-bold text-base md:text-xl tracking-tight">
-                <li class="flex items-center gap-3">
+            <ul class="space-y-2 md:space-y-4 font-bold text-sm md:text-lg lg:text-xl tracking-tight">
+                <li class="flex items-center justify-center md:justify-start gap-3">
                     <span>🔍</span> 1. ESCANEA EL CÓDIGO QR
                 </li>
-                <li class="flex items-center gap-3">
+                <li class="flex items-center justify-center md:justify-start gap-3">
                     <span>🔓</span> 2. ACTIVA LA CÁMARA
                 </li>
-                <li class="flex items-center gap-3">
+                <li class="flex items-center justify-center md:justify-start gap-3">
                     <span>🐆</span> 3. DESCUBRE LA ESPECIE EN AR
                 </li>
             </ul>
 
-            <!-- Solid Button -->
-            <div class="mt-4">
-                <a href="catalogo.html" class="btn-solid inline-block px-12 py-5 rounded-full text-black font-black text-xl tracking-tight uppercase no-underline transition-all hover:scale-105">
+            <div class="mt-2 md:mt-4">
+                <a href="catalogo.html" class="btn-solid inline-block px-10 md:px-14 py-4 md:py-5 rounded-full text-black font-black text-lg md:text-xl tracking-tight uppercase no-underline hover:scale-105 transition-transform">
                     ¡INICIAR EXPERIENCIA!
                 </a>
             </div>
         </div>
 
-        <!-- Right Side: Massive Jaguar Face (No Glow) -->
+        <!-- Jaguar Block -->
         <div class="flex-1 flex justify-center items-center animate__animated animate__fadeInRight">
-            <div class="text-[12rem] md:text-[18rem] lg:text-[22rem] emoji-central select-none cursor-default">
+            <div class="text-[9rem] md:text-[16rem] lg:text-[22rem] emoji-float select-none cursor-default leading-none">
                 🐯
             </div>
         </div>
