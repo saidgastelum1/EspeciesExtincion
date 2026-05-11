@@ -1,225 +1,146 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WebAR</title>
+    <title>WebAr</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'museum-orange': '#FF5733',
+                        'accent-orange': '#F5A623',
+                        'ar-cyan': '#00D4FF',
+                    },
+                    fontFamily: {
+                        'cinzel': ['Cinzel', 'serif'],
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                        'mono': ['"Share Tech Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        :root {
-            --bg-black: #000000;
-            --card-gray: #1A1A1A;
-            --wild-orange: #FF9500;
-            --text-white: #FFFFFF;
-            --text-dim: rgba(255, 255, 255, 0.6);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            overflow: hidden;
             -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            background-color: var(--bg-black);
-            color: var(--text-white);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            align-items: center;
-            justify-content: center;
+        /* Ambient Technical Grid */
+        .grid-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(245, 166, 35, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245, 166, 35, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
         }
 
+        /* Outer Frame adjusted */
+        .outer-frame {
+            position: fixed;
+            top: 20px; left: 20px; right: 20px; bottom: 20px;
+            border: 10px solid #D84315;
+            border-radius: 3rem;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to bottom, #FFFFFF 0%, #F5A623 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Solid Orange Button - No Gradient */
+        .btn-solid {
+            background-color: #F5A623;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-solid:active { transform: scale(0.96); }
+
+        /* No aura/glow for the jaguar as requested */
+        .emoji-central {
+            animation: float-center 4s ease-in-out infinite;
+        }
+
+        @keyframes float-center {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        /* Main Container for the split layout */
         main {
-            width: 100%;
-            max-width: 900px;
-            /* Ancho para permitir las 3 tarjetas horizontales en tablets/desktop */
-            padding: 2rem 1.5rem;
-            text-align: center;
-        }
-
-        header {
-            margin-bottom: 3rem;
-        }
-
-        .header-title {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 1rem;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .header-subtitle {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-top: 1rem;
-            color: var(--text-white);
-        }
-
-        /* Contenedor de Tarjetas */
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin: 2.5rem 0;
-        }
-
-        .step-card {
-            background: var(--card-gray);
-            border: 1px solid var(--wild-orange);
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 0 15px rgba(255, 149, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .step-card:active {
-            transform: scale(0.98);
-        }
-
-        .icon-box {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .icon-box svg {
-            width: 70px;
-            height: 70px;
-            stroke: var(--wild-orange);
-            fill: none;
-            stroke-width: 1.5;
-        }
-
-        .step-label {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--text-white);
-            margin-bottom: 0.5rem;
-        }
-
-        .step-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .step-desc {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            line-height: 1.4;
-        }
-
-        /* Botón Final Estilo Wildar */
-        .footer-action {
-            margin-top: 2rem;
-        }
-
-        .btn-wildar {
-            width: 100%;
-            max-width: 320px;
-            background: transparent;
-            color: var(--wild-orange);
-            border: 2px solid var(--wild-orange);
-            padding: 1.2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 149, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .btn-wildar:hover {
-            background: var(--wild-orange);
-            color: var(--bg-black);
-            box-shadow: 0 0 30px rgba(255, 149, 0, 0.4);
-        }
-
-        @media (max-width: 600px) {
-            .cards-container {
-                grid-template-columns: 1fr;
-            }
-
-            .header-title {
-                font-size: 1.2rem;
-            }
+            height: 100vh;
+            padding: 60px;
         }
     </style>
 </head>
+<body class="font-montserrat relative">
+    
+    <div class="grid-overlay"></div>
+    <div class="outer-frame"></div>
 
-<body>
+    <!-- Main Content: Letters Left, Jaguar Right -->
+    <main class="flex flex-col md:flex-row items-center justify-center gap-10 lg:gap-20 z-10 relative w-full h-screen max-w-6xl mx-auto">
+        
+        <!-- Left Side: Letters & Button -->
+        <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left gap-6 animate__animated animate__fadeInLeft">
+            
+            <!-- Title -->
+            <header>
+                <h1 class="font-cinzel text-4xl md:text-5xl lg:text-7xl font-black text-gradient leading-none">
+                    ESPECIES <br class="hidden md:block"> EXTINCIÓN
+                </h1>
+            </header>
+            
+            <!-- Steps -->
+            <ul class="space-y-3 font-bold text-base md:text-xl tracking-tight">
+                <li class="flex items-center gap-3">
+                    <span>🔍</span> 1. ESCANEA EL CÓDIGO QR
+                </li>
+                <li class="flex items-center gap-3">
+                    <span>🔓</span> 2. ACTIVA LA CÁMARA
+                </li>
+                <li class="flex items-center gap-3">
+                    <span>🐆</span> 3. DESCUBRE LA ESPECIE EN AR
+                </li>
+            </ul>
 
-    <main>
-        <header>
-            <div class="header-title">Museo de Ciencia y Tecnología</div>
-            <div class="header-subtitle">¿Cómo usar la Experiencia WebAR?</div>
-        </header>
-
-        <div class="cards-container">
-            <!-- Paso 1 -->
-            <div class="step-card">
-                <div class="icon-box">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                        <circle cx="12" cy="13" r="4" />
-                    </svg>
-                </div>
-                <div class="step-label">Paso 1</div>
-                <div class="step-title">Escanear el Código QR</div>
-                <div class="step-desc"></div>
-            </div>
-
-            <!-- Paso 2 -->
-            <div class="step-card">
-                <div class="icon-box">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 1v22M5 12h14" />
-                        <circle cx="12" cy="12" r="10" stroke-dasharray="4 4" />
-                        <path d="M15 8l-3-3-3 3M9 16l3 3 3-3" />
-                    </svg>
-                </div>
-                <div class="step-label">Paso 2</div>
-                <div class="step-title">Permitir Acceso a la Cámara</div>
-                <div class="step-desc"></div>
-            </div>
-
-            <!-- Paso 3 -->
-            <div class="step-card">
-                <div class="icon-box">
-                    <!-- Icono Estilizado Jaguar/Animal (SVG Simplified) -->
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        <circle cx="12" cy="12" r="3" fill="var(--wild-orange)" />
-                    </svg>
-                </div>
-                <div class="step-label">Paso 3</div>
-                <div class="step-title">Interactuar con el Animal</div>
-                <div class="step-desc"></div>
+            <!-- Solid Button -->
+            <div class="mt-4">
+                <a href="catalogo.html" class="btn-solid inline-block px-12 py-5 rounded-full text-black font-black text-xl tracking-tight uppercase no-underline transition-all hover:scale-105">
+                    ¡INICIAR EXPERIENCIA!
+                </a>
             </div>
         </div>
 
-        <div class="footer-action">
-            <button class="btn-wildar">
-                ¡INICIAR EXPERIENCIA!
-            </button>
+        <!-- Right Side: Massive Jaguar Face (No Glow) -->
+        <div class="flex-1 flex justify-center items-center animate__animated animate__fadeInRight">
+            <div class="text-[12rem] md:text-[18rem] lg:text-[22rem] emoji-central select-none cursor-default">
+                🐯
+            </div>
         </div>
+
     </main>
 
 </body>
-
 </html>
