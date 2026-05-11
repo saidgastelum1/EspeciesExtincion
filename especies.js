@@ -1,22 +1,5 @@
-/*
-  ══════════════════════════════════════════════════════════════
-  especies.js — Base de datos de las 80 especies
-  ══════════════════════════════════════════════════════════════
-
-  Para AGREGAR una especie:
-    1. Copia uno de los bloques de abajo
-    2. Cámbialo con los datos de tu especie
-    3. Pega al final del array ESPECIES
-    4. Listo. El catálogo y la página se actualizan solos.
-
-  El campo "id" debe ser único, sin espacios ni acentos.
-  Ejemplo: "jaguar", "oso-negro", "tortuga-laúd"
-  ══════════════════════════════════════════════════════════════
-*/
-
 const ESPECIES = [
 
-  /* ── MAMÍFEROS ─────────────────────────────────────────── */
   {
     id:        "jaguar",
     nombre:    "Jaguar",
