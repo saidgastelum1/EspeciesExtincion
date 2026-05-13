@@ -559,22 +559,29 @@ const ESPECIES = [
     ],
   },
 
-    {
-    id: "zapatilla-dama",
-    nombre: "Zapatilla de Dama",
-    cient: "Cypripedium irapeanum",
-    emoji: "🌸",
-    categoria: "Planta · Orquídea",
-    estado: "EN PELIGRO CRÍTICO",
-    habitat: "Bosques de pino-encino",
-    poblacion: "Muy rara",
-    tamaño: "40 – 60 cm",
-    peso: "—",
+{
+    id: "zorrillo-rayado",
+    nombre: "Zorrillo Rayado",
+    cient: "Mephitis mephitis",
+    emoji: "🦨",
+    categoria: "Mamífero · Mephitidae",
+    estado: "AMENAZADO",
+    habitat: "Bosques, praderas y zonas rurales",
+    poblacion: "Estable pero vulnerable a atropellamientos",
+    tamaño: "50 – 80 cm",
+    peso: "1 – 4 kg",
     sonido: "viento",
-    desc: "Orquídea terrestre con flor en forma de zapatilla amarilla.",
-    amenazas: ["Recolección ilegal", "Incendios"],
-    curiosidades: [{ t: "Trampa", txt: "Obliga a los insectos a pasar por un túnel." }],
-  },
+    desc: "Famoso por su eficaz mecanismo de defensa: un almizcle fétido que puede lanzar con gran precisión. Sus rayas blancas son una señal de advertencia para que nadie se le acerque.",
+    amenazas: [
+      "Atropellamientos masivos en carreteras durante sus búsquedas nocturnas.",
+      "Enfermedades transmitidas por perros domésticos como la rabia.",
+      "Persecución humana por el olor que emite cuando se defiende."
+    ],
+    curiosidades: [
+      { t: "Puntería", txt: "Puede lanzar su líquido fétido hasta a 3 metros de distancia con precisión quirúrgica." },
+      { t: "Baile", txt: "Antes de disparar, hace un pequeño 'baile' golpeando el suelo para avisar." }
+    ],
+  }
 
   // ─── PUEDES CONTINUAR AGREGANDO ESPECIES AQUÍ ───────────
   // Copia el bloque de arriba, cambia los datos y pega.
