@@ -534,32 +534,6 @@ const ESPECIES = [
   },
 
   {
-    id:        "cactus-estrella",
-    nombre:    "Cactus Estrella",
-    cient:     "Astrophytum asterias",
-    emoji:     "🌵",
-    categoria: "Planta · Cactácea",
-    estado:    "EN PELIGRO CRÍTICO",
-    habitat:   "Tamaulipas y sur de Texas",
-    poblacion: "< 2,000 ind. silvestres",
-    tamaño:    "2.5 – 15 cm",
-    peso:      "Hasta 200 g",
-    sonido:    "viento",
-    desc: `El cactus estrella, conocido como "sand dollar cactus" o "peyote cimarrón", es uno de los cactus más raros del mundo. Crece casi al ras del suelo y es tan bien camuflado que parece una piedra o una excreción animal. Su flor amarilla, que solo abre de día, es de una belleza extraordinaria. La especie enfrenta presión tanto de coleccionistas como del cambio de uso del suelo.`,
-    amenazas: [
-      "Recolección ilegal masiva por coleccionistas de suculentas y cactus raros.",
-      "Pérdida de hábitat por agricultura y ganadería en el matorral tamaulipeco.",
-      "Escasa regeneración natural: crece muy lento y tarda años en madurar.",
-      "Sequías extremas asociadas al cambio climático.",
-    ],
-    curiosidades: [
-      { t:"Maestro del camuflaje",  txt:"Su superficie plana y moteada lo hace casi indistinguible de las piedras del suelo. Los coleccionistas profesionales los buscan durante horas sin encontrarlos." },
-      { t:"Flor de un día",         txt:"Su flor amarilla sedosa solo se abre durante el día, por unas pocas horas. Si llueve o hay nubes, permanece cerrada." },
-      { t:"El más buscado",         txt:"Es uno de los cactus más cotizados por coleccionistas. Un ejemplar raro puede venderse en miles de dólares en subastas ilegales de Europa y Japón." },
-    ],
-  },
-
-  {
     id:        "orquidea-monja",
     nombre:    "Orquídea Monja Blanca",
     cient:     "Lycaste skinneri",
