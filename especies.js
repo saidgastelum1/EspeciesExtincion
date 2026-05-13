@@ -582,8 +582,8 @@ const ESPECIES = [
       { t: "Baile", txt: "Antes de disparar, hace un pequeño 'baile' golpeando el suelo para avisar." }
     ],
   }
-
-    {
+  
+{
     id: "abaniquillo-chiapas",
     nombre: "Abaniquillo de Chiapas",
     cient: "Anolis chiapensis",
@@ -1637,6 +1637,7 @@ const ESPECIES = [
       { t: "Navegación", txt: "Usan el sol y el campo magnético de la Tierra para orientarse." }
     ],
   },
+      
   {
     id: "moni",
     nombre: "Moní",
@@ -1660,6 +1661,7 @@ const ESPECIES = [
       { t: "Vida extrema", txt: "Solo florece cuando el nivel del río baja y queda expuesta al aire." }
     ],
   },
+      
   {
     id: "mono-arana",
     nombre: "Mono Araña",
@@ -1683,6 +1685,7 @@ const ESPECIES = [
       { t: "Sin pulgar", txt: "No tienen pulgares en las manos, lo que les ayuda a columpiarse más rápido." }
     ],
   },
+      
   {
     id: "mono-aullador",
     nombre: "Mono Aullador",
@@ -2532,13 +2535,12 @@ const ESPECIES = [
     curiosidades: [
       { t: "Trampa", txt: "Los insectos caen en la 'zapatilla' y solo pueden salir por un túnel que los llena de polen." },
       { t: "Hongo", txt: "Depende de un hongo del suelo para que sus semillas puedan germinar." }
-    ],
-  },
+    ]
+  }
 
   // ─── PUEDES CONTINUAR AGREGANDO ESPECIES AQUÍ ───────────
   // Copia el bloque de arriba, cambia los datos y pega.
   // El catálogo y la página de especie se actualizan solos.
-
 ];
 
 /* No edites nada debajo de esta línea */
