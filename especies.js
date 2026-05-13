@@ -585,6 +585,23 @@ const ESPECIES = [
     ],
   },
 
+    {
+    id: "zapatilla-dama",
+    nombre: "Zapatilla de Dama",
+    cient: "Cypripedium irapeanum",
+    emoji: "🌸",
+    categoria: "Planta · Orquídea",
+    estado: "EN PELIGRO CRÍTICO",
+    habitat: "Bosques de pino-encino",
+    poblacion: "Muy rara",
+    tamaño: "40 – 60 cm",
+    peso: "—",
+    sonido: "viento",
+    desc: "Orquídea terrestre con flor en forma de zapatilla amarilla.",
+    amenazas: ["Recolección ilegal", "Incendios"],
+    curiosidades: [{ t: "Trampa", txt: "Obliga a los insectos a pasar por un túnel." }],
+  },
+
   // ─── PUEDES CONTINUAR AGREGANDO ESPECIES AQUÍ ───────────
   // Copia el bloque de arriba, cambia los datos y pega.
   // El catálogo y la página de especie se actualizan solos.
