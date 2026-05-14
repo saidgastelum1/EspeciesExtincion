@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#000"/>
+<title>Especies en Peligro</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<script src="especies.js"></script>
+
+<style>
+:root {
+  --A: #7FBF00;
+  --glow: 127,191,0;
+  --bg: #0a0f0a;
+  --surface: rgba(10,16,10,0.70);
+  --border: rgba(255,255,255,0.09);
+  --text: rgba(255,255,255,0.90);
+  --muted: rgba(255,255,255,0.38);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--bg);
+  font-family: 'Barlow', sans-serif;
+  color: var(--text);
+  overflow: hidden;
+}
+
+#cam-bg {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  object-fit: cover; object-position: center;
+  z-index: 0; background: #0a0f0a;
+}
+#cam-overlay {
+  position: fixed; inset: 0; z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.18) 0%,
+    rgba(0,0,0,0.28) 35%,
+    rgba(0,0,0,0.58) 60%,
+    rgba(0,0,0,0.82) 100%
+  );
+}
+
+#page {
+  position: fixed; inset: 0; z-index: 10;
+  overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+#page::-webkit-scrollbar { display: none; }
+
+/* ── HEADER ── */
+.header {
+  position: sticky; top: 0; z-index: 50;
+  padding: calc(env(safe-area-inset-top, 0px) + 14px) 14px 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.88) 65%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.header-top {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px;
+}
+
+/* Título */
+.header-title {
+  flex: 1;
+}
+.header-title h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.5rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: .04em;
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(var(--glow),.5);
+}
+.header-title p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .48rem; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(var(--glow),0.7);
+  margin-top: 2px;
+}
+
+/* Botón back */
+.btn-back {
+  width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: #fff;
+  font-size: .95rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background .2s;
+}
+.btn-back:active { background: rgba(255,255,255,0.18); }
+
+/* Buscador */
+.search-wrap {
+  position: relative;
+  margin-bottom: 10px;
+}
+.search-ico {
+  position: absolute; left: 12px; top: 50%;
+  transform: translateY(-50%);
+  font-size: .85rem; opacity: .4;
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 11px 14px 11px 36px;
+  color: #fff;
+  font-family: 'Barlow', sans-serif;
+  font-size: .9rem;
+  outline: none;
+  -webkit-appearance: none;
+  transition: border-color .2s, background .2s;
+}
+.search-input::placeholder { color: rgba(255,255,255,0.28); }
+.search-input:focus {
+  border-color: rgba(var(--glow),.5);
+  background: rgba(255,255,255,0.10);
+}
+
+/* Filtros */
+.filters {
+  display: flex; gap: 6px;
+  padding: 0 0 12px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.filters::-webkit-scrollbar { display: none; }
+
+.filter-btn {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.35);
+  color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .5rem; letter-spacing: .1em; text-transform: uppercase;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: all .2s;
+}
+.filter-btn.active {
+  background: rgba(var(--glow),0.18);
+  border-color: rgba(var(--glow),0.55);
+  color: var(--A);
+}
+.filter-btn.critico.active {
+  background: rgba(255,23,68,0.16);
+  border-color: rgba(255,23,68,0.5);
+  color: #FF1744;
+}
+.filter-btn.vulnerable.active {
+  background: rgba(255,145,0,0.16);
+  border-color: rgba(255,145,0,0.5);
+  color: #FF9100;
+}
+.filter-btn.amenazado.active {
+  background: rgba(0,229,255,0.14);
+  border-color: rgba(0,229,255,0.45);
+  color: #00E5FF;
+}
+
+/* Contador */
+.results-count {
+  padding: 8px 14px 10px;
+  display: flex;
+  align-items: center;
+}
+.results-count-inner {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .5rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  background: rgba(0,0,0,0.50);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 5px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.results-count-inner span { color: var(--A); font-size: .58rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 0 10px 40px;
+}
+@media (min-width: 540px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 720px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 10px; } }
+
+/* ── CARD ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  transition: transform .18s, box-shadow .18s;
+  animation: card-in .35s ease both;
+}
+.card:active { transform: scale(.96); }
+
+/* Línea de color superior */
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--card-color, rgba(255,255,255,0.15));
+}
+
+/* Zona imagen */
+.card-img {
+  width: 100%;
+  height: 110px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(0,0,0,0.30);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.card-animal-img {
+  width: 75%;
+  height: 80%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform .3s ease;
+  position: relative; z-index: 1;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+}
+.card:active .card-animal-img { transform: scale(1.05); }
+
+.card-emoji {
+  display: none;
+  font-size: 3.2rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%; height: 100%;
+  filter: drop-shadow(0 0 12px rgba(var(--glow),0.7));
+  animation: float-small 3s ease-in-out infinite;
+}
+
+/* Glow de color en imagen */
+.card-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(0,0,0,0.55) 100%
+  );
+  pointer-events: none;
+}
+
+/* Indicador estado (punto) */
+.card-status-dot {
+  position: absolute; top: 8px; right: 8px; z-index: 2;
+  width: 7px; height: 7px; border-radius: 50%;
+  animation: blink 1.8s ease-in-out infinite;
+}
+/* Número */
+.card-num {
+  position: absolute; top: 8px; left: 9px; z-index: 2;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .46rem; color: rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.4);
+  padding: 2px 5px; border-radius: 4px;
+  letter-spacing: .06em;
+}
+
+/* Cuerpo de la card */
+.card-body {
+  padding: 9px 10px 12px;
+}
+.card-nombre {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .88rem; font-weight: 700;
+  line-height: 1.25;
+  /* Nombre completo, sin truncar */
+  white-space: normal;
+  word-break: break-word;
+  hyphens: auto;
+  margin-bottom: 3px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.8);
+}
+.card-cient {
+  font-style: italic; font-weight: 300;
+  font-size: .62rem; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 5px;
+}
+.card-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: #fff;
+  background: var(--card-color);
+  padding: 3px 9px; border-radius: 6px;
+  opacity: .92;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Colores de estado */
+.s-critico   { background: #FF1744; }
+.s-vulnerable { background: #FF9100; }
+.s-amenazado  { background: #00E5FF; }
+
+/* Vacío */
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--muted);
+}
+.empty-ico { font-size: 3rem; margin-bottom: 12px; opacity: .4; }
+.empty-txt { font-size: .9rem; line-height: 1.6; }
+
+/* Velo */
+#veil {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #000; opacity: 0; pointer-events: none;
+  transition: opacity .35s ease;
+}
+#veil.show { opacity: 1; pointer-events: all; }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+@keyframes float-small {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<video id="cam-bg" autoplay playsinline muted></video>
+<div id="cam-overlay"></div>
+
+<div id="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <a class="btn-back" href="index.html">←</a>
+      <div class="header-title">
+        <h1>Catálogo</h1>
+        <p>Especies en riesgo · México</p>
+      </div>
+    </div>
+
+    <!-- Buscador -->
+    <div class="search-wrap">
+      <span class="search-ico">🔍</span>
+      <input
+        class="search-input"
+        id="search"
+        type="search"
+        placeholder="Buscar especie…"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+      />
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Todas</button>
+      <button class="filter-btn critico"    data-filter="EN PELIGRO CRÍTICO">● Crítico</button>
+      <button class="filter-btn vulnerable" data-filter="VULNERABLE">● Vulnerable</button>
+      <button class="filter-btn amenazado"  data-filter="AMENAZADO">● Amenazado</button>
+    </div>
+  </div>
+
+  <!-- Contador -->
+  <div class="results-count">
+    <div class="results-count-inner">
+      <span id="count">0</span> especies encontradas
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid" id="grid"></div>
+
+</div>
+
+<div id="veil"></div>
+
+<script>
+const COLS = {
+  "EN PELIGRO CRÍTICO": { color: "#FF1744", cls: "s-critico",    label: "Crítico"    },
+  "VULNERABLE":         { color: "#FF9100", cls: "s-vulnerable",  label: "Vulnerable" },
+  "AMENAZADO":          { color: "#00E5FF", cls: "s-amenazado",   label: "Amenazado"  },
+};
+
+let currentFilter = "all";
+let currentSearch  = "";
+
+function render() {
+  const grid = document.getElementById('grid');
+
+  const list = ESPECIES.filter(e => {
+    const matchFilter = currentFilter === "all" || e.estado === currentFilter;
+    const q = currentSearch.toLowerCase();
+    const matchSearch = !q ||
+      e.nombre.toLowerCase().includes(q)   ||
+      e.cient.toLowerCase().includes(q)    ||
+      e.categoria.toLowerCase().includes(q)||
+      e.habitat.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+
+  document.getElementById('count').textContent = list.length;
+
+  if (!list.length) {
+    grid.innerHTML = `
+      <div class="empty">
+        <div class="empty-ico">🔍</div>
+        <p class="empty-txt">No encontramos ninguna especie<br/>que coincida con "<strong>${currentSearch}</strong>"</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map((e, i) => {
+    const co = COLS[e.estado] || COLS["VULNERABLE"];
+    const delay = Math.min(i * 0.035, 0.6);
+    return `
+      <div class="card"
+           onclick="navegar('especie.html?id=${e.id}')"
+           style="--card-color:${co.color}; animation-delay:${delay}s">
+
+        <!-- Zona imagen -->
+        <div class="card-img">
+          <span class="card-num">${String(i+1).padStart(2,'0')}</span>
+          <span class="card-status-dot ${co.cls}"></span>
+
+          <img
+            src="assets/${e.id}.png"
+            class="card-animal-img"
+            alt="${e.nombre}"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='flex';
+            "
+          />
+          <div class="card-emoji">${e.emoji}</div>
+        </div>
+
+        <!-- Info -->
+        <div class="card-body">
+          <div class="card-nombre">${e.nombre}</div>
+          <div class="card-cient">${e.cient}</div>
+          <div class="card-tag">${co.label}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* Búsqueda */
+document.getElementById('search').addEventListener('input', e => {
+  currentSearch = e.target.value.trim();
+  render();
+});
+
+/* Filtros */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    render();
+  });
+});
+
+/* Cámara — igual que especie.html */
+(async function() {
+  try {
+    const s = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } },
+      audio: false
+    });
+    const v = document.getElementById('cam-bg');
+    v.srcObject = s; v.play();
+  } catch(e) {}
+})();
+
+/* Transición */
+function navegar(url) {
+  const v = document.getElementById('veil');
+  v.classList.add('show');
+  setTimeout(() => window.location.href = url, 360);
+}
+
+/* Entrada con fade */
+window.addEventListener('DOMContentLoaded', () => {
+  const v = document.getElementById('veil');
+  v.style.opacity = '1'; v.style.transition = 'none';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    v.style.transition = 'opacity .4s ease';
+    v.style.opacity = '0';
+  }));
+  render();
+});
+</script>
+
+</body>
+</html>
