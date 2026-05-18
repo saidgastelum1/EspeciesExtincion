@@ -241,21 +241,25 @@ model-viewer {
 
 /* Badge estado — fondo ajustado al texto */
 .sp-pill {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: rgba(var(--glow),0.16);
-  border: 1px solid rgba(var(--glow),0.50);
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0,0,0,0.75);
+  border: 1px solid rgba(var(--glow),0.8);
   color: var(--A);
   font-family: 'Share Tech Mono', monospace;
-  font-size: .55rem; letter-spacing: .14em; text-transform: uppercase;
-  padding: 3px 10px; border-radius: 999px;
-  margin-bottom: 6px;
+  font-size: .8rem; font-weight: bold; letter-spacing: .1em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 999px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-shadow: 0 0 8px rgba(var(--glow), 0.5);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 0 10px rgba(var(--glow), 0.2);
 }
 .sp-pill::before {
   content: '';
-  width: 5px; height: 5px;
+  width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--A);
-  box-shadow: 0 0 6px var(--A);
+  box-shadow: 0 0 8px var(--A);
   animation: blink 1.4s ease-in-out infinite;
 }
 
