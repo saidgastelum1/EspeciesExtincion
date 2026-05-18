@@ -712,8 +712,22 @@
       });
     });
 
-    /* Cámara — igual que especie.html */
-    (async function () {
+    /* Renderizar especies inmediatamente para evitar pantalla negra */
+    render();
+
+    /* Restaurar el scroll si venimos de otra página */
+    const savedScroll = sessionStorage.getItem('catalogScroll');
+    if (savedScroll) {
+      // Usamos requestAnimationFrame para asegurar que el DOM ya aplicó el innerHTML
+      requestAnimationFrame(() => {
+        const page = document.getElementById('page');
+        if (page) page.scrollTop = parseInt(savedScroll, 10);
+        sessionStorage.removeItem('catalogScroll');
+      });
+    }
+
+    /* Cámara — Diferida ligeramente para no bloquear el renderizado inicial de la UI */
+    setTimeout(async () => {
       try {
         const s = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } },
@@ -722,9 +736,9 @@
         const v = document.getElementById('cam-bg');
         v.srcObject = s; v.play();
       } catch (e) { }
-    })();
+    }, 50);
 
-    /* Transición */
+    /* Transición al salir */
     function navegar(url) {
       // Guardar el scroll actual antes de salir
       const page = document.getElementById('page');
@@ -734,31 +748,6 @@
       v.classList.add('show');
       setTimeout(() => window.location.href = url, 360);
     }
-
-    /* Entrada con fade */
-    window.addEventListener('DOMContentLoaded', () => {
-      const v = document.getElementById('veil');
-      v.style.opacity = '1'; v.style.transition = 'none';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        v.style.transition = 'opacity .4s ease';
-        v.style.opacity = '0';
-      }));
-      render();
-
-      // Restaurar el scroll si venimos de otra página
-      const savedScroll = sessionStorage.getItem('catalogScroll');
-      if (savedScroll) {
-        const page = document.getElementById('page');
-        if (page) {
-          // Usamos requestAnimationFrame para asegurar que el grid ya tiene su altura real
-          requestAnimationFrame(() => {
-            page.scrollTop = parseInt(savedScroll, 10);
-            // Limpiar el scroll guardado por si luego recarga
-            sessionStorage.removeItem('catalogScroll');
-          });
-        }
-      }
-    });
   </script>
 
 </body>
