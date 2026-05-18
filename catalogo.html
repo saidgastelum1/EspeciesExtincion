@@ -86,9 +86,9 @@ html, body {
 }
 .header-title p {
   font-family: 'Share Tech Mono', monospace;
-  font-size: .48rem; letter-spacing: .16em; text-transform: uppercase;
-  color: rgba(var(--glow),0.7);
-  margin-top: 2px;
+  font-size: .8rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(var(--glow), 0.9);
+  margin-top: 4px;
 }
 
 /* Botón back */
@@ -112,25 +112,25 @@ html, body {
   margin-bottom: 10px;
 }
 .search-ico {
-  position: absolute; left: 12px; top: 50%;
+  position: absolute; left: 16px; top: 50%;
   transform: translateY(-50%);
-  font-size: .85rem; opacity: .4;
+  font-size: 1.2rem; opacity: .7;
   pointer-events: none;
 }
 .search-input {
   width: 100%;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 12px;
-  padding: 11px 14px 11px 36px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 14px;
+  padding: 14px 16px 14px 44px;
   color: #fff;
   font-family: 'Barlow', sans-serif;
-  font-size: .9rem;
+  font-size: 1.15rem;
   outline: none;
   -webkit-appearance: none;
   transition: border-color .2s, background .2s;
 }
-.search-input::placeholder { color: rgba(255,255,255,0.28); }
+.search-input::placeholder { color: rgba(255,255,255,0.5); }
 .search-input:focus {
   border-color: rgba(var(--glow),.5);
   background: rgba(255,255,255,0.10);
@@ -185,18 +185,18 @@ html, body {
   align-items: center;
 }
 .results-count-inner {
-  display: inline-flex; align-items: center; gap: 5px;
+  display: inline-flex; align-items: center; gap: 6px;
   font-family: 'Share Tech Mono', monospace;
-  font-size: .5rem; letter-spacing: .12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  background: rgba(0,0,0,0.50);
+  font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  background: rgba(0,0,0,0.60);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 5px 16px;
+  padding: 8px 20px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
 }
-.results-count-inner span { color: var(--A); font-size: .58rem; }
+.results-count-inner span { color: var(--A); font-size: .95rem; font-weight: bold; }
 
 .grid {
   display: grid;
