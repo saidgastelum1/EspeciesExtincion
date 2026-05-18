@@ -169,24 +169,66 @@ model-viewer {
   }
 }
 
-/* Botón back */
+/* Botón back premium */
 .btn-back {
-  position: absolute;
-  top: calc(env(safe-area-inset-top, 0px) + 14px);
-  left: 16px;
-  z-index: 20;
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.50);
-  border: 1px solid rgba(255,255,255,0.22);
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 14px) + 24px);
+  left: 14px;
+  z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; flex-shrink: 0;
+  border-radius: 12px;
+  background: rgba(10,10,10,0.55);
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  text-decoration: none; color: #fff;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  color: #fff; font-size: 1rem;
-  cursor: pointer; text-decoration: none;
-  transition: background .2s;
+  transition: all .25s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+  cursor: pointer;
 }
-.btn-back:active { background: rgba(255,255,255,0.18); }
+
+.btn-back::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(var(--glow),0.25) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.btn-back svg {
+  position: relative;
+  z-index: 1;
+  width: 22px; height: 22px;
+  stroke: rgba(255,255,255,0.9);
+  transition: transform .25s ease, stroke .25s ease;
+}
+
+.btn-back:hover, .btn-back:active {
+  background: rgba(10,10,10,0.75);
+  border-color: rgba(var(--glow), 0.5);
+  box-shadow: 
+    0 6px 16px rgba(0,0,0,0.5),
+    0 0 12px rgba(var(--glow), 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+.btn-back:hover::before, .btn-back:active::before {
+  opacity: 1;
+}
+
+.btn-back:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.btn-back:hover svg {
+  transform: translateX(-3px);
+  stroke: #fff;
+}
 
 /* Input oculto para cargar .glb */
 #glb-input { display: none; }
@@ -199,21 +241,25 @@ model-viewer {
 
 /* Badge estado — fondo ajustado al texto */
 .sp-pill {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: rgba(var(--glow),0.16);
-  border: 1px solid rgba(var(--glow),0.50);
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0,0,0,0.75);
+  border: 1px solid rgba(var(--glow),0.8);
   color: var(--A);
   font-family: 'Share Tech Mono', monospace;
-  font-size: .55rem; letter-spacing: .14em; text-transform: uppercase;
-  padding: 3px 10px; border-radius: 999px;
-  margin-bottom: 6px;
+  font-size: .8rem; font-weight: bold; letter-spacing: .1em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 999px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-shadow: 0 0 8px rgba(var(--glow), 0.5);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 0 10px rgba(var(--glow), 0.2);
 }
 .sp-pill::before {
   content: '';
-  width: 5px; height: 5px;
+  width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--A);
-  box-shadow: 0 0 6px var(--A);
+  box-shadow: 0 0 8px var(--A);
   animation: blink 1.4s ease-in-out infinite;
 }
 
@@ -702,7 +748,11 @@ function explorarHTML() {
 /* ── Render HTML ── */
 page.innerHTML = `
   <!-- Botón atrás -->
-  <div class="btn-back" onclick="navegar('catalogo.html')" style="z-index:30;position:fixed;top:calc(env(safe-area-inset-top,0px)+14px);left:16px;">←</div>
+  <div class="btn-back" onclick="navegar('catalogo.html')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+  </div>
 
   <!-- Zona visor holográfico -->
   <div id="viewer-zone">
@@ -814,12 +864,16 @@ page.innerHTML = `
 /* ── Tabs ── */
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
+    const page = document.getElementById('page');
+    const st = page.scrollTop; // Guardar scroll actual
+
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('visible'));
     btn.classList.add('active');
     const sec = document.getElementById('tab-' + btn.dataset.tab);
     if (sec) { void sec.offsetWidth; sec.classList.add('visible'); }
-    // Sin scroll al cambiar sección
+    
+    page.scrollTop = st; // Restaurar scroll
   });
 });
 
