@@ -101,6 +101,8 @@ html, body {
   display: flex; align-items: center; justify-content: center;
   text-decoration: none; color: #fff;
   font-size: 1.4rem; font-weight: bold;
+  line-height: 1;
+  padding-bottom: 3px; /* Ajuste óptico para centrar la flecha verticalmente */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: background .2s;
@@ -120,8 +122,10 @@ html, body {
 }
 .search-input {
   width: 100%;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.60);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: 14px;
   padding: 14px 16px 14px 44px;
   color: #fff;
@@ -134,7 +138,7 @@ html, body {
 .search-input::placeholder { color: rgba(255,255,255,0.5); }
 .search-input:focus {
   border-color: rgba(var(--glow),.5);
-  background: rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.80);
 }
 
 /* Filtros */
