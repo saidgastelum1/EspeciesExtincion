@@ -37,7 +37,8 @@
         body {
             background-color: #000000;
             color: #FFFFFF;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -97,9 +98,28 @@
 
         /* Viewport safety padding */
         main {
-            height: 100vh;
-            width: 100vw;
+            min-height: 100vh;
+            width: 100%;
             padding: 100px 30px 40px; /* Increased top padding for logos */
+        }
+
+        /* Mobile Landscape Optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+            main { 
+                padding-top: 60px !important; 
+                padding-bottom: 20px !important;
+                gap: 1.5rem !important;
+            }
+            .outer-frame {
+                top: 10px !important; left: 10px !important; right: 10px !important; bottom: 10px !important;
+                border-width: 4px !important; border-radius: 1.5rem !important;
+            }
+            .absolute.z-20 { top: 15px !important; }
+            .absolute.z-20 img { height: 25px !important; }
+            h1 { font-size: 2.2rem !important; line-height: 1 !important; }
+            ul li { font-size: 0.9rem !important; }
+            .btn-solid { padding: 10px 20px !important; font-size: 0.9rem !important; }
+            .emoji-float img { width: 180px !important; }
         }
     </style>
 </head>
@@ -109,7 +129,7 @@
     <div class="outer-frame"></div>
 
     <!-- Agency Logos Header -->
-    <div class="fixed top-8 md:top-12 left-0 w-full flex justify-center items-center gap-6 md:gap-12 z-20 px-8">
+    <div class="absolute top-8 md:top-12 left-0 w-full flex justify-center items-center gap-6 md:gap-12 z-20 px-8">
         <img src="img/logo-much.png" alt="Logo 1" class="h-7 md:h-10 object-contain">
         <img src="img/logo-planetario.png" alt="Logo 2" class="h-7 md:h-10 object-contain">
         <img src="img/logo-agencia-digital.png" alt="Logo 3" class="h-7 md:h-10 object-contain">
