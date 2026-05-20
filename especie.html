@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#000"/>
+<title>Especie</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<!-- model-viewer para modelos 3D .glb -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+<!-- Base de datos de todas las especies -->
+<script src="especies.js"></script>
+
+<style>
+:root {
+  --A: #7FBF00;
+  --B: #AAEE00;
+  --glow: 127,191,0;
+  --card-bg: rgba(10,14,10,0.72);
+  --card-border: rgba(255,255,255,0.10);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Barlow', sans-serif;
+  color: #fff;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── FONDO CÁMARA ── */
+#cam-bg {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  object-fit: cover; object-position: center;
+  z-index: 0; background: #0a0f0a;
+}
+
+/* ── OVERLAY oscuro sobre la cámara para legibilidad ── */
+#cam-overlay {
+  position: fixed; inset: 0; z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.25) 35%,
+    rgba(0,0,0,0.55) 60%,
+    rgba(0,0,0,0.80) 100%
+  );
+}
+
+/* ── SCROLL CONTAINER ── */
+#page {
+  position: fixed; inset: 0; z-index: 10;
+  overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+#page::-webkit-scrollbar { display: none; }
+
+/* ── ZONA SUPERIOR: visor holográfico ── */
+#viewer-zone {
+  position: relative;
+  width: 100%;
+  height: 56vw;
+  max-height: 340px;
+  min-height: 220px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+model-viewer {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  --progress-bar-color: var(--A);
+}
+
+/* ── Contenedor holográfico ── */
+.holo-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagen holográfica del animal */
+.holo-animal {
+  width: min(300px, 68vw);
+  position: relative;
+  z-index: 5;
+  object-fit: contain;
+  opacity: .96;
+  filter:
+    drop-shadow(0 0 8px  rgba(var(--glow), 0.9))
+    drop-shadow(0 0 25px rgba(var(--glow), 0.65))
+    drop-shadow(0 0 60px rgba(var(--glow), 0.35));
+  animation:
+    holo-float   3.5s ease-in-out infinite,
+    holo-flicker 4s   infinite alternate;
+}
+
+/* Anillo elíptico bajo el animal */
+.holo-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(var(--glow), 0.80);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(var(--glow), 0.16),
+    transparent 70%
+  );
+  box-shadow:
+    0 0 25px rgba(var(--glow), 0.45),
+    inset 0 0 25px rgba(var(--glow), 0.12);
+  animation: pulse-ring 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Emoji fallback (cuando no hay imagen) */
+.emoji-fallback {
+  font-size: 7.5rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 12px rgba(var(--glow), 0.9));
+  animation: holo-float 3.5s ease-in-out infinite;
+}
+
+/* ── Keyframes ── */
+@keyframes holo-float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes holo-flicker {
+  0%   { opacity: .72; }
+  20%  { opacity: 1;   }
+  35%  { opacity: .82; }
+  70%  { opacity: .96; }
+  100% { opacity: .90; }
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+    opacity: .75;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.08);
+    opacity: 1;
+  }
+}
+
+/* Botón back */
+.btn-back {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 14px);
+  left: 16px;
+  z-index: 30;
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(10,10,10,0.55);
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff; cursor: pointer; text-decoration: none;
+  transition: all .25s cubic-bezier(0.25,1,0.5,1);
+  position: fixed; overflow: hidden;
+}
+.btn-back::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(var(--glow),0.25) 0%, transparent 70%);
+  opacity: 0; transition: opacity .3s ease;
+}
+.btn-back svg {
+  position: relative; z-index: 1;
+  width: 22px; height: 22px;
+  stroke: rgba(255,255,255,0.9);
+  transition: transform .25s ease, stroke .25s ease;
+}
+.btn-back:active {
+  background: rgba(10,10,10,0.75);
+  border-color: rgba(var(--glow),0.5);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5), 0 0 12px rgba(var(--glow),0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  transform: scale(0.94);
+}
+.btn-back:active::before { opacity: 1; }
+.btn-back:active svg { stroke: #fff; }
+
+/* Input oculto para cargar .glb */
+#glb-input { display: none; }
+
+/* ── PANEL INFO (parte baja) ── */
+#info-panel {
+  padding: 0 16px calc(env(safe-area-inset-bottom,0px) + 32px) 16px;
+  padding-top: 10px;
+}
+
+/* Badge estado — fondo ajustado al texto */
+.sp-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(var(--glow),0.32);
+  border: 1px solid rgba(var(--glow),0.65);
+  color: var(--A);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
+  font-weight: 700;
+  padding: 6px 14px; border-radius: 999px;
+  margin-bottom: 8px;
+  box-shadow: 0 0 18px rgba(var(--glow),0.22), inset 0 0 10px rgba(var(--glow),0.10);
+}
+.sp-pill::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--A);
+  box-shadow: 0 0 8px var(--A);
+  animation: blink 1.4s ease-in-out infinite;
+}
+
+/* Nombre principal — sin fondo */
+.sp-nombre {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.7rem; font-weight: 900;
+  line-height: .95; letter-spacing: .01em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.9), 0 0 60px rgba(0,0,0,0.7);
+  margin-bottom: 6px;
+}
+
+/* Nombre científico + categoría — fondo pequeño ajustado al texto */
+.sp-cient-block {
+  display: inline-block;
+  background: rgba(8,12,8,0.72);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 4px 8px 5px 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-bottom: 14px;
+}
+.sp-cient {
+  display: block;
+  font-style: italic; font-weight: 300;
+  font-size: .82rem; color: var(--A);
+  margin-bottom: 2px;
+}
+
+/* Categoría */
+.sp-cat {
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .52rem; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ── KPIs ── */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.kpi {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  position: relative; overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.kpi::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(var(--glow),.4), transparent);
+}
+/* map bg decorativo en hábitat */
+.kpi.habitat-kpi::after {
+  content: '🌍';
+  position: absolute; right: 10px; bottom: 6px;
+  font-size: 2rem; opacity: .07;
+  pointer-events: none;
+}
+
+.kpi-ico-wrap {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem;
+  margin-bottom: 6px;
+}
+.kpi-ico-wrap.green { background: rgba(var(--glow),0.22); }
+.kpi-ico-wrap.blue  { background: rgba(0,120,255,0.22); }
+.kpi-ico-wrap.purple{ background: rgba(160,80,255,0.22); }
+.kpi-ico-wrap.gold  { background: rgba(255,180,0,0.22); }
+
+.kpi-lbl {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .48rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 3px;
+}
+.kpi-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.15rem; font-weight: 700; line-height: 1.15;
+  color: #fff;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.8);
+}
+.kpi-val.alert {
+  color: var(--A);
+  text-shadow: 0 0 14px rgba(var(--glow),0.45);
+}
+.kpi-val.alert .kpi-unit {
+  font-size: .75rem; font-weight: 500;
+  display: block;
+  color: var(--A);
+}
+
+/* Barra longitud decorativa */
+.length-bar {
+  height: 2px;
+  background: linear-gradient(to right, rgba(var(--glow),0.6), rgba(var(--glow),0.1));
+  border-radius: 1px;
+  margin-top: 6px;
+  width: 70%;
+}
+
+/* ── TABS ── */
+.tab-row {
+  display: flex; gap: 6px;
+  margin-bottom: 14px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px 4px 9px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.40);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .42rem; letter-spacing: .07em; text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  line-height: 1.5;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all .22s;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  position: relative; overflow: hidden;
+}
+.tab-btn::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.10), transparent);
+}
+.tab-btn .tab-ico {
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.45;
+  transition: opacity .22s;
+}
+.tab-btn .tab-ico svg { width: 16px; height: 16px; }
+.tab-btn.active {
+  background: rgba(var(--glow),0.14);
+  border-color: rgba(var(--glow),0.55);
+  color: var(--A);
+  box-shadow: 0 0 18px rgba(var(--glow),0.15), inset 0 0 12px rgba(var(--glow),0.05);
+}
+.tab-btn.active::before {
+  background: linear-gradient(to right, transparent, rgba(var(--glow),0.6), transparent);
+}
+.tab-btn.active .tab-ico { opacity: 1; }
+.tab-btn:active { opacity: .65; transform: scale(.97); }
+
+/* ── TAB CONTENT ── */
+.tab-section { display: none; animation: fade-in .28s ease both; }
+.tab-section.visible { display: block; }
+@keyframes fade-in { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* Card descripción con letra L decorativa */
+.content-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px 15px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  margin-bottom: 14px;
+  position: relative; overflow: hidden;
+}
+.content-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(var(--glow),.35), transparent);
+}
+
+/* Icono de letra grande estilo imagen */
+.desc-letter {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(var(--glow),0.35), rgba(0,0,0,0.6));
+  border: 2px solid rgba(var(--glow),0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem; font-weight: 900;
+  color: var(--A);
+  float: left; margin: 0 12px 8px 0;
+  flex-shrink: 0;
+  box-shadow: 0 0 18px rgba(var(--glow),0.3);
+}
+
+.desc-txt {
+  font-size: .9rem; font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.88);
+}
+
+/* Amenazas */
+.threat {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-size: .87rem; font-weight: 300;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.6;
+}
+.threat:last-child { border: none; padding-bottom: 0; }
+.threat-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--A);
+  width: 26px; flex-shrink: 0;
+  text-align: right; margin-top: 1px;
+  text-shadow: 0 0 8px rgba(var(--glow),.5);
+}
+
+/* Facts */
+.facts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.fact {
+  background: var(--card-bg);
+  border: 1px solid rgba(var(--glow),0.22);
+  border-radius: 14px;
+  padding: 13px 14px;
+  position: relative; overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.fact::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(var(--glow),.45), transparent);
+}
+.fact-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .5rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--B); margin-bottom: 5px;
+}
+.fact-body {
+  font-size: .88rem; font-weight: 300;
+  line-height: 1.7; color: rgba(255,255,255,0.86);
+}
+
+.sec-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .5rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--A); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
+.others {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-bottom: 8px;
+}
+
+/* Tarjeta de especie relacionada — estilo catálogo */
+.other {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  transition: transform .18s;
+  display: flex; flex-direction: column;
+}
+.other::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: rgba(var(--glow), 0.65);
+}
+.other:active { transform: scale(.96); }
+.other-img-zone {
+  width: 100%;
+  aspect-ratio: 1 / 0.85;
+  position: relative; overflow: hidden;
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.other-animal-img {
+  width: 80%; height: 80%;
+  object-fit: contain; object-position: center;
+  transition: transform .3s ease;
+  position: relative; z-index: 1;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.55));
+}
+.other:active .other-animal-img { transform: scale(1.06); }
+.other-emoji-fb {
+  display: none; font-size: 1.8rem;
+  align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+}
+.other-img-zone::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.28) 100%);
+  pointer-events: none;
+}
+.other-body {
+  padding: 5px 6px 7px;
+  flex-shrink: 0;
+}
+.other-nom {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: .58rem; letter-spacing: .02em;
+  text-transform: uppercase; line-height: 1.2;
+  color: #fff;
+}
+.other-cient {
+  font-size: .46rem; font-style: italic;
+  color: rgba(255,255,255,0.42); margin-top: 1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Botón "Buscar otra especie" mejorado */
+.other-catalog {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(var(--glow),0.08);
+  border: 1px solid rgba(var(--glow),0.28);
+  border-radius: 12px;
+  padding: 10px 6px;
+  color: var(--A); cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background .2s, box-shadow .2s;
+  position: relative; overflow: hidden;
+}
+.other-catalog::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(var(--glow),0.55), transparent);
+}
+.other-catalog::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(var(--glow),0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.other-catalog:active { background: rgba(var(--glow),0.20); box-shadow: 0 0 20px rgba(var(--glow),0.20); }
+.other-catalog .cat-ico {
+  width: 32px; height: 32px;
+  background: rgba(var(--glow),0.15);
+  border: 1px solid rgba(var(--glow),0.35);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.other-catalog .cat-ico svg { width: 15px; height: 15px; }
+.other-catalog .cat-txt-btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .42rem; letter-spacing: .10em; text-transform: uppercase;
+  text-align: center; line-height: 1.5;
+  color: var(--A); position: relative; z-index: 1;
+}
+
+/* Error 404 */
+.error-wrap {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 100vh; gap: 14px; text-align: center;
+  padding: 32px;
+}
+.error-ico { font-size: 4rem; opacity: .4; }
+.error-txt { color: rgba(255,255,255,.5); font-size: .9rem; line-height: 1.6; }
+.error-btn {
+  margin-top: 8px;
+  padding: 12px 28px; border-radius: 999px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff; font-family: 'Barlow', sans-serif;
+  font-size: .88rem; cursor: pointer;
+}
+
+/* Veil transición */
+#veil {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #000; opacity: 0; pointer-events: none;
+  transition: opacity .35s ease;
+}
+#veil.show { opacity: 1; pointer-events: all; }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+/* Modal upload .glb */
+#glb-modal {
+  display: none;
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  align-items: flex-end;
+  padding: 20px;
+}
+#glb-modal.open { display: flex; }
+.glb-sheet {
+  width: 100%;
+  background: rgba(12,18,12,0.96);
+  border: 1px solid rgba(var(--glow),0.3);
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+}
+.glb-sheet h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.3rem; font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.glb-sheet p {
+  font-size: .82rem; color: rgba(255,255,255,0.5);
+  margin-bottom: 18px;
+}
+.glb-actions { display: flex; flex-direction: column; gap: 8px; }
+.glb-btn {
+  padding: 13px; border-radius: 12px;
+  background: rgba(var(--glow),0.20);
+  border: 1px solid rgba(var(--glow),0.5);
+  color: var(--A);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  cursor: pointer;
+}
+.glb-btn.secondary {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.55);
+}
+.glb-url-row {
+  display: flex; gap: 8px; margin-top: 0;
+}
+.glb-url-input {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #fff;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .65rem;
+  outline: none;
+}
+.glb-url-input::placeholder { color: rgba(255,255,255,0.3); }
+.glb-url-submit {
+  padding: 10px 14px; border-radius: 10px;
+  background: rgba(var(--glow),0.25);
+  border: 1px solid rgba(var(--glow),0.5);
+  color: var(--A);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .65rem; cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<video id="cam-bg" autoplay playsinline muted></video>
+<div id="cam-overlay"></div>
+
+<div id="page">
+  <!-- El contenido se inyecta aquí por JS -->
+</div>
+
+<div id="veil"></div>
+
+<!-- Modal para cargar .glb -->
+<div id="glb-modal">
+  <div class="glb-sheet">
+    <h3>Modelo 3D</h3>
+    <p>Carga un archivo .glb para ver la especie en 3D</p>
+    <div class="glb-actions">
+      <button class="glb-btn" id="glb-file-btn">📁 Cargar archivo .glb</button>
+      <div class="glb-url-row">
+        <input class="glb-url-input" id="glb-url-input" type="url" placeholder="https://… URL de modelo .glb"/>
+        <button class="glb-url-submit" id="glb-url-btn">→</button>
+      </div>
+      <button class="glb-btn secondary" id="glb-cancel-btn">Cancelar</button>
+    </div>
+  </div>
+</div>
+<input type="file" id="glb-input" accept=".glb,.gltf"/>
+
+<script>
+const COLS = {
+  "EN PELIGRO CRÍTICO": { A:"#FF1744", B:"#FF6D00", glow:"255,23,68" },
+  "VULNERABLE":         { A:"#7FBF00", B:"#AAEE00", glow:"127,191,0" },
+  "AMENAZADO":          { A:"#00E5FF", B:"#00BFA5", glow:"0,229,255" },
+};
+
+const params = new URLSearchParams(window.location.search);
+const id     = params.get('id');
+const E      = (typeof ESPECIES !== 'undefined') ? ESPECIES.find(e => e.id === id) : null;
+const page   = document.getElementById('page');
+
+/* Estado del visor */
+let modelViewer = null;
+let currentGlbUrl = null;
+
+function setColors(estado) {
+  const co = COLS[estado] || COLS["VULNERABLE"];
+  const R = document.documentElement;
+  R.style.setProperty('--A', co.A);
+  R.style.setProperty('--B', co.B);
+  R.style.setProperty('--glow', co.glow);
+}
+
+/* ── DEMO MODE si no hay especies.js ── */
+const demoEspecie = {
+  id: 'demo',
+  nombre: 'Tortuga Caguama',
+  cient: 'Caretta caretta',
+  estado: 'VULNERABLE',
+  categoria: 'Reptil • Tortuga Marina',
+  habitat: 'Océano Atlántico y Pacífico',
+  poblacion: '~50,000',
+  tamaño: '70 – 95 cm',
+  peso: '80 – 200 kg',
+  emoji: '🐢',
+  sonido: 'oceano',
+  desc: 'La tortuga caguama es conocida por su enorme cabeza y su poderosa mandíbula, capaz de triturar conchas de cangrejos y moluscos. Realiza migraciones de miles de kilómetros entre sus zonas de alimentación y sus playas de anidación. Una hembra puede poner hasta 5 nidadas por temporada, con unos 100 huevos cada una.',
+  amenazas: [
+    'Captura incidental en artes de pesca como redes de arrastre y palangres.',
+    'Destrucción y urbanización de playas de anidación.',
+    'Contaminación marina por plásticos y derrames de petróleo.',
+    'Cambio climático que afecta la temperatura de las arenas y la proporción de sexos.',
+  ],
+  curiosidades: [
+    { t: 'Navegación magnética', txt: 'Poseen un sentido magnético que les permite orientarse con el campo magnético de la Tierra para regresar a la misma playa donde nacieron décadas después.' },
+    { t: 'Longevidad', txt: 'Pueden vivir más de 70 años. Las hembras tardan entre 20 y 30 años en alcanzar la madurez sexual.' },
+    { t: 'Dieta variada', txt: 'Se alimentan de cangrejos, langostas, percebes, mejillones y medusas gracias a su potente mandíbula calcificada.' },
+  ]
+};
+
+const EE = E || demoEspecie;
+
+/* Colores */
+setColors(EE.estado);
+document.title = EE.nombre;
+
+/* ── Relacionadas ── */
+const allEspecies = (typeof ESPECIES !== 'undefined') ? ESPECIES : [demoEspecie];
+const rel = allEspecies
+  .filter(x => x.id !== EE.id)
+  .sort(() => Math.random() - .5)
+  .slice(0, 2);
+
+/* Bloque explorar reutilizable */
+function explorarHTML() {
+  return `
+    <div class="sec-label">Explorar otras especies</div>
+    <div class="others">
+      ${rel.map(r => `
+        <div class="other" onclick="navegar('especie.html?id=${r.id}')">
+          <div class="other-img-zone">
+            <img
+              src="assets/${r.id}.png"
+              class="other-animal-img"
+              alt="${r.nombre}"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+            />
+            <div class="other-emoji-fb">${r.emoji}</div>
+          </div>
+          <div class="other-body">
+            <div class="other-nom">${r.nombre}</div>
+            <div class="other-cient">${r.cient}</div>
+          </div>
+        </div>`).join('')}
+      <div class="other-catalog" onclick="navegar('catalogo.html')">
+        <span class="cat-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        <span class="cat-txt-btn">Buscar otra especie</span>
+      </div>
+    </div>
+  `;
+}
+
+/* ── Render HTML ── */
+page.innerHTML = `
+  <!-- Botón atrás -->
+  <div class="btn-back" onclick="navegar('catalogo.html')" style="z-index:30;position:fixed;top:calc(env(safe-area-inset-top,0px)+14px);left:16px;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+  </div>
+
+  <!-- Zona visor holográfico -->
+  <div id="viewer-zone">
+    <div class="holo-wrap">
+      <!-- Imagen holográfica del animal -->
+      <img
+        src="assets/${EE.id}.png"
+        class="holo-animal"
+        id="animal-image"
+        onerror="
+          this.style.display='none';
+          document.getElementById('emoji-display').style.display='flex';
+        "
+      >
+      <!-- Emoji fallback cuando no hay imagen -->
+      <div class="emoji-fallback" id="emoji-display">
+        ${EE.emoji}
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel info -->
+  <div id="info-panel">
+
+    <div class="sp-pill">${EE.estado}</div>
+    <div class="sp-nombre">${EE.nombre}</div>
+    <div class="sp-cient-block">
+      <span class="sp-cient">${EE.cient}</span>
+      <span class="sp-cat">${EE.categoria}</span>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpis">
+      <div class="kpi habitat-kpi">
+        <div class="kpi-ico-wrap green">🌿</div>
+        <div class="kpi-lbl">Hábitat</div>
+        <div class="kpi-val">${EE.habitat}</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-ico-wrap blue">👥</div>
+        <div class="kpi-lbl">Población estimada</div>
+        <div class="kpi-val alert">${EE.poblacion}<span class="kpi-unit">hembras</span></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-ico-wrap purple">📏</div>
+        <div class="kpi-lbl">Longitud</div>
+        <div class="kpi-val">${EE.tamaño}</div>
+        <div class="length-bar"></div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-ico-wrap gold">⚖️</div>
+        <div class="kpi-lbl">Peso adulto</div>
+        <div class="kpi-val">${EE.peso}</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="desc">
+        <span class="tab-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="8" stroke-width="2.5"/><line x1="12" y1="12" x2="12" y2="17"/>
+          </svg>
+        </span>
+        Sobre esta especie
+      </button>
+      <button class="tab-btn" data-tab="amenazas">
+        <span class="tab-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/>
+          </svg>
+        </span>
+        Principales amenazas
+      </button>
+      <button class="tab-btn" data-tab="datos">
+        <span class="tab-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </span>
+        Datos fascinantes
+      </button>
+    </div>
+
+    <!-- Tab: descripción -->
+    <div class="tab-section visible" id="tab-desc">
+      <div class="content-card">
+        <div class="desc-letter">${EE.nombre.charAt(0)}</div>
+        <p class="desc-txt">${EE.desc}</p>
+      </div>
+      ${explorarHTML()}
+    </div>
+
+    <!-- Tab: amenazas -->
+    <div class="tab-section" id="tab-amenazas">
+      <div class="content-card">
+        ${EE.amenazas.map((a,i) => `
+          <div class="threat">
+            <span class="threat-n">${String(i+1).padStart(2,'0')}</span>
+            <span>${a}</span>
+          </div>`).join('')}
+      </div>
+      ${explorarHTML()}
+    </div>
+
+    <!-- Tab: datos -->
+    <div class="tab-section" id="tab-datos">
+      <div class="facts">
+        ${EE.curiosidades.map(c => `
+          <div class="fact">
+            <div class="fact-tag">${c.t}</div>
+            <div class="fact-body">${c.txt}</div>
+          </div>`).join('')}
+      </div>
+      ${explorarHTML()}
+    </div>
+
+  </div><!-- /info-panel -->
+`;
+
+/* ── Tabs ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('visible'));
+    btn.classList.add('active');
+    const sec = document.getElementById('tab-' + btn.dataset.tab);
+    if (sec) { void sec.offsetWidth; sec.classList.add('visible'); }
+    // Sin scroll al cambiar sección
+  });
+});
+
+/* ── Modal 3D ── */
+function open3DModal() {
+  document.getElementById('glb-modal').classList.add('open');
+}
+document.getElementById('glb-cancel-btn').addEventListener('click', () => {
+  document.getElementById('glb-modal').classList.remove('open');
+});
+
+/* Cargar desde archivo */
+document.getElementById('glb-file-btn').addEventListener('click', () => {
+  document.getElementById('glb-input').click();
+});
+document.getElementById('glb-input').addEventListener('change', function() {
+  const file = this.files[0];
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  loadGlbModel(url);
+  document.getElementById('glb-modal').classList.remove('open');
+});
+
+/* Cargar desde URL */
+document.getElementById('glb-url-btn').addEventListener('click', () => {
+  const url = document.getElementById('glb-url-input').value.trim();
+  if (url) {
+    loadGlbModel(url);
+    document.getElementById('glb-modal').classList.remove('open');
+  }
+});
+document.getElementById('glb-url-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') document.getElementById('glb-url-btn').click();
+});
+
+function loadGlbModel(src) {
+  const zone = document.getElementById('viewer-zone');
+  currentGlbUrl = src;
+
+  /* Eliminar visor anterior si existe */
+  const old = zone.querySelector('model-viewer');
+  if (old) old.remove();
+
+  /* Quitar emoji */
+  const emojiEl = document.getElementById('emoji-display');
+  if (emojiEl) emojiEl.style.display = 'none';
+
+  /* Crear model-viewer */
+  const mv = document.createElement('model-viewer');
+  mv.setAttribute('src', src);
+  mv.setAttribute('camera-controls', '');
+  mv.setAttribute('auto-rotate', '');
+  mv.setAttribute('auto-rotate-delay', '1000');
+  mv.setAttribute('rotation-per-second', '30deg');
+  mv.setAttribute('shadow-intensity', '1');
+  mv.setAttribute('environment-image', 'neutral');
+  mv.setAttribute('exposure', '1.2');
+  mv.style.width = '100%';
+  mv.style.height = '100%';
+  mv.style.background = 'transparent';
+
+  zone.insertBefore(mv, zone.querySelector('.radar-ring'));
+  modelViewer = mv;
+
+  /* Marcar botón como activo */
+  const btn3d = document.getElementById('btn-3d-toggle');
+  if (btn3d) btn3d.classList.add('active');
+}
+
+/* ── Sonido ambiente ── */
+const PRESETS = {
+  selva:  { type:'bandpass', freq:900,  Q:.5,  gain:.15, lfo:null },
+  oceano: { type:'lowpass',  freq:380,  Q:1.4, gain:.18, lfo:.1  },
+  lluvia: { type:'highpass', freq:2200, Q:.2,  gain:.12, lfo:null },
+  viento: { type:'bandpass', freq:180,  Q:.3,  gain:.14, lfo:.25 },
+  cueva:  { type:'lowpass',  freq:200,  Q:2,   gain:.10, lfo:null },
+};
+let audioCtx = null;
+function startAmbient() {
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const p = PRESETS[EE.sonido || 'selva'];
+    const n = audioCtx.sampleRate * 4, buf = audioCtx.createBuffer(1, n, audioCtx.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+    const src = audioCtx.createBufferSource(); src.buffer = buf; src.loop = true;
+    const fi = audioCtx.createBiquadFilter(); fi.type = p.type; fi.frequency.value = p.freq; fi.Q.value = p.Q;
+    const ga = audioCtx.createGain(); ga.gain.setValueAtTime(0, audioCtx.currentTime); ga.gain.linearRampToValueAtTime(p.gain, audioCtx.currentTime + 2);
+    if (p.lfo) { const lo = audioCtx.createOscillator(), lg = audioCtx.createGain(); lo.frequency.value = p.lfo; lg.gain.value = p.freq * .4; lo.connect(lg); lg.connect(fi.frequency); lo.start(); }
+    src.connect(fi); fi.connect(ga); ga.connect(audioCtx.destination); src.start();
+  } catch(e) {}
+}
+window.addEventListener('touchend', function f() { startAmbient(); window.removeEventListener('touchend', f); }, { once: true, passive: true });
+window.addEventListener('click', function f() { if (!audioCtx) startAmbient(); window.removeEventListener('click', f); }, { once: true });
+
+/* ── Cámara ── */
+(async function() {
+  try {
+    const s = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } },
+      audio: false
+    });
+    const v = document.getElementById('cam-bg');
+    v.srcObject = s; v.play();
+  } catch(e) {}
+})();
+
+/* ── Transición ── */
+function navegar(url) {
+  const v = document.getElementById('veil');
+  v.classList.add('show');
+  setTimeout(() => window.location.href = url, 360);
+}
+
+/* ── Entrada con fade ── */
+window.addEventListener('DOMContentLoaded', () => {
+  const v = document.getElementById('veil');
+  v.style.opacity = '1'; v.style.transition = 'none';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    v.style.transition = 'opacity .4s ease';
+    v.style.opacity = '0';
+  }));
+});
+</script>
+
+</body>
+</html>
