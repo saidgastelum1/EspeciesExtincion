@@ -99,27 +99,47 @@
         /* Viewport safety padding */
         main {
             min-height: 100vh;
+            /* Fallback for browsers that don't support dvh */
+            min-height: 100dvh;
             width: 100%;
             padding: 100px 30px 40px; /* Increased top padding for logos */
         }
 
-        /* Mobile Landscape Optimization */
+        /* Mobile Landscape Optimization (No Scroll - Fit inside margin) */
         @media (max-height: 600px) and (orientation: landscape) {
+            body { overflow: hidden !important; }
             main { 
-                padding-top: 60px !important; 
+                height: 100vh !important;
+                height: 100dvh !important;
+                min-height: 100vh !important;
+                min-height: 100dvh !important;
+                padding-top: 45px !important; 
                 padding-bottom: 20px !important;
-                gap: 1.5rem !important;
+                gap: 1rem !important;
             }
             .outer-frame {
                 top: 10px !important; left: 10px !important; right: 10px !important; bottom: 10px !important;
-                border-width: 4px !important; border-radius: 1.5rem !important;
+                border-width: 4px !important; border-radius: 1.2rem !important;
             }
-            .absolute.z-20 { top: 15px !important; }
-            .absolute.z-20 img { height: 25px !important; }
-            h1 { font-size: 2.2rem !important; line-height: 1 !important; }
-            ul li { font-size: 0.9rem !important; }
-            .btn-solid { padding: 10px 20px !important; font-size: 0.9rem !important; }
-            .emoji-float img { width: 180px !important; }
+            
+            /* Logos */
+            .absolute.z-20 { top: 12px !important; gap: 1rem !important; }
+            .absolute.z-20 img { height: 18px !important; }
+            
+            /* Text Block Tightening */
+            .flex-none.md\:flex-1 { gap: 0.5rem !important; }
+            h1 { font-size: 1.6rem !important; line-height: 1 !important; }
+            
+            /* List tightening */
+            .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem !important; }
+            ul li { font-size: 0.8rem !important; }
+            
+            /* Button */
+            .mt-2.md\:mt-4 { margin-top: 0.25rem !important; }
+            .btn-solid { padding: 8px 16px !important; font-size: 0.8rem !important; }
+            
+            /* Image */
+            .emoji-float img { width: 140px !important; }
         }
     </style>
 </head>
