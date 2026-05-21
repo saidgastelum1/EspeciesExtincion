@@ -169,66 +169,44 @@ model-viewer {
   }
 }
 
-/* Botón back premium */
+/* Botón back */
 .btn-back {
   position: fixed;
-  top: calc(env(safe-area-inset-top, 14px) + 24px);
-  left: 14px;
-  z-index: 50;
+  top: calc(env(safe-area-inset-top, 0px) + 48px);
+  left: 16px;
+  z-index: 30;
   display: flex; align-items: center; justify-content: center;
-  width: 44px; height: 44px; flex-shrink: 0;
+  width: 44px; height: 44px;
   border-radius: 12px;
   background: rgba(10,10,10,0.55);
   border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 
-    0 4px 12px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-  text-decoration: none; color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  transition: all .25s cubic-bezier(0.25, 1, 0.5, 1);
-  overflow: hidden;
-  cursor: pointer;
+  color: #fff; cursor: pointer; text-decoration: none;
+  transition: all .25s cubic-bezier(0.25,1,0.5,1);
+  position: fixed; overflow: hidden;
 }
-
 .btn-back::before {
   content: '';
   position: absolute; inset: 0;
   background: radial-gradient(circle at 50% 50%, rgba(var(--glow),0.25) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity .3s ease;
+  opacity: 0; transition: opacity .3s ease;
 }
-
 .btn-back svg {
-  position: relative;
-  z-index: 1;
+  position: relative; z-index: 1;
   width: 22px; height: 22px;
   stroke: rgba(255,255,255,0.9);
   transition: transform .25s ease, stroke .25s ease;
 }
-
-.btn-back:hover, .btn-back:active {
-  background: rgba(10,10,10,0.75);
-  border-color: rgba(var(--glow), 0.5);
-  box-shadow: 
-    0 6px 16px rgba(0,0,0,0.5),
-    0 0 12px rgba(var(--glow), 0.3),
-    inset 0 1px 0 rgba(255,255,255,0.2);
-  transform: translateY(-2px);
-}
-
-.btn-back:hover::before, .btn-back:active::before {
-  opacity: 1;
-}
-
 .btn-back:active {
-  transform: translateY(0) scale(0.94);
+  background: rgba(10,10,10,0.75);
+  border-color: rgba(var(--glow),0.5);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5), 0 0 12px rgba(var(--glow),0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  transform: scale(0.94);
 }
-
-.btn-back:hover svg {
-  transform: translateX(-3px);
-  stroke: #fff;
-}
+.btn-back:active::before { opacity: 1; }
+.btn-back:active svg { stroke: #fff; }
 
 /* Input oculto para cargar .glb */
 #glb-input { display: none; }
@@ -241,25 +219,23 @@ model-viewer {
 
 /* Badge estado — fondo ajustado al texto */
 .sp-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(0,0,0,0.75);
-  border: 1px solid rgba(var(--glow),0.8);
-  color: var(--A);
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--A);
+  border: 1px solid rgba(var(--glow),0.80);
+  color: #000;
   font-family: 'Share Tech Mono', monospace;
-  font-size: .8rem; font-weight: bold; letter-spacing: .1em; text-transform: uppercase;
-  padding: 5px 14px; border-radius: 999px;
-  margin-bottom: 10px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  text-shadow: 0 0 8px rgba(var(--glow), 0.5);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 0 10px rgba(var(--glow), 0.2);
+  font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
+  font-weight: 700;
+  padding: 6px 14px; border-radius: 999px;
+  margin-bottom: 8px;
+  box-shadow: 0 0 18px rgba(var(--glow),0.35);
 }
 .sp-pill::before {
   content: '';
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: var(--A);
-  box-shadow: 0 0 8px var(--A);
+  background: rgba(0,0,0,0.5);
+  box-shadow: none;
   animation: blink 1.4s ease-in-out infinite;
 }
 
@@ -378,29 +354,45 @@ model-viewer {
 }
 .tab-btn {
   flex: 1;
-  padding: 9px 4px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.45);
-  color: rgba(255,255,255,0.45);
-  font-family: 'Share Tech Mono', monospace;
-  font-size: .44rem; letter-spacing: .06em; text-transform: uppercase;
+  padding: 10px 4px 9px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(10,14,10,0.72);
+  color: rgba(255,255,255,0.50);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .70rem; font-weight: 700; letter-spacing: .10em; text-transform: uppercase;
   text-align: center;
   cursor: pointer;
-  line-height: 1.5;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all .2s;
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  line-height: 1.4;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: all .22s;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  position: relative; overflow: hidden;
 }
-.tab-btn .tab-ico { font-size: .9rem; }
+.tab-btn::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+}
+.tab-btn .tab-ico {
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.45;
+  transition: opacity .22s;
+}
+.tab-btn .tab-ico svg { width: 16px; height: 16px; }
 .tab-btn.active {
-  background: rgba(var(--glow),0.20);
-  border-color: rgba(var(--glow),0.65);
+  background: rgba(10,14,10,0.85);
+  border-color: rgba(var(--glow),0.60);
   color: var(--A);
-  box-shadow: 0 0 16px rgba(var(--glow),0.18);
+  box-shadow: 0 0 18px rgba(var(--glow),0.15), inset 0 0 12px rgba(var(--glow),0.05);
 }
-.tab-btn:active { opacity: .7; }
+.tab-btn.active::before {
+  background: linear-gradient(to right, transparent, rgba(var(--glow),0.65), transparent);
+}
+.tab-btn.active .tab-ico { opacity: 1; }
+.tab-btn:active { opacity: .65; transform: scale(.97); }
 
 /* ── TAB CONTENT ── */
 .tab-section { display: none; animation: fade-in .28s ease both; }
@@ -497,46 +489,115 @@ model-viewer {
   display: flex; align-items: center; gap: 8px;
 }
 .sec-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
-.others { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 8px; }
-.other {
-  display: flex; flex-direction: column; align-items: center; gap: 5px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 14px 8px;
-  color: #fff; cursor: pointer;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: background .2s;
+.others {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-bottom: 8px;
 }
-.other:active { background: rgba(255,255,255,0.14); }
-.other-ico { font-size: 1.7rem; }
+
+/* Tarjeta de especie relacionada — estilo catálogo */
+.other {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  transition: transform .18s;
+  display: flex; flex-direction: column;
+}
+.other::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--other-color, rgba(var(--glow), 0.65));
+}
+.other:active { transform: scale(.96); }
+.other-img-zone {
+  width: 100%;
+  aspect-ratio: 1 / 0.85;
+  position: relative; overflow: hidden;
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.other-animal-img {
+  width: 80%; height: 80%;
+  object-fit: contain; object-position: center;
+  transition: transform .3s ease;
+  position: relative; z-index: 1;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.55));
+}
+.other:active .other-animal-img { transform: scale(1.06); }
+.other-emoji-fb {
+  display: none; font-size: 1.8rem;
+  align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+}
+.other-img-zone::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.28) 100%);
+  pointer-events: none;
+}
+.other-body {
+  padding: 5px 6px 7px;
+  flex-shrink: 0;
+}
 .other-nom {
   font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: .68rem; letter-spacing: .03em;
-  text-align: center; line-height: 1.3;
-  text-transform: uppercase;
+  font-weight: 700;
+  font-size: .58rem; letter-spacing: .02em;
+  text-transform: uppercase; line-height: 1.2;
+  color: #fff;
 }
-/* Botón "Buscar otra especie" → catálogo */
+.other-cient {
+  font-size: .46rem; font-style: italic;
+  color: rgba(255,255,255,0.42); margin-top: 1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Botón "Buscar otra especie" mejorado */
 .other-catalog {
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-  background: rgba(var(--glow),0.10);
-  border: 1px dashed rgba(var(--glow),0.40);
-  border-radius: 14px;
-  padding: 14px 8px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(var(--glow),0.08);
+  border: 1px solid rgba(var(--glow),0.28);
+  border-radius: 12px;
+  padding: 10px 6px;
   color: var(--A); cursor: pointer;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  transition: background .2s;
+  transition: background .2s, box-shadow .2s;
+  position: relative; overflow: hidden;
 }
-.other-catalog:active { background: rgba(var(--glow),0.22); }
-.other-catalog .cat-ico { font-size: 1.4rem; }
+.other-catalog::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(var(--glow),0.55), transparent);
+}
+.other-catalog::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(var(--glow),0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.other-catalog:active { background: rgba(var(--glow),0.20); box-shadow: 0 0 20px rgba(var(--glow),0.20); }
+.other-catalog .cat-ico {
+  width: 32px; height: 32px;
+  background: rgba(var(--glow),0.15);
+  border: 1px solid rgba(var(--glow),0.35);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.other-catalog .cat-ico svg { width: 15px; height: 15px; }
 .other-catalog .cat-txt-btn {
   font-family: 'Share Tech Mono', monospace;
-  font-size: .46rem; letter-spacing: .1em; text-transform: uppercase;
-  text-align: center; line-height: 1.4;
-  color: var(--A);
+  font-size: .42rem; letter-spacing: .10em; text-transform: uppercase;
+  text-align: center; line-height: 1.5;
+  color: var(--A); position: relative; z-index: 1;
 }
 
 /* Error 404 */
@@ -732,13 +793,31 @@ function explorarHTML() {
   return `
     <div class="sec-label">Explorar otras especies</div>
     <div class="others">
-      ${rel.map(r => `
-        <div class="other" onclick="navegar('especie.html?id=${r.id}')">
-          <span class="other-ico">${r.emoji}</span>
-          <span class="other-nom">${r.nombre}</span>
-        </div>`).join('')}
+      ${rel.map(r => {
+          const co = COLS[r.estado] || COLS["VULNERABLE"];
+          return `
+        <div class="other" onclick="navegar('especie.html?id=${r.id}')" style="--other-color:${co.A}">
+          <div class="other-img-zone">
+            <img
+              src="assets/${r.id}.png"
+              class="other-animal-img"
+              alt="${r.nombre}"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+            />
+            <div class="other-emoji-fb">${r.emoji}</div>
+          </div>
+          <div class="other-body">
+            <div class="other-nom">${r.nombre}</div>
+            <div class="other-cient">${r.cient}</div>
+          </div>
+        </div>`;
+        }).join('')}
       <div class="other-catalog" onclick="navegar('catalogo.html')">
-        <span class="cat-ico">🔍</span>
+        <span class="cat-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
         <span class="cat-txt-btn">Buscar otra especie</span>
       </div>
     </div>
@@ -748,7 +827,7 @@ function explorarHTML() {
 /* ── Render HTML ── */
 page.innerHTML = `
   <!-- Botón atrás -->
-  <div class="btn-back" onclick="navegar('catalogo.html')">
+  <div class="btn-back" onclick="navegar('catalogo.html')" style="z-index:30;position:fixed;top:calc(env(safe-area-inset-top,0px)+48px);left:16px;">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M19 12H5M12 19l-7-7 7-7"/>
     </svg>
@@ -812,15 +891,27 @@ page.innerHTML = `
     <!-- Tabs -->
     <div class="tab-row">
       <button class="tab-btn active" data-tab="desc">
-        <span class="tab-ico">ℹ️</span>
+        <span class="tab-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="8" stroke-width="2.5"/><line x1="12" y1="12" x2="12" y2="17"/>
+          </svg>
+        </span>
         Sobre esta especie
       </button>
       <button class="tab-btn" data-tab="amenazas">
-        <span class="tab-ico">⚠️</span>
+        <span class="tab-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/>
+          </svg>
+        </span>
         Principales amenazas
       </button>
       <button class="tab-btn" data-tab="datos">
-        <span class="tab-ico">💡</span>
+        <span class="tab-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </span>
         Datos fascinantes
       </button>
     </div>
@@ -864,16 +955,12 @@ page.innerHTML = `
 /* ── Tabs ── */
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    const page = document.getElementById('page');
-    const st = page.scrollTop; // Guardar scroll actual
-
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('visible'));
     btn.classList.add('active');
     const sec = document.getElementById('tab-' + btn.dataset.tab);
     if (sec) { void sec.offsetWidth; sec.classList.add('visible'); }
-    
-    page.scrollTop = st; // Restaurar scroll
+    // Sin scroll al cambiar sección
   });
 });
 
