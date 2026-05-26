@@ -169,11 +169,11 @@ model-viewer {
   }
 }
 
-/* Botón back */
+/* Botón back — misma posición que en catalogo.html */
 .btn-back {
   position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 48px);
-  left: 16px;
+  top: calc(env(safe-area-inset-top, 14px) + 24px);
+  left: 14px;
   z-index: 30;
   display: flex; align-items: center; justify-content: center;
   width: 44px; height: 44px;
@@ -185,7 +185,7 @@ model-viewer {
   -webkit-backdrop-filter: blur(14px);
   color: #fff; cursor: pointer; text-decoration: none;
   transition: all .25s cubic-bezier(0.25,1,0.5,1);
-  position: fixed; overflow: hidden;
+  overflow: hidden;
 }
 .btn-back::before {
   content: '';
@@ -827,7 +827,7 @@ function explorarHTML() {
 /* ── Render HTML ── */
 page.innerHTML = `
   <!-- Botón atrás -->
-  <div class="btn-back" onclick="navegar('catalogo.html')" style="z-index:30;position:fixed;top:calc(env(safe-area-inset-top,0px)+48px);left:16px;">
+  <div class="btn-back" onclick="navegar('catalogo.html')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M19 12H5M12 19l-7-7 7-7"/>
     </svg>
