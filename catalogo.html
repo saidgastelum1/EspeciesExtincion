@@ -765,10 +765,18 @@
     /* Renderizar especies inmediatamente para evitar pantalla negra */
     render();
 
-    /* Restaurar el scroll si venimos de otra página */
+    /* Scroll al cargar: inicio (buscador) o posición guardada */
+    const irInicio = sessionStorage.getItem('catalogInicio');
     const savedScroll = sessionStorage.getItem('catalogScroll');
-    if (savedScroll) {
-      // Usamos requestAnimationFrame para asegurar que el DOM ya aplicó el innerHTML
+    if (irInicio) {
+      sessionStorage.removeItem('catalogInicio');
+      requestAnimationFrame(() => {
+        const page = document.getElementById('page');
+        const header = document.querySelector('.header');
+        if (page) page.scrollTop = 0;
+        if (header) header.classList.remove('scrolled');
+      });
+    } else if (savedScroll) {
       requestAnimationFrame(() => {
         const page = document.getElementById('page');
         if (page) page.scrollTop = parseInt(savedScroll, 10);

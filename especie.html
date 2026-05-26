@@ -812,7 +812,7 @@ function explorarHTML() {
           </div>
         </div>`;
         }).join('')}
-      <div class="other-catalog" onclick="navegar('catalogo.html')">
+      <div class="other-catalog" onclick="irAlCatalogoInicio()">
         <span class="cat-ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -1074,6 +1074,12 @@ window.addEventListener('click', function f() { if (!audioCtx) startAmbient(); w
 })();
 
 /* ── Transición ── */
+function irAlCatalogoInicio() {
+  sessionStorage.removeItem('catalogScroll');
+  sessionStorage.setItem('catalogInicio', '1');
+  navegar('catalogo.html');
+}
+
 function navegar(url) {
   const v = document.getElementById('veil');
   v.classList.add('show');
