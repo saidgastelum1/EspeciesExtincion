@@ -660,17 +660,30 @@
     let currentFilter = "all";
     let currentSearch = "";
 
+    /** Comparación sin distinguir mayúsculas ni acentos (águila ≈ aguila). */
+    function sinAcentos(str) {
+      return String(str)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function coincideBusqueda(texto, q) {
+      return sinAcentos(texto).includes(q);
+    }
+
     function render() {
       const grid = document.getElementById('grid');
+      const q = sinAcentos(currentSearch);
 
       const list = ESPECIES.filter(e => {
         const matchFilter = currentFilter === "all" || e.estado === currentFilter;
-        const q = currentSearch.toLowerCase();
         const matchSearch = !q ||
-          e.nombre.toLowerCase().includes(q) ||
-          e.cient.toLowerCase().includes(q) ||
-          e.categoria.toLowerCase().includes(q) ||
-          e.habitat.toLowerCase().includes(q);
+          coincideBusqueda(e.nombre, q) ||
+          coincideBusqueda(e.cient, q) ||
+          coincideBusqueda(e.categoria, q) ||
+          coincideBusqueda(e.habitat, q) ||
+          coincideBusqueda(e.id, q);
         return matchFilter && matchSearch;
       });
 
