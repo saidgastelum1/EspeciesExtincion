@@ -533,7 +533,7 @@ const ESPECIES = [
   },
   {
     id: "raton-alfalfar",
-    nombre: "Ratón de Alfalfar",
+    nombre: "Ratón de Alfalfa",
     cient: "Microtus californicus",
     estado: "AMENAZADO",
     categoria: "Mamífero • Roedor",
@@ -1494,7 +1494,7 @@ const ESPECIES = [
   },
   {
     id: "escorpion-arboricola",
-    nombre: "Escorpión Arbóreo de Labios Rojos",
+    nombre: "Escorpión Arborícola de Labios Rojos",
     cient: "Abronia lythrochila",
     estado: "AMENAZADO",
     categoria: "Arácnido • Escorpión",
@@ -1542,7 +1542,7 @@ const ESPECIES = [
   },
   {
     id: "tarantula-arboricola",
-    nombre: "Tarántula Arbórea Mexicana",
+    nombre: "Tarántula Arborícola Mexicana",
     cient: "Psalmopoeus victori",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Arácnido • Araña",
