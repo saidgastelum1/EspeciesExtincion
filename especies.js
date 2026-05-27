@@ -2,7 +2,7 @@
 const ESPECIES = [
   {
     id: "rana-ladradora-guerrero",
-    nombre: "Rana Ladradora de Guerrero",
+    nombre: "Rana ladradora de Guerrero",
     cient: "Craugastor guerreroensis",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Anfibio • Anuro",
@@ -51,7 +51,7 @@ const ESPECIES = [
   },
   {
     id: "culebra-ojo-gato",
-    nombre: "Culebra Ojo de Gato del Suroeste",
+    nombre: "Culebra ojo de gato del suroeste",
     cient: "Leptodeira maculata",
     estado: "AMENAZADO",
     categoria: "Reptil • Serpiente",
@@ -124,7 +124,7 @@ const ESPECIES = [
   },
   {
     id: "colorin-pecho-naranja",
-    nombre: "Colorín Pecho Naranja",
+    nombre: "Colorín pecho naranja",
     cient: "Passerina leclancherii",
     estado: "AMENAZADO",
     categoria: "Ave • Cardinalidae",
@@ -148,7 +148,7 @@ const ESPECIES = [
   },
   {
     id: "abaniquillo-chiapas",
-    nombre: "Abaniquillo Adornado de Chiapas",
+    nombre: "Abaniquillo adornado de Chiapas",
     cient: "Anolis anisolepis",
     estado: "AMENAZADO",
     categoria: "Reptil • Lagartija",
@@ -172,7 +172,7 @@ const ESPECIES = [
   },
   {
     id: "cecilia-oaxaquena",
-    nombre: "Cecilia Oaxaqueña",
+    nombre: "Cecilia oaxaqueña",
     cient: "Dermophis oaxacae",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Anfibio • Gymnophiona",
@@ -196,7 +196,7 @@ const ESPECIES = [
   },
   {
     id: "iguana-espinosa-golfo",
-    nombre: "Iguana Espinosa del Golfo",
+    nombre: "Iguana espinosa del Golfo",
     cient: "Ctenosaura acanthura",
     estado: "AMENAZADO",
     categoria: "Reptil • Lagartija",
@@ -220,7 +220,7 @@ const ESPECIES = [
   },
   {
     id: "lagartija-topo",
-    nombre: "Lagartija Topo Cinco Dedos",
+    nombre: "Lagartija topo cinco dedos",
     cient: "Bipes biporus",
     estado: "AMENAZADO",
     categoria: "Reptil • Lagartija",
@@ -244,7 +244,7 @@ const ESPECIES = [
   },
   {
     id: "nauyaca-guerrero",
-    nombre: "Nauyaca de Montaña Guerrerense",
+    nombre: "Nauyaca de montaña guerrerense",
     cient: "Mixcoatlus barbouri",
     estado: "AMENAZADO",
     categoria: "Reptil • Serpiente venenosa",
@@ -268,7 +268,7 @@ const ESPECIES = [
   },
   {
     id: "zorrillo-rayado",
-    nombre: "Zorrillo Rayado",
+    nombre: "Zorrillo rayado",
     cient: "Conepatus semistriatus subsp. amazonicus",
     estado: "AMENAZADO",
     categoria: "Mamífero • Carnívoro",
@@ -292,7 +292,7 @@ const ESPECIES = [
   },
   {
     id: "cantil-agua",
-    nombre: "Cantil de Agua",
+    nombre: "Cantil de agua",
     cient: "Agkistrodon bilineatus",
     estado: "AMENAZADO",
     categoria: "Reptil • Serpiente venenosa",
@@ -316,7 +316,7 @@ const ESPECIES = [
   },
   {
     id: "ajolote-altiplano",
-    nombre: "Ajolote del Altiplano",
+    nombre: "Ajolote del altiplano",
     cient: "Ambystoma velasci",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Anfibio • Salamandra",
@@ -388,7 +388,7 @@ const ESPECIES = [
   },
   {
     id: "rana-arbol-juanita",
-    nombre: "Rana de Árbol de Juanita",
+    nombre: "Rana de árbol de juanita",
     cient: "Exerodonta juanitae",
     estado: "AMENAZADO",
     categoria: "Anfibio • Anuro",
@@ -436,7 +436,7 @@ const ESPECIES = [
   },
   {
     id: "colorin-azulrosa",
-    nombre: "Colorín Azulrosa",
+    nombre: "Colorín azulrosa",
     cient: "Passerina rositae",
     estado: "AMENAZADO",
     categoria: "Ave • Cardinalidae",
@@ -460,7 +460,7 @@ const ESPECIES = [
   },
   {
     id: "pajarito-monte",
-    nombre: "Pajarito de Monte",
+    nombre: "Pajarito de monte",
     cient: "Psilocybe fagicola",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Ave • Emberizidae",
@@ -484,7 +484,7 @@ const ESPECIES = [
   },
   {
     id: "tiburon-ballena",
-    nombre: "Tiburón Ballena",
+    nombre: "Tiburón ballena",
     cient: "Rhincodon typus",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Pez • Elasmobranquio",
@@ -508,7 +508,7 @@ const ESPECIES = [
   },
   {
     id: "vaquita-marina",
-    nombre: "Vaquita Marina",
+    nombre: "Vaquita marina",
     cient: "Phocoena sinus",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Mamífero • Cetáceo",
@@ -533,7 +533,7 @@ const ESPECIES = [
   },
   {
     id: "raton-alfalfar",
-    nombre: "Ratón de Alfalfa",
+    nombre: "Ratón de alfalfar",
     cient: "Microtus californicus",
     estado: "AMENAZADO",
     categoria: "Mamífero • Roedor",
@@ -581,7 +581,7 @@ const ESPECIES = [
   },
   {
     id: "chara-enana",
-    nombre: "Chara Enana",
+    nombre: "Chara enana",
     cient: "Cyanolyca nana",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Ave • Corvidae",
@@ -605,7 +605,7 @@ const ESPECIES = [
   },
   {
     id: "lobo-mexicano",
-    nombre: "Lobo Mexicano",
+    nombre: "Lobo mexicano",
     cient: "Canis lupus ssp. baileyi",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Mamífero • Cánido",
@@ -629,7 +629,7 @@ const ESPECIES = [
   },
   {
     id: "tapir-centroamericano",
-    nombre: "Tapir Centroamericano",
+    nombre: "Tapir centroamericano",
     cient: "Tapirus bairdii",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Mamífero • Perissodáctilo",
@@ -701,7 +701,7 @@ const ESPECIES = [
   },
   {
     id: "tuza-tropical",
-    nombre: "Tuza Tropical",
+    nombre: "Tuza tropical",
     cient: "Geomys tropicalis",
     estado: "AMENAZADO",
     categoria: "Mamífero • Roedor",
@@ -725,7 +725,7 @@ const ESPECIES = [
   },
   {
     id: "lagarto-escorpion",
-    nombre: "Lagarto Escorpión",
+    nombre: "Lagarto escorpión",
     cient: "Heloderma horridum",
     estado: "AMENAZADO",
     categoria: "Reptil • Lagartija venenosa",
@@ -749,7 +749,7 @@ const ESPECIES = [
   },
   {
     id: "mono-aullador",
-    nombre: "Mono Aullador",
+    nombre: "Mono aullador",
     cient: "Alouatta pigra",
     estado: "VULNERABLE",
     categoria: "Mamífero • Primate",
@@ -773,7 +773,7 @@ const ESPECIES = [
   },
   {
     id: "chara-sinaloense",
-    nombre: "Chara Sinaloense",
+    nombre: "Chara sinaloense",
     cient: "Cyanocorax beecheii",
     estado: "AMENAZADO",
     categoria: "Ave • Corvidae",
@@ -894,7 +894,7 @@ const ESPECIES = [
   },
   {
     id: "tecolote-tamaulipeco",
-    nombre: "Tecolote Tamaulipeco",
+    nombre: "Tecolote tamaulipeco",
     cient: "Glaucidium sanchezi",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Ave • Strigidae",
@@ -1134,7 +1134,7 @@ const ESPECIES = [
   },
   {
     id: "guaqueque-mexicano",
-    nombre: "Guaqueque Mexicano",
+    nombre: "Guaqueque mexicano",
     cient: "Dasyprocta mexicana",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Mamífero • Roedor",
@@ -1158,7 +1158,7 @@ const ESPECIES = [
   },
   {
     id: "gorrion-serrano",
-    nombre: "Gorrión Serrano",
+    nombre: "Gorrión serrano",
     cient: "Xenospiza baileyi",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Ave • Passerellidae",
@@ -1230,7 +1230,7 @@ const ESPECIES = [
   },
   {
     id: "murcielago-pescador",
-    nombre: "Murciélago Pescador",
+    nombre: "Murciélago pescador",
     cient: "Myotis vivesi",
     estado: "AMENAZADO",
     categoria: "Mamífero • Quiróptero",
@@ -1278,7 +1278,7 @@ const ESPECIES = [
   },
   {
     id: "salamandra-pie-plano",
-    nombre: "Salamandra Pie Plano Pigmea",
+    nombre: "Salamandra pie plano pigmea",
     cient: "Chiropterotriton lavae",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Anfibio • Salamandra",
@@ -1494,7 +1494,7 @@ const ESPECIES = [
   },
   {
     id: "escorpion-arboricola",
-    nombre: "Escorpión Arborícola de Labios Rojos",
+    nombre: "Escorpión arborícola de labios rojos",
     cient: "Abronia lythrochila",
     estado: "AMENAZADO",
     categoria: "Arácnido • Escorpión",
@@ -1542,7 +1542,7 @@ const ESPECIES = [
   },
   {
     id: "tarantula-arboricola",
-    nombre: "Tarántula Arborícola Mexicana",
+    nombre: "Tarántula arborícola mexicana",
     cient: "Psalmopoeus victori",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Arácnido • Araña",
@@ -1710,7 +1710,7 @@ const ESPECIES = [
   },
   {
     id: "ranita-chamula",
-    nombre: "Ranita Chamula",
+    nombre: "Ranita chamula",
     cient: "Duellmanohyla chamulae",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Anfibio • Anuro",
@@ -1758,7 +1758,7 @@ const ESPECIES = [
   },
   {
     id: "biznaga-barril",
-    nombre: "Biznaga Barril",
+    nombre: "Biznaga barril",
     cient: "Ferocactus histrix",
     estado: "AMENAZADO",
     categoria: "Planta • Cactácea",
@@ -1831,7 +1831,7 @@ const ESPECIES = [
   {
     id: "flor-montana",
     nombre: "Flor de Montaña",
-    cient: "Laelia speciosa",
+    cient: "Eryngium protoiflorum",
     estado: "AMENAZADO",
     categoria: "Planta • Orquídea",
     habitat: "Bosques de encino, México central",
