@@ -24,6 +24,9 @@
   --glow: 127,191,0;
   --card-bg: rgba(10,14,10,0.72);
   --card-border: rgba(255,255,255,0.10);
+  /* Verde del catálogo (fijo, no depende del estado) */
+  --catalog-A: #7FBF00;
+  --catalog-glow: 127,191,0;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body {
@@ -252,18 +255,21 @@ model-viewer {
 /* Nombre científico + categoría — fondo pequeño ajustado al texto */
 .sp-cient-block {
   display: inline-block;
-  background: rgba(8,12,8,0.72);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(8,12,8,0.82);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 6px;
   padding: 4px 8px 5px 8px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   margin-bottom: 14px;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(var(--glow), 0.10);
 }
 .sp-cient {
   display: block;
   font-style: italic; font-weight: 300;
-  font-size: .82rem; color: var(--A);
+  font-size: .86rem; color: rgba(var(--glow), 0.95);
   margin-bottom: 2px;
 }
 
@@ -271,8 +277,10 @@ model-viewer {
 .sp-cat {
   display: block;
   font-family: 'Share Tech Mono', monospace;
-  font-size: .52rem; letter-spacing: .16em; text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  font-size: .62rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.68);
 }
 
 /* ── KPIs ── */
@@ -283,18 +291,21 @@ model-viewer {
   margin-bottom: 14px;
 }
 .kpi {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: rgba(10,14,10,0.86);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: 14px;
   padding: 12px 14px;
   position: relative; overflow: hidden;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 12px 26px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.06);
 }
 .kpi::before {
   content: '';
   position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(to right, transparent, rgba(var(--glow),.4), transparent);
+  background: linear-gradient(to right, transparent, rgba(var(--glow),.55), transparent);
 }
 /* map bg decorativo en hábitat */
 .kpi.habitat-kpi::after {
@@ -318,15 +329,19 @@ model-viewer {
 
 .kpi-lbl {
   font-family: 'Share Tech Mono', monospace;
-  font-size: .48rem; letter-spacing: .12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.38);
+  font-size: .56rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.60);
   margin-bottom: 3px;
 }
 .kpi-val {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 1.15rem; font-weight: 700; line-height: 1.15;
+  font-size: 1.22rem;
+  font-weight: 800;
+  line-height: 1.15;
   color: #fff;
-  text-shadow: 0 1px 10px rgba(0,0,0,0.8);
+  text-shadow: 0 2px 14px rgba(0,0,0,0.85);
 }
 .kpi-val.alert {
   color: var(--A);
@@ -552,10 +567,16 @@ model-viewer {
   font-size: .58rem; letter-spacing: .02em;
   text-transform: uppercase; line-height: 1.2;
   color: #fff;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.85);
 }
 .other-cient {
-  font-size: .46rem; font-style: italic;
-  color: rgba(255,255,255,0.42); margin-top: 1px;
+  font-style: italic;
+  font-weight: 600;
+  font-size: .68rem;
+  color: rgba(var(--catalog-glow), 0.92);
+  margin-top: 3px;
+  letter-spacing: .02em;
+  text-shadow: 0 0 12px rgba(var(--catalog-glow), 0.25), 0 1px 10px rgba(0,0,0,0.90);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
