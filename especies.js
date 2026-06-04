@@ -6,9 +6,9 @@ const ESPECIES = [
     cient: "Craugastor guerreroensis",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Anfibio • Anuro",
-    habitat: "Bosque pino-encino de Guerrero",
+    habitat: "Bosque de niebla y de pino-encino de Guerrero",
     poblacion: "Desconocida",
-    tamaño: "32 – 40 mm",
+    tamaño: "35 – 53 mm",
     peso: "< 5 g",
     emoji: "🐸",
     sonido: "selva",
@@ -80,7 +80,7 @@ const ESPECIES = [
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Mamífero • Cetáceo",
     habitat: "Océanos del mundo, costas mexicanas",
-    poblacion: "10,000 – 25,000 individuos",
+    poblacion: "5,000 – 15,000 individuos",
     tamaño: "24 – 33 m",
     peso: "100 – 200 t",
     emoji: "🐋",
@@ -94,7 +94,7 @@ const ESPECIES = [
     ],
     curiosidades: [
       { t: "El ser más grande", txt: "Con hasta 33 m de longitud y 200 toneladas, supera en masa a cualquier dinosaurio conocido, incluido el Argentinosaurus." },
-      { t: "Corazón gigante", txt: "Su corazón pesa unos 180 kg y late entre 4 y 8 veces por minuto; un humano podría gatear por su aorta." },
+      { t: "Latidos del Corazón", txt: "Va de 2 latidos, cuando se alimenta hasta 37 por minuto cuando hace el esfuerzo de salir a respirar." },
       { t: "Canto a larga distancia", txt: "Emite vocalizaciones a frecuencias infrasónicas que pueden viajar miles de kilómetros bajo el agua." }
     ]
   },
@@ -176,7 +176,7 @@ const ESPECIES = [
     cient: "Dermophis oaxacae",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Anfibio • Gymnophiona",
-    habitat: "Suelos húmedos de Oaxaca",
+    habitat: "Suelos húmedos de Chiapas, Colima, Guerrero, Jalisco, Oaxaca y Michoacán",
     poblacion: "Desconocida",
     tamaño: "30 – 50 cm",
     peso: "20 – 60 g",
@@ -463,23 +463,23 @@ const ESPECIES = [
     nombre: "Pajarito de monte",
     cient: "Psilocybe fagicola",
     estado: "EN PELIGRO CRÍTICO",
-    categoria: "Ave • Emberizidae",
-    habitat: "Pastizales de montaña, centro de México",
-    poblacion: "< 2,000 individuos",
-    tamaño: "12 – 13 cm",
-    peso: "14 – 18 g",
-    emoji: "🐦",
-    sonido: "viento",
-    desc: "El pajarito de monte o gorrión de pastizal es una de las aves más amenazadas de México, endémica de los pastizales de zacatonales de alta montaña en el Eje Neovolcánico. Su distribución es extremadamente fragmentada, con solo unas pocas poblaciones conocidas en el Estado de México, Jalisco y Durango.",
+    categoria: "Hongo • Hymenogastraceae",
+    habitat: "Bosques húmedos de montaña de México",
+    poblacion: "No disponible",
+    tamaño: "Sombrero de pocos centímetros",
+    peso: "N/A",
+    emoji: "🍄",
+    sonido: "lluvia",
+    desc: "El pajarito de monte es un hongo del género Psilocybe registrado en México, no un ave. Crece en ambientes húmedos de montaña, asociado a materia orgánica en descomposición del suelo forestal. Como ocurre con muchos hongos silvestres, su distribución real y estado poblacional están poco documentados porque depende de fructificaciones temporales y de registros micológicos especializados.",
     amenazas: [
-      "Conversión de pastizales de montaña para cultivos de maíz y avena.",
-      "Sobrepastoreo que elimina el zacatonal necesario para nidificación.",
-      "Incendios recurrentes en la época reproductiva."
+      "Pérdida y degradación de bosques húmedos de montaña.",
+      "Alteración de la hojarasca y del microclima del suelo por tala, apertura de caminos y cambio de uso de suelo.",
+      "Escasez de información científica sobre su distribución y abundancia."
     ],
     curiosidades: [
-      { t: "Género único", txt: "Es la única especie de su género Xenospiza, sin parientes cercanos vivos, representando una línea evolutiva única e irreemplazable." },
-      { t: "Pastizal obligado", txt: "No puede sobrevivir fuera de los zacatonales de montaña; no utiliza ningún otro tipo de vegetación para anidar ni alimentarse." },
-      { t: "Recuperación activa", txt: "Organizaciones trabajan con comunidades para restaurar pastizales y proteger sus escasas colonias reproductoras." }
+      { t: "No es pájaro", txt: "Su nombre común puede confundir, pero taxonómicamente pertenece a los hongos basidiomicetos." },
+      { t: "Fructificación temporal", txt: "La parte visible aparece solo cuando las condiciones de humedad y temperatura son adecuadas; el micelio permanece oculto en el sustrato." },
+      { t: "Identificación especializada", txt: "Las especies de Psilocybe requieren revisión cuidadosa de rasgos microscópicos y contexto ecológico para evitar confusiones." }
     ]
   },
   {
@@ -533,26 +533,26 @@ const ESPECIES = [
   },
   {
     id: "raton-alfalfar",
-    nombre: "Ratón de alfalfar",
+    nombre: "Ratón de alfalfa",
     cient: "Microtus californicus",
     estado: "AMENAZADO",
     categoria: "Mamífero • Roedor",
-    habitat: "Campos agrícolas y pastizales",
-    poblacion: "Reducida regionalmente",
+    habitat: "Pastizales y humedales herbáceos del norte de Baja California",
+    poblacion: "Reducida en México",
     tamaño: "12 – 17 cm",
     peso: "15 – 32 g",
     emoji: "🐭",
     sonido: "viento",
-    desc: "El ratón de alfalfar o ratón venado es un pequeño roedor de pelaje bicolor —pardo en el dorso y blanco en el vientre— distribuido en Norteamérica. En México habita pastizales, campos agrícolas y bordes de bosque. Juega un papel importante en la cadena alimentaria como presa de aves rapaces, serpientes y mamíferos carnívoros.",
+    desc: "El ratón de alfalfar o topillo de California es un roedor herbívoro de cuerpo compacto y cola corta. Su distribución principal está en California y el suroeste de Oregón; en México se conoce del norte de Baja California. No debe confundirse con el ratón venado, que pertenece a otro género. Habita sitios con pastos densos, herbazales y zonas húmedas con cobertura vegetal baja.",
     amenazas: [
-      "Uso intensivo de rodenticidas en campos agrícolas que reduce sus poblaciones.",
-      "Pérdida de pastizales por cambio de uso de suelo.",
-      "Enfermedades como el hantavirus que afectan a humanos en zonas rurales."
+      "Pérdida y fragmentación de pastizales y humedales del norte de Baja California.",
+      "Urbanización y conversión agrícola de valles y zonas ribereñas.",
+      "Uso de rodenticidas y manejo intensivo de campos que reduce refugio y alimento."
     ],
     curiosidades: [
-      { t: "Memoria espacial excepcional", txt: "Puede recordar la ubicación exacta de cientos de escondites de semillas que crea para el invierno, recuperando la mayoría con gran precisión." },
-      { t: "Presa clave", txt: "Es el alimento principal de más de 100 especies de depredadores en Norteamérica, desde búhos hasta coyotes y serpientes." },
-      { t: "Portador de hantavirus", txt: "Puede portar el virus sin enfermarse; el hantavirus en sus excrementos representa un riesgo de salud en zonas rurales." }
+      { t: "Topillo herbívoro", txt: "A diferencia de muchos ratones granívoros, se alimenta sobre todo de pastos, brotes y otras plantas tiernas." },
+      { t: "Túneles entre pastos", txt: "Forma senderos y galerías superficiales entre la vegetación densa, lo que le permite moverse protegido de depredadores." },
+      { t: "Límite sur", txt: "Las poblaciones mexicanas representan el extremo meridional de su distribución natural." }
     ]
   },
   {
@@ -606,7 +606,7 @@ const ESPECIES = [
   {
     id: "lobo-mexicano",
     nombre: "Lobo mexicano",
-    cient: "Canis lupus ssp. baileyi",
+    cient: "Canis lupus subsp. baileyi",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Mamífero • Cánido",
     habitat: "Sierra Madre Occidental",
@@ -969,23 +969,23 @@ const ESPECIES = [
     nombre: "Palma Espinuda",
     cient: "Dioon merolae",
     estado: "AMENAZADO",
-    categoria: "Planta • Palma",
-    habitat: "Bosque tropical seco de Sonora-Sinaloa",
+    categoria: "Planta • Cícada",
+    habitat: "Bosques de pino-encino y selvas secas de Chiapas y Oaxaca",
     poblacion: "Reducida",
-    tamaño: "Hasta 8 m",
+    tamaño: "Hasta ~3 m",
     peso: "N/A",
-    emoji: "🌴",
+    emoji: "🌿",
     sonido: "viento",
-    desc: "La palma espinuda es una palma endémica del noroeste de México presente en el bosque tropical caducifolio de Sonora y Sinaloa. Sus hojas en forma de abanico con espinas en los pecíolos le dan nombre. Resistente a la sequía, proporciona refugio y alimento a numerosas aves y mamíferos. Comunidades locales usan sus hojas para techar casas.",
+    desc: "La palma espinuda o espadaña no es una palma verdadera: es una cícada del género Dioon. Es endémica del sur de México, con distribución reportada en Chiapas y Oaxaca. Crece en laderas y bosques abiertos, incluyendo pino-encino, selva baja caducifolia y selva baja subcaducifolia, aproximadamente entre 800 y 1,700 m de altitud.",
     amenazas: [
-      "Conversión del bosque tropical seco para ganadería y agricultura.",
-      "Extracción de hojas para artesanía sin manejo sustentable.",
-      "Incendios forestales en zonas de bosque seco."
+      "Pérdida y fragmentación de bosques y selvas secas por agricultura, ganadería e incendios.",
+      "Extracción de hojas y plantas para usos ceremoniales u ornamentales sin manejo adecuado.",
+      "Crecimiento lento y distribución restringida, lo que dificulta la recuperación de poblaciones."
     ],
     curiosidades: [
-      { t: "Refugio de fauna", txt: "Sus flores atraen abejas y murciélagos nectarívoros; sus frutos son consumidos por al menos 15 especies de aves y mamíferos del bosque seco." },
-      { t: "Tejido tradicional", txt: "Comunidades yaquis y mayos usan sus hojas para techar casas, fabricar sombreros y hacer artesanías, tradición de siglos." },
-      { t: "Resistencia a sequía", txt: "Puede sobrevivir meses sin lluvia gracias a reservas de agua en su tronco y al cierre de estomas para reducir evaporación." }
+      { t: "Planta antigua", txt: "Las cícadas pertenecen a linajes muy antiguos de plantas con semilla, anteriores a muchas plantas con flor modernas." },
+      { t: "Conos, no flores", txt: "Produce conos reproductivos separados en plantas macho y hembra; no forma flores como una palma." },
+      { t: "Uso ceremonial", txt: "En algunas comunidades de Chiapas sus hojas se han usado en celebraciones tradicionales, por lo que el manejo sustentable es clave." }
     ]
   },
   {
@@ -1138,22 +1138,22 @@ const ESPECIES = [
     cient: "Dasyprocta mexicana",
     estado: "EN PELIGRO CRÍTICO",
     categoria: "Mamífero • Roedor",
-    habitat: "Selvas húmedas de Veracruz",
-    poblacion: "< 2,500 estimados",
+    habitat: "Bosques tropicales de Veracruz, Oaxaca, Tabasco y Chiapas",
+    poblacion: "Desconocida; tendencia decreciente",
     tamaño: "40 – 55 cm",
-    peso: "3 – 4 kg",
+    peso: "2 – 4 kg",
     emoji: "🐿️",
     sonido: "selva",
-    desc: "El guaqueque mexicano es un roedor de mediano tamaño endémico de las selvas húmedas del norte de Veracruz y sur de Tamaulipas. De cuerpo esbelto y pelaje pardo-anaranjado brillante, es un corredor rápido en el suelo selvático. Es uno de los pocos animales capaz de abrir las duras semillas de la caoba y otras maderas preciosas.",
+    desc: "El guaqueque mexicano, también llamado agutí negro o zerete prieto, es un roedor endémico del sur de México. Su distribución se concentra en tierras bajas tropicales de Veracruz, Oaxaca, Tabasco y Chiapas; no se reconoce como especie distribuida en Tamaulipas. Tiene cuerpo esbelto, patas largas y pelaje oscuro a pardo negruzco, no anaranjado brillante. Vive en el suelo de selvas y fragmentos de bosque, donde consume frutos, semillas y otros materiales vegetales.",
     amenazas: [
-      "Deforestación extrema de las selvas húmedas del norte de Veracruz.",
-      "Cacería para consumo en comunidades rurales del área.",
-      "Menos del 10% de su hábitat original permanece en la región."
+      "Pérdida y fragmentación de selvas tropicales en Veracruz, Oaxaca, Tabasco y Chiapas por agricultura, ganadería y expansión urbana.",
+      "Cacería para consumo local en algunas comunidades rurales.",
+      "Aislamiento de poblaciones en parches de bosque cada vez más pequeños."
     ],
     curiosidades: [
-      { t: "Abridor de semillas", txt: "Es uno de los pocos animales con mandíbulas suficientemente poderosas para abrir las durísimas semillas de la caoba y el cedro." },
-      { t: "Dispersor clave", txt: "Entierra semillas como reserva; las que olvida germinan y renuevan el bosque, siendo esencial para la regeneración de árboles." },
-      { t: "Corredor veloz", txt: "Puede alcanzar 40 km/h en carrera de huida, usando su agilidad en lugar del sigilo para escapar de depredadores." }
+      { t: "Dispersor de semillas", txt: "Transporta y entierra semillas como reserva de alimento; algunas quedan olvidadas y germinan, ayudando a regenerar la selva." },
+      { t: "Agutí oscuro", txt: "A diferencia de otros guaqueques más rojizos, esta especie se reconoce por su coloración oscura, con pelos más largos en la nuca y grupa." },
+      { t: "Endémico mexicano", txt: "Su área nativa está restringida al sur de México, por lo que la pérdida de selvas regionales afecta a toda la especie." }
     ]
   },
   {
@@ -1449,23 +1449,23 @@ const ESPECIES = [
     nombre: "Sardinita Ciega",
     cient: "Astyanax jordani",
     estado: "EN PELIGRO CRÍTICO",
-    categoria: "Pez • Bythitidae",
-    habitat: "Cenotes de Yucatán",
+    categoria: "Pez • Characidae",
+    habitat: "Cuevas y aguas subterráneas de la cuenca del Pánuco, San Luis Potosí",
     poblacion: "Desconocida, muy reducida",
     tamaño: "4 – 8 cm",
     peso: "< 3 g",
     emoji: "🐟",
     sonido: "cueva",
-    desc: "La sardinita ciega es un pequeño pez cavernícola endémico de los cenotes y cuevas subacuáticas de Yucatán. Ha perdido los ojos y la pigmentación al adaptarse a la oscuridad total. Habita en aguas subterráneas cristalinas conectadas a través de un extenso sistema de ríos subterráneos.",
+    desc: "La sardinita ciega es un pequeño pez cavernícola mexicano de la familia Characidae. Se asocia con cuevas y aguas subterráneas de la cuenca del río Pánuco, especialmente en la región de San Luis Potosí, no con cenotes de Yucatán. Ha perdido los ojos funcionales y gran parte de la pigmentación como adaptación a ambientes oscuros.",
     amenazas: [
-      "Contaminación del acuífero yucateco por residuos de granjas porcícolas y agrícolas.",
-      "Intrusión de agua salada por sobreexplotación de acuíferos costeros.",
-      "Turismo no regulado en cenotes que perturba ecosistemas subterráneos."
+      "Contaminación de aguas subterráneas por descargas urbanas, agrícolas o ganaderas.",
+      "Extracción de agua que altera el nivel y flujo de los sistemas cavernícolas.",
+      "Perturbación directa de cuevas y manantiales donde viven sus poblaciones."
     ],
     curiosidades: [
       { t: "Sin ojos y sin color", txt: "Perdió ojos y pigmentación al evolucionar en oscuridad total; ambos rasgos son costosos energéticamente y sin utilidad en cuevas." },
-      { t: "Red hídrica subterránea", txt: "Los cenotes de Yucatán están conectados por el sistema de cuevas subacuáticas más largo del mundo, extendiéndose cientos de kilómetros." },
-      { t: "Linaje antiguo", txt: "Los bythitidos son peces de línea evolutiva antigua; las formas cavernícolas se han adaptado durante miles de años al ecosistema subterráneo yucateco." }
+      { t: "Pariente de tetras", txt: "Pertenece a Characidae, la misma familia de muchos tetras de agua dulce, aunque su forma cavernícola es muy especializada." },
+      { t: "Modelo evolutivo", txt: "Los peces cavernícolas de Astyanax se estudian para entender cómo evolucionan la pérdida de ojos, pigmentación y cambios sensoriales." }
     ]
   },
   {
@@ -1473,23 +1473,23 @@ const ESPECIES = [
     nombre: "Espada de Clemencia",
     cient: "Xiphophorus clemenciae",
     estado: "AMENAZADO",
-    categoria: "Planta • Euforbia",
-    habitat: "Desierto chihuahuense, Chihuahua y Coahuila",
-    poblacion: "Reducida",
-    tamaño: "30 – 80 cm",
-    peso: "N/A",
-    emoji: "🌵",
-    sonido: "viento",
-    desc: "La candelilla o espada de clemencia es una planta arbustiva endémica de los desiertos de Chihuahua y Coahuila. Sus tallos delgados y erectos cubiertos de una cera protectora blanquecina han sido aprovechados durante siglos para extraer la cera de candelilla, usada en cosméticos, barnices y lubricantes.",
+    categoria: "Pez • Poeciliidae",
+    habitat: "Arroyos y manantiales del sistema Coatzacoalcos-Uxpanapa",
+    poblacion: "No disponible",
+    tamaño: "3 – 4 cm",
+    peso: "< 1 g",
+    emoji: "🐟",
+    sonido: "rio",
+    desc: "La espada de Clemencia es un pez dulceacuícola mexicano del género Xiphophorus, emparentado con los colas de espada. Habita arroyos claros, manantiales y tributarios de corriente lenta a moderada en el sureste de México, principalmente en sistemas relacionados con el alto Coatzacoalcos y Uxpanapa en Oaxaca y Veracruz, con registros adicionales en Chiapas.",
     amenazas: [
-      "Sobre-extracción de cera sin manejo sustentable que debilita las poblaciones.",
-      "Cambio climático que intensifica las sequías en el desierto chihuahuense.",
-      "Cambio de uso de suelo para ganadería en zonas áridas."
+      "Contaminación de arroyos por descargas urbanas, agroquímicos y sedimentos.",
+      "Modificación de manantiales y cauces por obras locales, extracción de agua o cambio de uso de suelo.",
+      "Rango regional limitado que vuelve vulnerables a sus poblaciones ante perturbaciones de cuenca."
     ],
     curiosidades: [
-      { t: "Cera natural valiosa", txt: "Su cera es más dura y brillante que la carnauba brasileña; se usa en cosméticos, chicles, barnices, tintas de impresión y como sustituto de la cera de abeja." },
-      { t: "Economía rural", txt: "La extracción de candelilla es sustento de miles de familias en el desierto chihuahuense; existe una Norma Oficial que regula su aprovechamiento." },
-      { t: "Savia lechosa", txt: "Como toda euforbia, produce látex tóxico que disuade a los herbívoros; el látex era usado por indígenas con fines medicinales." }
+      { t: "Cola de espada", txt: "Los machos presentan la prolongación inferior de la aleta caudal que da nombre común al grupo de los colas de espada." },
+      { t: "Nombre dedicado", txt: "El epíteto clemenciae honra a Clemencia, esposa del ictiólogo José Álvarez del Villar, descriptor de la especie." },
+      { t: "Interés evolutivo", txt: "Se ha estudiado por su historia evolutiva dentro de Xiphophorus, un género importante para entender especiación e hibridación." }
     ]
   },
   {
@@ -1497,23 +1497,23 @@ const ESPECIES = [
     nombre: "Escorpión arborícola de labios rojos",
     cient: "Abronia lythrochila",
     estado: "AMENAZADO",
-    categoria: "Arácnido • Escorpión",
-    habitat: "Selvas húmedas del SE México",
+    categoria: "Reptil • Lagartija",
+    habitat: "Bosques de montaña de Chiapas",
     poblacion: "Desconocida",
-    tamaño: "4 – 8 cm",
-    peso: "1 – 5 g",
-    emoji: "🦂",
+    tamaño: "Hasta ~30 cm",
+    peso: "Desconocido",
+    emoji: "🦎",
     sonido: "selva",
-    desc: "El escorpión arbóreo de labios rojos es una especie que habita en las selvas húmedas del sureste de México. A diferencia de la mayoría de los escorpiones terrestres, tiene adaptaciones para trepar por la corteza de los árboles y cazar en altura. Su nombre se debe a la coloración rojiza alrededor de la boca.",
+    desc: "El escorpión arborícola de labios rojos no es un arácnido: es una lagartija del género Abronia, también llamada dragoncito o lagarto alicante de labios rojos. Es endémica de Chiapas y vive asociada a bosques húmedos de montaña, donde se mueve entre ramas, bromelias y vegetación arbórea. Su nombre común se debe a la coloración rojiza alrededor de la boca.",
     amenazas: [
-      "Destrucción de la selva húmeda donde vive en el sureste mexicano.",
-      "Colecta por comerciantes de artrópodos exóticos.",
-      "Escaso conocimiento científico sobre su distribución y estado poblacional."
+      "Pérdida y fragmentación del bosque de montaña por tala, agricultura y cambio de uso de suelo.",
+      "Colecta ilegal para el comercio de reptiles exóticos.",
+      "Distribución restringida y poca información poblacional disponible."
     ],
     curiosidades: [
-      { t: "Escalador nocturno", txt: "Escala troncos y ramas de noche usando sus patas con estructuras adhesivas, cazando insectos y arañas que duermen en la corteza." },
-      { t: "Fluorescencia UV", txt: "Como todos los escorpiones, brilla con luz azul-verde bajo luz ultravioleta; los investigadores usan linternas UV para detectarlos de noche." },
-      { t: "Veneno selectivo", txt: "Su veneno puede ser doloroso pero raramente es peligroso para humanos sanos; está diseñado para presas de su tamaño." }
+      { t: "Dragoncito arborícola", txt: "Muchas Abronia viven entre árboles y bromelias, con cuerpo robusto y cola prensil o semiprensil para moverse en la vegetación." },
+      { t: "No es venenoso", txt: "Aunque algunos nombres locales como escorpión o alicante generan temor, es una lagartija y no un escorpión." },
+      { t: "Color variable", txt: "La especie muestra variación de coloración; los labios rojizos son uno de los rasgos que inspiraron su nombre común." }
     ]
   },
   {
@@ -1786,21 +1786,21 @@ const ESPECIES = [
     cient: "Beaucarnea recurvata",
     estado: "AMENAZADO",
     categoria: "Planta • Asparagaceae",
-    habitat: "Bosque seco de Tamaulipas y SLP",
+    habitat: "Bosques secos y selvas bajas del oriente de México",
     poblacion: "Reducida",
     tamaño: "Hasta 9 m",
     peso: "N/A",
     emoji: "🌴",
     sonido: "viento",
-    desc: "El nolina o pata de elefante es una planta icónica del noreste de México, con una base del tronco enormemente engrosada que almacena agua. Sus hojas delgadas y largas brotan en la cima en una corona que puede superar los 5 m. Es extremadamente longeva —puede vivir más de 350 años— y de crecimiento muy lento.",
+    desc: "La pata de elefante es una planta arborescente mexicana de crecimiento lento, famosa por la base del tronco enormemente engrosada que almacena agua. Su distribución silvestre se concentra en el oriente de México, especialmente en Veracruz, con reportes taxonómicos más amplios para Oaxaca, Puebla, San Luis Potosí y Tamaulipas según la fuente consultada. Sus hojas largas y delgadas forman coronas en las ramas.",
     amenazas: [
       "Extracción masiva de ejemplares silvestres para el comercio ornamental global.",
-      "Pérdida del matorral seco donde habita en Tamaulipas y San Luis Potosí.",
+      "Pérdida de selvas bajas y bosques secos en su área de distribución natural.",
       "Colecta de ejemplares grandes centenarios que tardan siglos en reponerse."
     ],
     curiosidades: [
       { t: "Árbol de trescientos años", txt: "Puede vivir más de 350 años; muchos ejemplares que se venden en viveros son extraídos de la naturaleza y tienen décadas o siglos de edad." },
-      { t: "Reservorio de agua", txt: "La base del tronco hinchada puede almacenar decenas de litros de agua para sobrevivir las largas sequías del noreste árido mexicano." },
+      { t: "Reservorio de agua", txt: "La base del tronco hinchada almacena agua para sobrevivir periodos secos prolongados." },
       { t: "Planta global", txt: "Es una de las plantas de ornato más exportadas de México; su fama mundial como planta de interior ha impulsado la extracción ilegal." }
     ]
   },
@@ -1809,47 +1809,47 @@ const ESPECIES = [
     nombre: "Maquique",
     cient: "Cyathea fulva",
     estado: "AMENAZADO",
-    categoria: "Ave • Ardeidae",
-    habitat: "Ríos y humedales de México",
+    categoria: "Planta • Helecho arborescente",
+    habitat: "Bosques húmedos de montaña",
     poblacion: "Reducida",
-    tamaño: "64 – 76 cm",
-    peso: "900 – 1300 g",
-    emoji: "🦅",
-    sonido: "oceano",
-    desc: "El maquique o garza tigre mexicana es una garza de gran tamaño con plumaje pardo rufo rayado que le da aspecto de tigre. Habita en ríos, lagunas y manglares de las costas tropicales mexicanas. Es solitaria y esquiva, cazando inmóvil a orillas del agua con paciencia extraordinaria.",
+    tamaño: "Varios metros de altura",
+    peso: "N/A",
+    emoji: "🌿",
+    sonido: "lluvia",
+    desc: "El maquique es un helecho arborescente, no un ave. Cyathea fulva pertenece a los helechos arborescentes y forma un tallo erecto coronado por frondas grandes. En México se asocia con bosques húmedos y de montaña, donde requiere sombra, humedad constante y suelos con materia orgánica.",
     amenazas: [
-      "Destrucción de manglares y zonas ribereñas tropicales.",
-      "Contaminación de ríos y lagunas costeras.",
-      "Perturbación humana en zonas de anidación."
+      "Tala y fragmentación de bosques húmedos de montaña.",
+      "Extracción de ejemplares o partes vegetales para uso ornamental.",
+      "Desecación y apertura del dosel que reducen la humedad necesaria para sus esporas y plántulas."
     ],
     curiosidades: [
-      { t: "Cazador inmóvil", txt: "Puede permanecer absolutamente inmóvil durante horas a orillas del agua, confundiéndose con el entorno hasta que una presa se acerca." },
-      { t: "Plumaje críptico", txt: "Sus rayas y colores pardos imitan perfectamente la luz y sombra de la vegetación riparia; puede estar a metros de un observador sin ser detectado." },
-      { t: "Pico lanza", txt: "Cuando ataca, su largo cuello se extiende en una fracción de segundo para clavar el pico en la presa con velocidad casi imposible de seguir a simple vista." }
+      { t: "Helecho arborescente", txt: "Aunque parece una pequeña palma, se reproduce por esporas como otros helechos y no produce flores ni semillas." },
+      { t: "Indicador de humedad", txt: "Su presencia suele asociarse con microambientes frescos y húmedos, sensibles a la apertura del bosque." },
+      { t: "Crecimiento lento", txt: "Los helechos arborescentes tardan años en formar tallos altos, por lo que la extracción de adultos afecta mucho a las poblaciones." }
     ]
   },
   {
     id: "flor-montana",
     nombre: "Flor de Montaña",
-    cient: "Eryngium protoiflorum",
+    cient: "Eryngium proteiflorum",
     estado: "AMENAZADO",
-    categoria: "Planta • Orquídea",
-    habitat: "Bosques de encino, México central",
+    categoria: "Planta • Apiaceae",
+    habitat: "Pastizales y claros de alta montaña del centro de México",
     poblacion: "Reducida",
-    tamaño: "20 – 40 cm",
+    tamaño: "20 – 60 cm",
     peso: "N/A",
     emoji: "🌺",
     sonido: "selva",
-    desc: "La flor de mayo o laelia de mayo es una orquídea epífita endémica de los bosques de encino del altiplano mexicano, especialmente en Michoacán, Jalisco, Guanajuato y Querétaro. Sus grandes flores rosado-malva con labelo morado intenso, de hasta 12 cm de diámetro, son consideradas las más espectaculares de las orquídeas mexicanas.",
+    desc: "La flor de montaña o rosa de las nieves es una herbácea perenne del género Eryngium, familia Apiaceae; no es una orquídea. Es nativa de México, con distribución reportada de Veracruz a Michoacán, y crece en ambientes frescos de montaña. Sus inflorescencias forman cabezuelas llamativas rodeadas de brácteas espinosas que le dan aspecto de flor grande.",
     amenazas: [
-      "Extracción masiva de plantas del campo para el mercado de orquídeas.",
-      "Pérdida del bosque de encino donde habita.",
-      "Dependencia de hongos micorrízicos que desaparecen al degradar el hábitat."
+      "Pisoteo y extracción de plantas en zonas de visita turística de alta montaña.",
+      "Pérdida o degradación de pastizales y claros montanos por cambio de uso de suelo.",
+      "Cambio climático que puede desplazar las condiciones frías y húmedas donde prospera."
     ],
     curiosidades: [
-      { t: "Mayo florido", txt: "Florece masivamente en mayo; un árbol de encino cubierto de laelias en flor es uno de los espectáculos botánicos más impresionantes de México." },
-      { t: "Solo en encinos viejos", txt: "Crece casi exclusivamente sobre encinos de más de 50 años, vulnerable a la tala y la regeneración de bosques jóvenes sin árboles viejos." },
-      { t: "Protegida globalmente", txt: "Está incluida en el Apéndice I de CITES, prohibiéndose su comercio internacional; sin embargo, sigue extrayéndose ilegalmente." }
+      { t: "Pariente del cilantro", txt: "Aunque su aspecto recuerda a una flor ornamental espinosa, pertenece a Apiaceae, la familia del cilantro, apio y zanahoria." },
+      { t: "Brácteas vistosas", txt: "Lo más llamativo no son pétalos grandes, sino brácteas que rodean las cabezuelas florales." },
+      { t: "Planta de altura", txt: "Se observa en ambientes montanos del centro de México, donde las noches frías y la humedad favorecen su crecimiento." }
     ]
   },
   {

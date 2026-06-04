@@ -625,7 +625,7 @@
     <div class="search-filters-static">
       <div class="search-wrap">
         <span class="search-ico">🔍</span>
-        <input class="search-input" id="search" type="search" placeholder="Buscar especie…" autocomplete="off"
+        <input class="search-input" id="search" type="search" placeholder="Buscar por nombre o nombre científico…" autocomplete="off"
           autocorrect="off" spellcheck="false" />
       </div>
       <div class="filters">
@@ -668,22 +668,39 @@
         .replace(/[\u0300-\u036f]/g, '');
     }
 
-    function coincideBusqueda(texto, q) {
-      return sinAcentos(texto).includes(q);
+    /** Normaliza texto de búsqueda (nombres comunes y científicos). */
+    function normalizarTexto(str) {
+      return sinAcentos(str)
+        .replace(/[._]/g, ' ')
+        .replace(/[^a-z0-9\s-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function textoBusquedaEspecie(e) {
+      return normalizarTexto([
+        e.nombre,
+        e.cient,
+        e.categoria,
+        e.habitat,
+        e.id
+      ].filter(Boolean).join(' '));
+    }
+
+    function coincideEspecie(e, q) {
+      if (!q) return true;
+      const texto = textoBusquedaEspecie(e);
+      const tokens = q.split(/\s+/).filter(Boolean);
+      return tokens.every(tok => texto.includes(tok));
     }
 
     function render() {
       const grid = document.getElementById('grid');
-      const q = sinAcentos(currentSearch);
+      const q = normalizarTexto(currentSearch);
 
       const list = ESPECIES.filter(e => {
         const matchFilter = currentFilter === "all" || e.estado === currentFilter;
-        const matchSearch = !q ||
-          coincideBusqueda(e.nombre, q) ||
-          coincideBusqueda(e.cient, q) ||
-          coincideBusqueda(e.categoria, q) ||
-          coincideBusqueda(e.habitat, q) ||
-          coincideBusqueda(e.id, q);
+        const matchSearch = coincideEspecie(e, q);
         return matchFilter && matchSearch;
       });
 
