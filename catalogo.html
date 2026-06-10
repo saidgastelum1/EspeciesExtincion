@@ -85,7 +85,8 @@
 
     /* ── SEARCH + FILTERS (static, scroll with page) ── */
     .search-filters-static {
-      padding: 0 14px;
+      padding: 0;
+      width: 100%;
     }
 
     .header-top {
@@ -93,6 +94,8 @@
       align-items: center;
       gap: 10px;
       padding-bottom: 10px;
+      padding-left: 14px;
+      padding-right: 14px;
     }
 
     /* Título */
@@ -158,43 +161,30 @@
       width: 22px;
       height: 22px;
       stroke: rgba(255, 255, 255, 0.9);
-      transition: transform .25s ease, stroke .25s ease;
     }
 
     .btn-back:hover,
     .btn-back:active {
       background: rgba(10, 10, 10, 0.75);
       border-color: rgba(var(--glow), 0.5);
-      box-shadow:
-        0 6px 16px rgba(0, 0, 0, 0.5),
-        0 0 12px rgba(var(--glow), 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 12px rgba(var(--glow), 0.3);
       transform: translateY(-2px);
-    }
-
-    .btn-back:hover::before,
-    .btn-back:active::before {
-      opacity: 1;
     }
 
     .btn-back:active {
       transform: translateY(0) scale(0.94);
     }
 
-    .btn-back:hover svg {
-      transform: translateX(-3px);
-      stroke: #fff;
-    }
-
     /* Buscador */
     .search-wrap {
       position: relative;
       margin-bottom: 10px;
+      padding: 0 14px;
     }
 
     .search-ico {
       position: absolute;
-      left: 16px;
+      left: 30px;
       top: 50%;
       transform: translateY(-50%);
       font-size: 1.2rem;
@@ -215,12 +205,7 @@
       font-family: 'Barlow', sans-serif;
       font-size: 1.15rem;
       outline: none;
-      -webkit-appearance: none;
       transition: border-color .2s, background .2s;
-    }
-
-    .search-input::placeholder {
-      color: rgba(255, 255, 255, 0.5);
     }
 
     .search-input:focus {
@@ -228,12 +213,18 @@
       background: rgba(0, 0, 0, 0.80);
     }
 
-    /* Filtros */
+    /* ── SCROLL PARA MÓVILES ── */
     .filters {
+      width: 100%;
+      overflow-x: auto !important; /* Fuerza el scroll horizontal */
+      overflow-y: hidden;
+      white-space: nowrap;
+      padding: 6px 14px 14px 14px; /* Relleno lateral para alinearse con los elementos */
       display: flex;
-      gap: 5px;
-      padding: 0 0 12px;
-      overflow-x: hidden;
+      gap: 8px;
+      align-items: center;
+      -webkit-overflow-scrolling: touch !important; /* Scroll con inercia nativo en iOS/Android */
+      touch-action: pan-x; /* Le dice al navegador que este elemento se mueve de lado a lado */
       scrollbar-width: none;
     }
 
@@ -242,26 +233,30 @@
     }
 
     .filter-btn {
-      flex: 1;
-      min-width: 0;
-      padding: 7px 6px;
-      border-radius: 999px;
+      display: inline-block;
+      flex-shrink: 0; /* Evita que el flex comprimas los botones en pantallas pequeñas */
+      padding: 10px 16px;
+      border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.35);
       background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       color: rgba(255, 255, 255, 0.90);
       font-family: 'Share Tech Mono', monospace;
-      font-size: .52rem;
+      font-size: .72rem;
       font-weight: bold;
-      letter-spacing: .06em;
+      letter-spacing: .02em;
       text-transform: uppercase;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       transition: all .2s;
-      white-space: nowrap;
       text-align: center;
       box-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      line-height: 1.15;
+    }
+
+    .filter-btn.all {
+      border-radius: 999px;
     }
 
     .filter-btn.active {
@@ -269,20 +264,6 @@
       border-color: rgba(var(--glow), 0.9);
       color: #fff;
       box-shadow: 0 0 12px rgba(var(--glow),0.4), 0 2px 10px rgba(0,0,0,0.5);
-    }
-
-    .filter-btn.critico.active {
-      background: rgba(255, 23, 68, 0.50);
-      border-color: rgba(255, 23, 68, 0.9);
-      color: #fff;
-      box-shadow: 0 0 12px rgba(255,23,68,0.4), 0 2px 10px rgba(0,0,0,0.5);
-    }
-
-    .filter-btn.vulnerable.active {
-      background: rgba(255, 145, 0, 0.50);
-      border-color: rgba(255, 145, 0, 0.9);
-      color: #fff;
-      box-shadow: 0 0 12px rgba(255,145,0,0.4), 0 2px 10px rgba(0,0,0,0.5);
     }
 
     .filter-btn.fp.active  { background:rgba(183,28,28,.50);  border-color:rgba(183,28,28,.9);  color:#fff; box-shadow:0 0 12px rgba(183,28,28,.4),0 2px 10px rgba(0,0,0,.5); }
@@ -294,7 +275,7 @@
 
     /* Contador */
     .results-count {
-      padding: 8px 14px 10px;
+      padding: 4px 14px 10px;
       display: flex;
       align-items: center;
     }
@@ -330,16 +311,11 @@
     }
 
     @media (min-width: 540px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      .grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (min-width: 720px) {
-      .grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-      }
+      .grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
     }
 
     /* ── CARD ── */
@@ -361,18 +337,13 @@
       transform: scale(.96);
     }
 
-    /* Línea de color superior */
     .card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
+      top: 0; left: 0; right: 0; height: 2px;
       background: var(--card-color, rgba(255, 255, 255, 0.15));
     }
 
-    /* Zona imagen */
     .card-img {
       width: 100%;
       height: 110px;
@@ -395,49 +366,26 @@
       filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
     }
 
-    .card:active .card-animal-img {
-      transform: scale(1.05);
-    }
-
     .card-emoji {
       display: none;
       font-size: 3.2rem;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 0 12px rgba(var(--glow), 0.7));
-      animation: float-small 3s ease-in-out infinite;
+      width: 100%; height: 100%;
     }
 
-    /* Glow de color en imagen */
-    .card-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom,
-          transparent 60%,
-          rgba(0, 0, 0, 0.25) 100%);
-      pointer-events: none;
-    }
-
-    /* Indicador estado (punto) */
     .card-status-dot {
       position: absolute;
-      top: 8px;
-      right: 8px;
+      top: 8px; right: 8px;
       z-index: 2;
-      width: 7px;
-      height: 7px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       animation: blink 1.8s ease-in-out infinite;
     }
 
-    /* Número */
     .card-num {
       position: absolute;
-      top: 8px;
-      left: 9px;
+      top: 8px; left: 9px;
       z-index: 2;
       font-family: 'Share Tech Mono', monospace;
       font-size: .46rem;
@@ -445,152 +393,69 @@
       background: rgba(0, 0, 0, 0.4);
       padding: 2px 5px;
       border-radius: 4px;
-      letter-spacing: .06em;
     }
 
-    /* Cuerpo de la card */
     .card-body {
       padding: 9px 10px 12px;
     }
 
     .card-nombre {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: .88rem;
-      font-weight: 700;
-      line-height: 1.25;
-      /* Nombre completo, sin truncar */
-      white-space: normal;
-      word-break: break-word;
-      hyphens: auto;
+      font-size: .88rem; font-weight: 700; line-height: 1.25;
       margin-bottom: 3px;
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
     }
 
     .card-cient {
-      font-style: italic;
-      font-weight: 600;
-      font-size: .68rem;
+      font-style: italic; font-weight: 600; font-size: .68rem;
       color: rgba(var(--glow), 0.85);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       margin-bottom: 5px;
-      letter-spacing: .02em;
     }
 
     .card-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+      display: inline-flex; align-items: center; gap: 5px;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: #fff;
-      background: var(--card-color);
-      padding: 3px 9px;
-      border-radius: 6px;
-      opacity: .92;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      font-size: .68rem; font-weight: 700;
+      color: #fff; background: var(--card-color);
+      padding: 3px 9px; border-radius: 6px;
     }
 
-    /* Colores de estado */
-    /* NOM-059 */
-    .s-P  { background: #B71C1C; }   /* P  — En Peligro de Extinción  */
-    .s-A  { background: #E65100; }   /* A  — Amenazada                 */
-    .s-Pr { background: #1B5E20; }   /* Pr — Protección Especial       */
-    /* UICN */
-    .s-CR { background: #880E4F; }   /* CR — En Peligro Crítico        */
-    .s-VU { background: #F57F17; }   /* VU — Vulnerable                */
-    .s-LC { background: #37474F; }   /* LC — Preocupación Menor        */
+    .s-P  { background: #B71C1C; }
+    .s-A  { background: #E65100; }
+    .s-Pr { background: #1B5E20; }
+    .s-CR { background: #880E4F; }
+    .s-VU { background: #F57F17; }
+    .s-LC { background: #37474F; }
 
-    /* Vacío */
-    .empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 60px 24px;
-      color: var(--muted);
-    }
+    .empty { grid-column: 1 / -1; text-align: center; padding: 60px 24px; color: var(--muted); }
+    .empty-ico { font-size: 3rem; margin-bottom: 12px; opacity: .4; }
 
-    .empty-ico {
-      font-size: 3rem;
-      margin-bottom: 12px;
-      opacity: .4;
-    }
-
-    .empty-txt {
-      font-size: .9rem;
-      line-height: 1.6;
-    }
-
-    /* Velo */
     #veil {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: #000;
-      opacity: 0;
-      pointer-events: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: #000; opacity: 0; pointer-events: none;
       transition: opacity .35s ease;
     }
-
-    #veil.show {
-      opacity: 1;
-      pointer-events: all;
-    }
+    #veil.show { opacity: 1; pointer-events: all; }
 
     /* HEADER HIDE ON SCROLL */
     .search-wrap,
     .filters {
-      transition: opacity .3s ease, max-height .35s cubic-bezier(0.4,0,0.2,1), margin .35s ease;
+      transition: opacity .3s ease, max-height .35s cubic-bezier(0.4,0,0.2,1), margin .35s ease, padding .35s ease;
       overflow: hidden;
       max-height: 200px;
       opacity: 1;
     }
     .header.scrolled .search-wrap,
     .header.scrolled .filters {
-      max-height: 0;
-      opacity: 0;
-      margin-bottom: 0;
+      max-height: 0 !important;
+      opacity: 0 !important;
+      margin-bottom: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
     }
 
-    @keyframes blink {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: .2
-      }
-    }
-
-    @keyframes float-small {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-6px);
-      }
-    }
-
-    @keyframes card-in {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    @keyframes blink { 0%, 100% { opacity: 1 } 50% { opacity: .2 } }
+    @keyframes card-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 
@@ -615,10 +480,9 @@
           <p>Especies en riesgo · México</p>
         </div>
       </div>
-
     </div>
 
-    <!-- Buscador + Filtros (estáticos, se van con el scroll) -->
+    <!-- Buscador + Filtros -->
     <div class="search-filters-static">
       <div class="search-wrap">
         <span class="search-ico">🔍</span>
@@ -626,13 +490,7 @@
           autocorrect="off" spellcheck="false" />
       </div>
       <div class="filters">
-        <button class="filter-btn active" data-filter="all">Todas</button>
-        <button class="filter-btn fp"  data-filter="P" >● P</button>
-        <button class="filter-btn fa"  data-filter="A" >● A</button>
-        <button class="filter-btn fpr" data-filter="Pr">● Pr</button>
-        <button class="filter-btn fcr" data-filter="CR">● CR</button>
-        <button class="filter-btn fvu" data-filter="VU">● VU</button>
-        <button class="filter-btn flc" data-filter="LC">● LC</button>
+        <!-- Los botones dinámicos se inyectarán aquí -->
       </div>
     </div>
 
@@ -652,44 +510,73 @@
 
   <script>
     const COLS = {
-      // NOM-059-SEMARNAT-2010
-      "P":  { color: "#B71C1C", cls: "s-P",  label: "P — En Peligro" },
+      "P":  { color: "#B71C1C", cls: "s-P",  label: "P — En Peligro de Extinción" },
       "A":  { color: "#E65100", cls: "s-A",  label: "A — Amenazada"  },
       "Pr": { color: "#1B5E20", cls: "s-Pr", label: "Pr — Protección Especial" },
-      // UICN
       "CR": { color: "#880E4F", cls: "s-CR", label: "CR — En Peligro Crítico" },
       "VU": { color: "#F57F17", cls: "s-VU", label: "VU — Vulnerable" },
       "LC": { color: "#37474F", cls: "s-LC", label: "LC — Preocupación Menor" },
     };
 
-    let currentFilter = "all";
+    const CATALOG_STATE_KEYS = {
+      filter: 'catalogFilter',
+      scroll: 'catalogScroll',
+      inicio: 'catalogInicio',
+    };
+    const VALID_FILTERS = new Set(["all", "P", "A", "Pr", "CR", "VU", "LC"]);
+
+    let currentFilter = sessionStorage.getItem(CATALOG_STATE_KEYS.filter) || "all";
+    if (!VALID_FILTERS.has(currentFilter)) currentFilter = "all";
     let currentSearch = "";
 
-    /** Comparación sin distinguir mayúsculas ni acentos (águila ≈ aguila). */
-    function sinAcentos(str) {
-      return String(str)
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
+    const FILTERS_HTML = `
+      <button class="filter-btn all" data-filter="all">Todas</button>
+      <button class="filter-btn fp" data-filter="P">En Peligro de Extinción</button>
+      <button class="filter-btn fa" data-filter="A">Amenazada</button>
+      <button class="filter-btn fpr" data-filter="Pr">Sujeta a Protección Especial</button>
+      <button class="filter-btn fcr" data-filter="CR">En Peligro Crítico</button>
+      <button class="filter-btn fvu" data-filter="VU">Vulnerable</button>
+      <button class="filter-btn flc" data-filter="LC">Preocupación Menor</button>
+    `;
+
+    function guardarEstadoCatalogo() {
+      sessionStorage.setItem(CATALOG_STATE_KEYS.filter, currentFilter);
+      const page = document.getElementById('page');
+      if (page) sessionStorage.setItem(CATALOG_STATE_KEYS.scroll, String(page.scrollTop));
     }
 
-    /** Normaliza texto de búsqueda (nombres comunes y científicos). */
+    function sincronizarFiltroActivo() {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === currentFilter);
+      });
+    }
+
+    function inicializarFiltros() {
+      const filters = document.querySelector('.filters');
+      if (filters) filters.innerHTML = FILTERS_HTML;
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentFilter = btn.dataset.filter;
+          sessionStorage.setItem(CATALOG_STATE_KEYS.filter, currentFilter);
+          sincronizarFiltroActivo();
+          render();
+        });
+      });
+
+      sincronizarFiltroActivo();
+    }
+
+    function sinAcentos(str) {
+      return String(str).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
     function normalizarTexto(str) {
-      return sinAcentos(str)
-        .replace(/[._]/g, ' ')
-        .replace(/[^a-z0-9\s-]/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
+      return sinAcentos(str).replace(/[._]/g, ' ').replace(/[^a-z0-9\s-]/g, ' ').replace(/\s+/g, ' ').trim();
     }
 
     function textoBusquedaEspecie(e) {
-      return normalizarTexto([
-        e.nombre,
-        e.cient,
-        e.categoria,
-        e.habitat,
-        e.id
-      ].filter(Boolean).join(' '));
+      return normalizarTexto([e.nombre, e.cient, e.categoria, e.habitat, e.id].filter(Boolean).join(' '));
     }
 
     function coincideEspecie(e, q) {
@@ -725,27 +612,21 @@
         const delay = Math.min(i * 0.035, 0.6);
         return `
       <div class="card"
-           onclick="navegar('especie.html?id=${e.id}')"
+           onclick="navegar('especie.html?id=${e.id}&estado=${e.estado}')"
            style="--card-color:${co.color}; animation-delay:${delay}s">
 
-        <!-- Zona imagen -->
         <div class="card-img">
           <span class="card-num">${String(i + 1).padStart(2, '0')}</span>
           <span class="card-status-dot ${co.cls}"></span>
-
           <img
             src="assets/${e.id}.png"
             class="card-animal-img"
             alt="${e.nombre}"
-            onerror="
-              this.style.display='none';
-              this.nextElementSibling.style.display='flex';
-            "
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
           />
           <div class="card-emoji">${e.emoji}</div>
         </div>
 
-        <!-- Info -->
         <div class="card-body">
           <div class="card-nombre">${e.nombre}</div>
           <div class="card-cient">${e.cient}</div>
@@ -755,21 +636,12 @@
       }).join('');
     }
 
-    /* Búsqueda */
     document.getElementById('search').addEventListener('input', e => {
       currentSearch = e.target.value.trim();
       render();
     });
 
-    /* Filtros */
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
-        render();
-      });
-    });
+    inicializarFiltros();
 
     /* Ocultar buscador y filtros al hacer scroll */
     (function(){
@@ -784,29 +656,29 @@
       },{passive:true});
     })();
 
-    /* Renderizar especies inmediatamente para evitar pantalla negra */
     render();
 
-    /* Scroll al cargar: inicio (buscador) o posición guardada */
-    const irInicio = sessionStorage.getItem('catalogInicio');
-    const savedScroll = sessionStorage.getItem('catalogScroll');
+    /* Scroll al cargar */
+    const irInicio = sessionStorage.getItem(CATALOG_STATE_KEYS.inicio);
+    const savedScroll = sessionStorage.getItem(CATALOG_STATE_KEYS.scroll);
     if (irInicio) {
-      sessionStorage.removeItem('catalogInicio');
+      sessionStorage.removeItem(CATALOG_STATE_KEYS.inicio);
       requestAnimationFrame(() => {
         const page = document.getElementById('page');
-        const header = document.querySelector('.header');
         if (page) page.scrollTop = 0;
-        if (header) header.classList.remove('scrolled');
       });
     } else if (savedScroll) {
-      requestAnimationFrame(() => {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
         const page = document.getElementById('page');
-        if (page) page.scrollTop = parseInt(savedScroll, 10);
-        sessionStorage.removeItem('catalogScroll');
-      });
+        const header = document.querySelector('.header');
+        const scrollTop = parseInt(savedScroll, 10);
+        if (page && Number.isFinite(scrollTop)) page.scrollTop = scrollTop;
+        if (header && scrollTop > 30) header.classList.add('scrolled');
+        sessionStorage.removeItem(CATALOG_STATE_KEYS.scroll);
+      }));
     }
 
-    /* Cámara — Diferida ligeramente para no bloquear el renderizado inicial de la UI */
+    /* Cámara */
     setTimeout(async () => {
       try {
         const s = await navigator.mediaDevices.getUserMedia({
@@ -818,12 +690,8 @@
       } catch (e) { }
     }, 50);
 
-    /* Transición al salir */
     function navegar(url) {
-      // Guardar el scroll actual antes de salir
-      const page = document.getElementById('page');
-      if (page) sessionStorage.setItem('catalogScroll', page.scrollTop);
-
+      guardarEstadoCatalogo();
       const v = document.getElementById('veil');
       v.classList.add('show');
       setTimeout(() => window.location.href = url, 360);
@@ -831,5 +699,4 @@
   </script>
 
 </body>
-
 </html>

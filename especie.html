@@ -11,10 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
-<!-- model-viewer para modelos 3D .glb -->
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
-<!-- Base de datos de todas las especies -->
 <script src="especies.js"></script>
 
 <style>
@@ -728,12 +726,10 @@ model-viewer {
 <div id="cam-overlay"></div>
 
 <div id="page">
-  <!-- El contenido se inyecta aquí por JS -->
-</div>
+  </div>
 
 <div id="veil"></div>
 
-<!-- Modal para cargar .glb -->
 <div id="glb-modal">
   <div class="glb-sheet">
     <h3>Modelo 3D</h3>
@@ -752,9 +748,15 @@ model-viewer {
 
 <script>
 const COLS = {
-  "EN PELIGRO CRÍTICO": { A:"#FF1744", B:"#FF6D00", glow:"255,23,68" },
-  "VULNERABLE":         { A:"#7FBF00", B:"#AAEE00", glow:"127,191,0" },
-  "AMENAZADO":          { A:"#00E5FF", B:"#00BFA5", glow:"0,229,255" },
+  "P":                  { A:"#B71C1C", B:"#FF8A80", glow:"183,28,28" },
+  "A":                  { A:"#E65100", B:"#FFB74D", glow:"230,81,0" },
+  "Pr":                 { A:"#1B5E20", B:"#81C784", glow:"27,94,32" },
+  "CR":                 { A:"#880E4F", B:"#F48FB1", glow:"136,14,79" },
+  "VU":                 { A:"#F57F17", B:"#FFF59D", glow:"245,127,23" },
+  "LC":                 { A:"#37474F", B:"#B0BEC5", glow:"55,71,79" },
+  "EN PELIGRO CRÍTICO": { A:"#880E4F", B:"#F48FB1", glow:"136,14,79" },
+  "VULNERABLE":         { A:"#F57F17", B:"#FFF59D", glow:"245,127,23" },
+  "AMENAZADO":          { A:"#E65100", B:"#FFB74D", glow:"230,81,0" }
 };
 
 const params = new URLSearchParams(window.location.search);
@@ -767,6 +769,7 @@ let modelViewer = null;
 let currentGlbUrl = null;
 
 function setColors(estado) {
+  /* ── AQUÍ SE ASIGNA EL COLOR DINÁMICO DIRECTAMENTE DESDE TU OBJETO COLS CON LAS 6 CATEGORÍAS ── */
   const co = COLS[estado] || COLS["VULNERABLE"];
   const R = document.documentElement;
   R.style.setProperty('--A', co.A);
@@ -852,17 +855,14 @@ function explorarHTML() {
 
 /* ── Render HTML ── */
 page.innerHTML = `
-  <!-- Botón atrás -->
   <div class="btn-back" onclick="navegar('catalogo.html')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M19 12H5M12 19l-7-7 7-7"/>
     </svg>
   </div>
 
-  <!-- Zona visor holográfico -->
   <div id="viewer-zone">
     <div class="holo-wrap">
-      <!-- Imagen holográfica del animal -->
       <img
         src="assets/${EE.id}.png"
         class="holo-animal"
@@ -872,14 +872,12 @@ page.innerHTML = `
           document.getElementById('emoji-display').style.display='flex';
         "
       >
-      <!-- Emoji fallback cuando no hay imagen -->
       <div class="emoji-fallback" id="emoji-display">
         ${EE.emoji}
       </div>
     </div>
   </div>
 
-  <!-- Panel info -->
   <div id="info-panel">
 
     <div class="sp-pill">${EE.estado}</div>
@@ -889,7 +887,6 @@ page.innerHTML = `
       <span class="sp-cat">${EE.categoria}</span>
     </div>
 
-    <!-- KPIs -->
     <div class="kpis">
       <div class="kpi habitat-kpi">
         <div class="kpi-ico-wrap green">🌿</div>
@@ -914,7 +911,6 @@ page.innerHTML = `
       </div>
     </div>
 
-    <!-- Tabs -->
     <div class="tab-row">
       <button class="tab-btn active" data-tab="desc">
         <span class="tab-ico">
@@ -942,7 +938,6 @@ page.innerHTML = `
       </button>
     </div>
 
-    <!-- Tab: descripción -->
     <div class="tab-section visible" id="tab-desc">
       <div class="content-card">
         <div class="desc-letter">${EE.nombre.charAt(0)}</div>
@@ -951,7 +946,6 @@ page.innerHTML = `
       ${explorarHTML()}
     </div>
 
-    <!-- Tab: amenazas -->
     <div class="tab-section" id="tab-amenazas">
       <div class="content-card">
         ${EE.amenazas.map((a,i) => `
@@ -963,7 +957,6 @@ page.innerHTML = `
       ${explorarHTML()}
     </div>
 
-    <!-- Tab: datos -->
     <div class="tab-section" id="tab-datos">
       <div class="facts">
         ${EE.curiosidades.map(c => `
@@ -975,8 +968,7 @@ page.innerHTML = `
       ${explorarHTML()}
     </div>
 
-  </div><!-- /info-panel -->
-`;
+  </div>`;
 
 /* ── Tabs ── */
 document.querySelectorAll('.tab-btn').forEach(btn => {
