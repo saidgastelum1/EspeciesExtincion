@@ -39,7 +39,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Ambient Technical Grid */
         .grid-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -50,7 +49,6 @@
             z-index: -1;
         }
 
-        /* Responsive Outer Frame */
         .outer-frame {
             position: fixed;
             top: 15px; left: 15px; right: 15px; bottom: 15px;
@@ -68,13 +66,11 @@
             }
         }
 
-        /* High Visibility Title Style */
         .title-neon {
             color: #FF9500;
             text-shadow: 0 0 10px rgba(255, 149, 0, 0.3);
         }
 
-        /* Solid Orange Button */
         .btn-solid {
             background-color: #FF9500;
             box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
@@ -93,7 +89,6 @@
             50% { transform: translateY(-15px); }
         }
 
-        /* Viewport safety padding */
         main {
             min-height: 100vh;
             min-height: 100dvh;
@@ -144,18 +139,16 @@
     <div class="grid-overlay"></div>
     <div class="outer-frame"></div>
 
-    <!-- SECCIÓN DE LOGOS OPTIMIZADA (MÁXIMO RESALTE Y DISTRIBUCIÓN EQUILIBRADA) -->
+    <!-- SECCIÓN DE LOGOS OPTIMIZADA -->
     <div class="absolute top-9 md:top-14 left-0 w-full flex flex-col items-center gap-3 md:gap-5 z-20 px-4">
         
-        <!-- Contenedor con ancho máximo del 82% para asegurar los laterales libres en negro -->
         <div class="w-full max-w-[82%] sm:max-w-[75%] md:max-w-2xl lg:max-w-4xl flex flex-col items-center gap-3 md:gap-5">
             
-            <!-- Fila Superior: Logo Agencia -->
+            <!-- Logo Agencia -->
             <div class="flex justify-center w-full max-w-[320px] sm:max-w-[360px] md:max-w-md lg:max-w-lg">
                 <img src="img/logo-agencia-digital.png" alt="Agencia Digital" class="w-full h-auto max-h-[52px] sm:max-h-[58px] md:max-h-[72px] lg:max-h-[80px] object-contain filter brightness-110 contrast-105 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
             </div>
             
-            <!-- Fila Inferior: Aliados y Museos (Separación controlada sin tocar orillas) -->
             <div class="flex justify-between items-center w-full gap-2 md:gap-12">
                 <img src="img/logo-much.png" alt="Logo 1" class="h-6 sm:h-7 md:h-10 lg:h-12 object-contain filter brightness-110 contrast-105 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
                 <img src="img/logo-planetario.png" alt="Logo 2" class="h-6 sm:h-7 md:h-10 lg:h-12 object-contain filter brightness-110 contrast-105 drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
@@ -198,7 +191,7 @@
             </div>
         </div>
 
-        <!-- Bloque Derecho: Imagen del Jaguar -->
+        <!-- Imagen del Jaguar -->
         <div class="flex-none md:flex-1 flex justify-center items-center animate__animated animate__fadeInRight mt-2 md:mt-0">
             <div class="emoji-float select-none cursor-default">
                 <img src="img/jaguar.png" alt="Jaguar Real" class="w-60 sm:w-72 md:w-96 lg:w-[34rem] object-contain drop-shadow-[0_0_55px_rgba(255,149,0,0.35)]">
@@ -207,7 +200,6 @@
 
     </main>
 
-    <!-- JavaScript para asegurar el comportamiento estricto del bloqueo de orientación -->
     <script>
         function checkOrientation() {
             const lockScreen = document.getElementById('landscape-lock');
