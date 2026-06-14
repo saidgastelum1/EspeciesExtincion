@@ -74,7 +74,7 @@
       display: none;
     }
 
-    /* ── HEADER ── */
+    /*HEADER*/
     .header {
       position: sticky;
       top: 0;
@@ -83,7 +83,7 @@
       background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
     }
 
-    /* ── SEARCH + FILTERS (static, scroll with page) ── */
+    /*SEARCH + FILTERS*/
     .search-filters-static {
       padding: 0;
       width: 100%;
@@ -122,7 +122,7 @@
       margin-top: 4px;
     }
 
-    /* Botón back premium */
+    /* Botón */
     .btn-back {
       display: flex;
       align-items: center;
@@ -213,18 +213,18 @@
       background: rgba(0, 0, 0, 0.80);
     }
 
-    /* ── SCROLL PARA MÓVILES ── */
+    /*SCROLL PARA MÓVILES*/
     .filters {
       width: 100%;
-      overflow-x: auto !important; /* Fuerza el scroll horizontal */
+      overflow-x: auto !important; /* scroll horizontal */
       overflow-y: hidden;
       white-space: nowrap;
-      padding: 6px 14px 14px 14px; /* Relleno lateral para alinearse con los elementos */
+      padding: 6px 14px 14px 14px;
       display: flex;
       gap: 8px;
       align-items: center;
-      -webkit-overflow-scrolling: touch !important; /* Scroll con inercia nativo en iOS/Android */
-      touch-action: pan-x; /* Le dice al navegador que este elemento se mueve de lado a lado */
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-x;
       scrollbar-width: none;
     }
 
@@ -318,7 +318,7 @@
       .grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
     }
 
-    /* ── CARD ── */
+    /*CARD*/
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -490,11 +490,10 @@
           autocorrect="off" spellcheck="false" />
       </div>
       <div class="filters">
-        <!-- Los botones dinámicos se inyectarán aquí -->
+
       </div>
     </div>
 
-    <!-- Contador -->
     <div class="results-count">
       <div class="results-count-inner">
         <span id="count">0</span> especies encontradas
