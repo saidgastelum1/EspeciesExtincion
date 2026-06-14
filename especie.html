@@ -265,9 +265,10 @@ model-viewer {
 }
 .sp-cient {
   display: block;
-  font-style: italic; font-weight: 300;
-  font-size: .86rem; color: rgba(var(--glow), 0.95);
-  margin-bottom: 2px;
+  font-style: italic; font-weight: 600;
+  font-size: 1.15rem; color: #fff;
+  text-shadow: 0 0 14px rgba(var(--glow), 0.9), 0 2px 6px rgba(0,0,0,0.8);
+  margin-bottom: 4px;
 }
 
 /* Categoría */
@@ -501,8 +502,10 @@ model-viewer {
 
 .sec-label {
   font-family: 'Share Tech Mono', monospace;
-  font-size: .5rem; letter-spacing: .18em; text-transform: uppercase;
+  font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+  font-weight: 700;
   color: var(--A); margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(var(--glow), 0.5);
   display: flex; align-items: center; gap: 8px;
 }
 .sec-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
@@ -566,7 +569,7 @@ model-viewer {
 .other-nom {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
-  font-size: .58rem; letter-spacing: .02em;
+  font-size: .68rem; letter-spacing: .02em;
   text-transform: uppercase; line-height: 1.2;
   color: #fff;
   text-shadow: 0 1px 8px rgba(0,0,0,0.85);
@@ -748,11 +751,11 @@ model-viewer {
 <script>
 const COLS = {
   "P":                  { A:"#B71C1C", B:"#FF8A80", glow:"183,28,28" },
-  "A":                  { A:"#E65100", B:"#FFB74D", glow:"230,81,0" },
+  "A":                  { A:"#F9A825", B:"#FFF176", glow:"249,168,37" },
   "Pr":                 { A:"#1B5E20", B:"#81C784", glow:"27,94,32" },
   "CR":                 { A:"#880E4F", B:"#F48FB1", glow:"136,14,79" },
-  "VU":                 { A:"#F57F17", B:"#FFF59D", glow:"245,127,23" },
-  "LC":                 { A:"#37474F", B:"#B0BEC5", glow:"55,71,79" },
+  "VU":                 { A:"#E65100", B:"#FFB74D", glow:"230,81,0" },
+  "LC":                 { A:"#1565C0", B:"#90CAF9", glow:"21,101,192" },
   "EN PELIGRO CRÍTICO": { A:"#880E4F", B:"#F48FB1", glow:"136,14,79" },
   "VULNERABLE":         { A:"#F57F17", B:"#FFF59D", glow:"245,127,23" },
   "AMENAZADO":          { A:"#E65100", B:"#FFB74D", glow:"230,81,0" }
@@ -879,7 +882,7 @@ page.innerHTML = `
 
   <div id="info-panel">
 
-    <div class="sp-pill">${EE.estado}</div>
+    <div class="sp-pill">${({"P":"P — En Peligro","A":"A — Amenazada","Pr":"Pr — Protección Especial","CR":"CR — En Peligro Crítico","VU":"VU — Vulnerable","LC":"LC — Preocupación Menor"})[EE.estado] || EE.estado}</div>
     <div class="sp-nombre">${EE.nombre}</div>
     <div class="sp-cient-block">
       <span class="sp-cient">${EE.cient}</span>

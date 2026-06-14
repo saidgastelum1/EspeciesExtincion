@@ -31,22 +31,22 @@ const ESPECIES = [
     cient: "Urobatis concentricus",
     estado: "LC",
     categoria: "Pez cartilaginoso • Raya",
-    habitat: "Golfo de California, fondos rocosos",
+    habitat: "Pacífico mexicano, fondos rocosos",
     poblacion: "Reducida",
     tamaño: "Hasta 58.4 cm",
     peso: "Hasta 2 kg",
     emoji: "🐟",
     sonido: "oceano",
-    desc: "La raya redonda de arrecife es una especie endémica del Golfo de California. Habita fondos rocosos y arrecifes someros, donde se camufla perfectamente con el sustrato. Su disco circular presenta un patrón de manchas concéntricas que le da nombre. Es bentónica y nocturna, y se alimenta de crustáceos, moluscos y gusanos poliquetos.",
+    desc: "La raya redonda de arrecife es una especie endémica del Pacífico mexicano, hallada desde Baja California hasta Nayarit. Habita fondos rocosos y arrecifes someros, donde se camufla perfectamente con el sustrato. Su disco circular presenta un patrón de manchas concéntricas que le da nombre. Es bentónica y nocturna, y se alimenta de crustáceos, moluscos y gusanos poliquetos.",
     amenazas: [
       "Captura incidental en redes de arrastre y palangres de fondo.",
       "Destrucción de arrecifes rocosos por actividades portuarias y turísticas.",
-      "Endemismo restringido al Golfo de California que limita su capacidad de recuperación."
+      "Endemismo restringido al Pacífico mexicano que limita su capacidad de recuperación."
     ],
     curiosidades: [
-      { t: "Patrón único", txt: "Sus manchas concéntricas en el disco son únicas entre las rayas del Golfo de California y sirven de camuflaje sobre fondos de piedra y arena." },
+      { t: "Patrón único", txt: "Sus manchas concéntricas en el disco son únicas entre las rayas del Pacífico y sirven de camuflaje sobre fondos de piedra y arena." },
       { t: "Aguijón venenoso", txt: "Posee una espina caudal con veneno que usa como defensa; puede causar heridas dolorosas pero raramente son mortales para humanos." },
-      { t: "Solo en México", txt: "Es endémica exclusiva del Golfo de California, lo que la hace especialmente vulnerable a la sobrepesca regional." }
+      { t: "Solo en México", txt: "Es endémica exclusiva de aguas mexicanas del Pacífico, lo que la hace especialmente vulnerable a la sobrepesca regional." }
     ]
   },
   {
@@ -81,8 +81,8 @@ const ESPECIES = [
     categoria: "Mamífero • Cetáceo",
     habitat: "Océanos del mundo, costas mexicanas",
     poblacion: "5,000 – 15,000 individuos",
-    tamaño: "24 – 27 m",
-    peso: "100 – 120 t",
+    tamaño: "24 – 33 m",
+    peso: "100 – 200 t",
     emoji: "🐋",
     sonido: "oceano",
     desc: "La ballena azul es el animal más grande que ha existido sobre la Tierra. En aguas mexicanas se avista principalmente en el Pacífico, frente a Baja California, donde acude a alimentarse de kril. Su corazón pesa aproximadamente 180 kg. A pesar de su tamaño monumental, se alimenta de pequeños crustáceos que filtra con sus barbas.",
@@ -93,7 +93,7 @@ const ESPECIES = [
       "Cambio climático que reduce las poblaciones de kril, su principal alimento."
     ],
     curiosidades: [
-      { t: "En lugar de dientes", txt: "En lugar de dientes tiene de 540 a 790 barbas que son como peines que le ayudan a filtrar el alimento ." },
+      { t: "El ser más grande", txt: "Con hasta 33 m de longitud y 200 toneladas, supera en masa a cualquier dinosaurio conocido, incluido el Argentinosaurus." },
       { t: "Latidos del Corazón", txt: "Va de 2 latidos, cuando se alimenta hasta 37 por minuto cuando hace el esfuerzo de salir a respirar." },
       { t: "Canto a larga distancia", txt: "Emite vocalizaciones a frecuencias infrasónicas que pueden viajar miles de kilómetros bajo el agua." }
     ]
@@ -104,7 +104,7 @@ const ESPECIES = [
     cient: "Ortalis wagleri",
     estado: "LC",
     categoria: "Ave • Cracidae",
-    habitat: "Bosque tropical seco",
+    habitat: "Bosque tropical seco del noreste de México",
     poblacion: "Reducida",
     tamaño: "48 – 58 cm",
     peso: "430 – 600 g",
@@ -119,7 +119,7 @@ const ESPECIES = [
     curiosidades: [
       { t: "Coro matutino", txt: "Al amanecer, grupos cantan simultáneamente produciendo un coro ensordecedor que puede escucharse a kilómetros de distancia." },
       { t: "Árbol frutal viviente", txt: "Dispersa semillas de frutos tropicales a través de sus excrementos, cumpliendo un papel clave en la regeneración del bosque." },
-      { t: "Endémica del noroeste", txt: "Solo existe en la vertiente pacífica mexicana desde el sur de Sinaloa, en uno de los ecosistemas más deforestados del país." }
+      { t: "Endémica del noroeste", txt: "Solo existe en la vertiente pacífica mexicana desde el sur de Sinaloa hasta Colima, en uno de los ecosistemas más deforestados del país." }
     ]
   },
   {
@@ -128,20 +128,21 @@ const ESPECIES = [
     cient: "Passerina leclancherii",
     estado: "LC",
     categoria: "Ave • Cardinalidae",
-    habitat: "Oeste de México, Tonalá y Arriaga",
+    habitat: "Bosque tropical seco, costas de México",
     poblacion: "Reducida",
     tamaño: "11 – 12 cm",
     peso: "11 – 14 g",
     emoji: "🐦",
     sonido: "selva",
-    desc: "El colorín pecho naranja es un ave endémica de llamativa coloración. El macho luce plumaje azul brillante con pecho y vientre naranja intenso, mientras la hembra es parda. Se distribuye en el oeste de México, se puede encontrar en la zona de Tonalá y Arriaga en Chiapas. Su canto melodioso y sus colores lo han hecho víctima del comercio ilegal de aves.",
+    desc: "El colorín mexicano es un ave endémica de llamativa coloración. El macho luce plumaje azul brillante con pecho y vientre naranja intenso, mientras la hembra es parda. Habita en bosques tropicales secos y matorrales del Pacífico mexicano. Su canto melodioso y sus colores lo han hecho víctima del comercio ilegal de aves.",
     amenazas: [
-      "Captura ilegal para el comercio de aves de jaula.",
-      "Destrucción del hábitat.",
+      "Captura ilegal para el comercio de aves de jaula, principal amenaza.",
+      "Destrucción del bosque tropical seco para usos agrícolas.",
+      "Fragmentación del hábitat que aísla poblaciones reproductoras."
     ],
     curiosidades: [
       { t: "Colores llamativos", txt: "El macho combina azul ultramarino, naranja vivo y verde olivo en un plumaje considerado entre los más coloridos de las aves mexicanas." },
-      { t: "Solo en México", txt: "Es endémico exclusivo de México, principalmente en el oeste del país." },
+      { t: "Solo en México", txt: "Es endémico exclusivo de México, principalmente en Jalisco, Colima, Michoacán, Guerrero y Oaxaca en la vertiente del Pacífico." },
       { t: "Víctima del tráfico", txt: "Su belleza lo convierte en blanco de capturadores ilegales; miles de individuos son extraídos anualmente de la naturaleza." }
     ]
   },
@@ -181,9 +182,9 @@ const ESPECIES = [
     peso: "20 – 60 g",
     emoji: "🐛",
     sonido: "selva",
-    desc: "La cecilia oaxaqueña es un anfibio sin patas ni cola visible, vive enterrada en suelos húmedos y hojarasca de bosques tropicales. Es un depredador activo de lombrices, larvas de insectos y pequeños invertebrados. Su piel segmentada la hace parecida a una lombriz gigante, aunque son organismos totalmente distintos.",
+    desc: "La cecilia oaxaqueña es un anfibio vermiforme endémico de Oaxaca. Sin patas ni cola visible, vive enterrada en suelos húmedos y hojarasca de bosques tropicales. Es un depredador activo de lombrices, larvas de insectos y pequeños invertebrados. Su piel segmentada la hace parecida a una lombriz gigante, aunque son organismos totalmente distintos.",
     amenazas: [
-      "Deforestación y pérdida de suelos húmedos.",
+      "Deforestación y pérdida de suelos húmedos en Oaxaca.",
       "Uso de agroquímicos que eliminan sus presas y contaminan el suelo.",
       "Desconocimiento científico: es tan poco estudiada que su estado real es incierto."
     ],
@@ -205,7 +206,7 @@ const ESPECIES = [
     peso: "1 – 2.5 kg",
     emoji: "🦎",
     sonido: "selva",
-    desc: "La iguana espinosa del Golfo es una lagartija robusta endémica de la planicie costera del Golfo de México en Veracruz, Chiapas, Oaxaca y Tamaulipas. Su cola cubierta de escamas espinosas en anillos alternos es su característica más distintiva. Principalmente herbívora de adulta, consume hojas, flores y frutos. Es especie importante en la dieta de comunidades indígenas y mestizas.",
+    desc: "La iguana espinosa del Golfo es una lagartija robusta endémica de la planicie costera del Golfo de México en Veracruz y Tamaulipas. Su cola cubierta de escamas espinosas en anillos alternos es su característica más distintiva. Principalmente herbívora de adulta, consume hojas, flores y frutos. Es especie importante en la dieta de comunidades indígenas y mestizas.",
     amenazas: [
       "Cacería intensa para consumo humano en comunidades rurales.",
       "Pérdida del hábitat por urbanización costera y agricultura.",
@@ -223,14 +224,15 @@ const ESPECIES = [
     cient: "Bipes biporus",
     estado: "Pr",
     categoria: "Reptil • Lagartija",
-    habitat: "Península de Baja California",
+    habitat: "Tierras bajas tropicales del SE México",
     poblacion: "Desconocida",
     tamaño: "8 – 14 cm",
     peso: "3 – 8 g",
     emoji: "🦎",
     sonido: "selva",
-    desc: "La lagartija topo cinco dedos es una lagartija de cuerpo esbelto y movimientos serpentinos, excavadoras, construyen túneles y regulan su temperatura moviéndose bajo la tierra, habita entre la hojarasca y suelos sueltos. Sus extremidades reducidas le permiten moverse entre la vegetación densa casi como una serpiente. Se alimenta de pequeños insectos, termitas y arañas. Su coloración dorsal brillante presenta un patrón de líneas claras.",
+    desc: "La lagartija topo cinco dedos es una lagartija de cuerpo esbelto y movimientos serpentinos que habita entre la hojarasca y suelos sueltos del sureste mexicano. Sus extremidades reducidas le permiten moverse entre la vegetación densa casi como una serpiente. Se alimenta de pequeños insectos, termitas y arañas. Su coloración dorsal brillante presenta un patrón de líneas claras.",
     amenazas: [
+      "Pérdida de la selva húmeda en el sureste de México.",
       "Eliminación de la hojarasca del suelo en zonas perturbadas.",
       "Escaso conocimiento científico sobre sus poblaciones."
     ],
@@ -271,12 +273,12 @@ const ESPECIES = [
     estado: "Pr",
     categoria: "Mamífero • Carnívoro",
     habitat: "Bosques y matorrales de México",
-    poblacion: "Reducida",
+    poblacion: "Estable pero fragmentada",
     tamaño: "30 – 38 cm",
     peso: "0.5 – 1.8 kg",
     emoji: "🦨",
     sonido: "selva",
-    desc: "El zorrillo rayado se alimenta de pequeños mamíferos como roedores, huevos e insectos; controlando sus poblaciones. Cuando se sienten amenazados tratan de verse más grandes, gruñen y golpean el suelo con sus patas y si todo falla se defienden levantando la cola y liberando un almizcle muy irritante de aroma peculiar.",
+    desc: "El zorrillo rayado o mofeta de cola larga es un mamífero omnívoro distribuido desde el sur de Estados Unidos hasta Nicaragua. Sus rayas blancas sobre fondo negro son una advertencia para los depredadores. Cuando se siente amenazado, expulsa un líquido maloliente desde glándulas anales que puede alcanzar hasta 4 metros.",
     amenazas: [
       "Atropellamiento en carreteras, una de las principales causas de mortalidad.",
       "Persecución y envenenamiento en zonas rurales por creer que transmite rabia.",
@@ -324,7 +326,7 @@ const ESPECIES = [
     peso: "60 – 200 g",
     emoji: "🦎",
     sonido: "oceano",
-    desc: "El ajolote del altiplano es una salamandra acuática endémica de México que mantiene sus características larvarias toda la vida conservando branquias externas incluso en la edad adulta. Se distribuye en estados cercanos a EU hasta el centro de México. Es pariente cercano del famoso ajolote de Xochimilco y enfrenta una grave crisis por la degradación de su hábitat acuático.",
+    desc: "El ajolote del altiplano es una salamandra acuática endémica de México que mantiene sus características larvarias toda la vida —neotenia— conservando branquias externas incluso en la edad adulta. Habita en lagos y canales del altiplano central. Es pariente cercano del famoso ajolote de Xochimilco y enfrenta una grave crisis por la degradación de su hábitat acuático.",
     amenazas: [
       "Contaminación de lagos y canales del altiplano por descargas urbanas e industriales.",
       "Introducción de peces exóticos (carpas, tilapia) que compiten y depredan larvas.",
@@ -390,13 +392,13 @@ const ESPECIES = [
     cient: "Exerodonta juanitae",
     estado: "A",
     categoria: "Anfibio • Anuro",
-    habitat: "Gerrero y Oaxaca",
+    habitat: "Bosques tropicales del Pacífico mexicano",
     poblacion: "Reducida",
     tamaño: "40 – 65 mm",
     peso: "8 – 20 g",
     emoji: "🐸",
     sonido: "selva",
-    desc: "La rana de árbol de Juanita habita en bosques tropicales de desde Oaxaaca hasta Guerrero. Nocturna y excelente trepadora, posee almohadillas adhesivas en los dedos. Se reproduce en charcos temporales durante la temporada de lluvias. Su canto es un coro nocturno característico del trópico.",
+    desc: "La rana de árbol de Juanita habita en bosques tropicales de la costa del Pacífico mexicano desde Sonora hasta Guerrero. Nocturna y excelente trepadora, posee almohadillas adhesivas en los dedos. Se reproduce en charcos temporales durante la temporada de lluvias. Su canto es un coro nocturno característico del trópico.",
     amenazas: [
       "Pérdida de charcos y lagunas temporales donde se reproduce.",
       "Deforestación del bosque tropical seco y subhúmedo.",
@@ -414,7 +416,7 @@ const ESPECIES = [
     cient: "Bolitoglossa alberchi",
     estado: "VU",
     categoria: "Anfibio • Salamandra",
-    habitat: "Sierra de los Tuxtlas, Veracruz, Oaxaca y Chiapas",
+    habitat: "Sierra de los Tuxtlas, Veracruz",
     poblacion: "< 500 estimados",
     tamaño: "7 – 12 cm",
     peso: "2 – 6 g",
@@ -438,16 +440,16 @@ const ESPECIES = [
     cient: "Passerina rositae",
     estado: "A",
     categoria: "Ave • Cardinalidae",
-    habitat: "Cerca de las costas de Oaxaca y Chiapas",
+    habitat: "Matorrales áridos del norte de México",
     poblacion: "Reducida",
     tamaño: "11 – 13 cm",
     peso: "11 – 16 g",
     emoji: "🐦",
     sonido: "viento",
-    desc: "El colorín morado es un pequeño pájaro cantor con el macho de un vistoso color azul con tintes morados y rosados. Es migratorio parcial, pasando el invierno en zonas más cálidas.",
+    desc: "El colorín morado es un pequeño pájaro cantor con el macho de un vistoso color azul con tintes morados y rosados. Habita en matorrales espinosos áridos y semiáridos del norte de México. Es migratorio parcial, pasando el invierno en zonas más cálidas.",
     amenazas: [
       "Captura ilegal para el comercio de aves de jaula.",
-      "Pérdida de hábitat por desarrollo turístico en zonas costeras.",
+      "Pérdida de matorral espinoso por agricultura y ganadería.",
       "Colisiones con ventanas y tendidos eléctricos durante migración."
     ],
     curiosidades: [
@@ -468,9 +470,9 @@ const ESPECIES = [
     peso: "N/A",
     emoji: "🍄",
     sonido: "lluvia",
-    desc: "El pajarito de monte es un hongo del género Psilocybe registrado en México. Crece en ambientes húmedos de montaña, asociado a materia orgánica en descomposición del suelo forestal. Como ocurre con muchos hongos silvestres, su distribución real y estado poblacional están poco documentados porque depende de fructificaciones temporales y de registros micológicos especializados.",
+    desc: "El pajarito de monte es un hongo del género Psilocybe registrado en México, no un ave. Crece en ambientes húmedos de montaña, asociado a materia orgánica en descomposición del suelo forestal. Como ocurre con muchos hongos silvestres, su distribución real y estado poblacional están poco documentados porque depende de fructificaciones temporales y de registros micológicos especializados.",
     amenazas: [
-      "Pérdida y degradación de bosques nubosos de la Sierra Madre Oriental.",
+      "Pérdida y degradación de bosques húmedos de montaña.",
       "Alteración de la hojarasca y del microclima del suelo por tala, apertura de caminos y cambio de uso de suelo.",
       "Escasez de información científica sobre su distribución y abundancia."
     ],
@@ -510,13 +512,13 @@ const ESPECIES = [
     cient: "Phocoena sinus",
     estado: "P",
     categoria: "Mamífero • Cetáceo",
-    habitat: "Golfo de México",
+    habitat: "Norte del Golfo de California",
     poblacion: "< 20 individuos",
     tamaño: "1.2 – 1.5 m",
     peso: "30 – 55 kg",
     emoji: "🐬",
     sonido: "oceano",
-    desc: "La vaquita marina es el cetáceo más pequeño y el más amenazado del mundo. Endémica del alto Golfo, esta pequeña marsopa es conocida por los distintivos círculos oscuros alrededor de los ojos. Con menos de 20 individuos confirmados, está al borde de la extinción irreversible.",
+    desc: "La vaquita marina es el cetáceo más pequeño y el más amenazado del mundo. Endémica del extremo norte del Golfo de California, esta pequeña marsopa es conocida por los distintivos círculos oscuros alrededor de los ojos. Con menos de 20 individuos confirmados, está al borde de la extinción irreversible.",
     amenazas: [
       "Enredamiento en redes de pesca ilegales de totoaba, principal causa de muerte.",
       "Pesca con redes de enmalle de cualquier tipo en su área de distribución.",
@@ -531,17 +533,17 @@ const ESPECIES = [
   },
   {
     id: "raton-alfalfar",
-    nombre: "Ratón de alfalfar",
+    nombre: "Ratón de alfalfa",
     cient: "Microtus californicus",
     estado: "P",
     categoria: "Mamífero • Roedor",
-    habitat: "Pastizales y humedales del norte de Baja California",
+    habitat: "Pastizales y humedales herbáceos del norte de Baja California",
     poblacion: "Reducida en México",
     tamaño: "12 – 17 cm",
     peso: "15 – 32 g",
     emoji: "🐭",
     sonido: "viento",
-    desc: "El ratón de alfalfar o Meteoro de California es un roedor herbívoro de cuerpo compacto y cola corta. Su distribución principal está en California. No debe confundirse con el ratón venado, que pertenece a otro género. Habita sitios con pastos densos, herbazales y zonas húmedas con cobertura vegetal baja.",
+    desc: "El ratón de alfalfar o topillo de California es un roedor herbívoro de cuerpo compacto y cola corta. Su distribución principal está en California y el suroeste de Oregón; en México se conoce del norte de Baja California. No debe confundirse con el ratón venado, que pertenece a otro género. Habita sitios con pastos densos, herbazales y zonas húmedas con cobertura vegetal baja.",
     amenazas: [
       "Pérdida y fragmentación de pastizales y humedales del norte de Baja California.",
       "Urbanización y conversión agrícola de valles y zonas ribereñas.",
@@ -583,13 +585,13 @@ const ESPECIES = [
     cient: "Cyanolyca nana",
     estado: "P",
     categoria: "Ave • Corvidae",
-    habitat: "Bosque mesófilo de montaña",
+    habitat: "Bosque mesófilo de montaña, Oaxaca",
     poblacion: "< 1,000 individuos",
     tamaño: "24 – 28 cm",
     peso: "55 – 70 g",
     emoji: "🐦",
     sonido: "selva",
-    desc: "La chara enana es la chara más pequeña de México y una de las aves más amenazadas del país. Endémica de los bosques de niebla desde el noreste de Guanajuato hasta Oaxaca, vive en grupos familiares que se desplazan entre las copas de los árboles. Su hábitat, el bosque mesófilo de montaña, es uno de los ecosistemas más biodiversos y amenazados de México.",
+    desc: "La chara enana es la chara más pequeña de México y una de las aves más amenazadas del país. Endémica de los bosques de niebla de las sierras de Oaxaca, vive en grupos familiares que se desplazan entre las copas de los árboles. Su hábitat, el bosque mesófilo de montaña, es uno de los ecosistemas más biodiversos y amenazados de México.",
     amenazas: [
       "Fragmentación extrema del bosque mesófilo de montaña en Oaxaca.",
       "Solo se conocen tres localidades con poblaciones confirmadas.",
@@ -631,13 +633,13 @@ const ESPECIES = [
     cient: "Tapirus bairdii",
     estado: "P",
     categoria: "Mamífero • Perissodáctilo",
-    habitat: "Selvas húmedas",
+    habitat: "Selvas húmedas del SE de México",
     poblacion: "~5,500 en toda su distribución",
     tamaño: "1.8 – 2.5 m",
     peso: "150 – 300 kg",
     emoji: "🦏",
     sonido: "selva",
-    desc: "El tapir centroamericano es el mamífero terrestre más grande de México y América Central. Pariente lejano de caballos y rinocerontes. Se distribuye en Chiapas, Oaxaca, Yucatán y Tabasco.Es excelente nadador y dispersor de semillas vital para la regeneración forestal.",
+    desc: "El tapir de Baird o danta es el mamífero terrestre más grande de México y América Central. Pariente lejano de caballos y rinocerontes, habita selvas húmedas desde el sureste mexicano hasta Ecuador. Es excelente nadador y dispersor de semillas vital para la regeneración forestal.",
     amenazas: [
       "Cacería furtiva para consumo de su carne en comunidades rurales.",
       "Destrucción acelerada de la selva húmeda en Chiapas, Campeche y Quintana Roo.",
@@ -655,13 +657,13 @@ const ESPECIES = [
     cient: "Romerolagus diazi",
     estado: "P",
     categoria: "Mamífero • Lagomorfo",
-    habitat: "Volcanes y laderas montañosas del centro de México",
+    habitat: "Volcanes del Eje Neovolcánico",
     poblacion: "~1,200 – 1,600 individuos",
     tamaño: "25 – 35 cm",
     peso: "350 – 600 g",
     emoji: "🐰",
     sonido: "viento",
-    desc: "El teporingo es un pequeño conejo endémico de México que solo habita en las laderas volcánicas. Es el conejo con las orejas más cortas y cola menos visible que cualquier otro. Vive en colonias en zacatonales de alta montaña entre 2,800 y 4,200 m de altitud.",
+    desc: "El teporingo o zacatuche es un pequeño conejo endémico de México que solo habita en las laderas volcánicas del Eje Neovolcánico: Popocatépetl, Iztaccíhuatl, Nevado de Toluca y El Pelado. Es el conejo más primitivo de América, con orejas más cortas y cola menos visible que cualquier otro. Vive en colonias en zacatonales de alta montaña entre 2,800 y 4,200 m de altitud.",
     amenazas: [
       "Incendios forestales en los zacatonales donde vive.",
       "Conversión de pastizales de alta montaña para cultivos y pastoreo.",
@@ -681,7 +683,7 @@ const ESPECIES = [
     categoria: "Mamífero • Sirénido",
     habitat: "Costas del Golfo de México",
     poblacion: "~1,000 en México",
-    tamaño: "2.7 – 3.5 m",
+    tamaño: "2.5 – 4.5 m",
     peso: "200 – 600 kg",
     emoji: "🐋",
     sonido: "oceano",
@@ -703,17 +705,17 @@ const ESPECIES = [
     cient: "Geomys tropicalis",
     estado: "A",
     categoria: "Mamífero • Roedor",
-    habitat: "Zona costera del sur de Tamaulipas",
+    habitat: "Tierras bajas tropicales de México",
     poblacion: "Reducida",
     tamaño: "22 – 35 cm",
     peso: "200 – 650 g",
     emoji: "🐹",
     sonido: "selva",
-    desc: "La tuza tropical es un roedor subterráneo de cuerpo robusto con poderosas garras para excavar. Pasa casi toda su vida bajo tierra en extensos sistemas de túneles. Sus bolsas guayeras externas le sirven para transportar alimento al nido.",
+    desc: "La tuza tropical es un roedor subterráneo de cuerpo robusto con poderosas garras para excavar. Habita tierras bajas tropicales desde Veracruz hasta Honduras. Pasa casi toda su vida bajo tierra en extensos sistemas de túneles. Sus bolsas guayeras externas le sirven para transportar alimento al nido.",
     amenazas: [
       "Destrucción del hábitat por expansión agrícola.",
       "Control como plaga en cultivos de caña y hortalizas.",
-      "Fragmentación de su hábitat que aísla poblaciones y reduce el flujo genético."
+      "Reducción de la selva húmeda tropical en su área de distribución."
     ],
     curiosidades: [
       { t: "Excavadora solitaria", txt: "Construye y mantiene sola sistemas de túneles de hasta 100 m de longitud, una hazaña de ingeniería para un animal de 400 gramos." },
@@ -733,7 +735,7 @@ const ESPECIES = [
     peso: "0.8 – 2 kg",
     emoji: "🦎",
     sonido: "selva",
-    desc: "El lagarto escorpión es uno de los únicos dos lagartos venenosos del mundo. Su piel cubierta de escamas redondeadas tipo cuentas le da un aspecto característico. El veneno fluye por los dientes al morder. Habita en bosques tropicales secos del Pacífico mexicano. A pesar de su veneno, prefiere evitar el conflicto.",
+    desc: "El escorpión o lagarto enchaquirado es uno de los únicos dos lagartos venenosos del mundo. Su piel cubierta de escamas redondeadas tipo cuentas le da un aspecto característico. El veneno fluye por los dientes al morder. Habita en bosques tropicales secos del Pacífico mexicano. A pesar de su veneno, prefiere evitar el conflicto.",
     amenazas: [
       "Captura para el comercio ilegal de animales exóticos.",
       "Matanza por temor en comunidades rurales.",
@@ -751,7 +753,7 @@ const ESPECIES = [
     cient: "Alouatta pigra",
     estado: "P",
     categoria: "Mamífero • Primate",
-    habitat: "Selvas húmedas",
+    habitat: "Selvas húmedas del SE de México",
     poblacion: "Reducida",
     tamaño: "50 – 67 cm",
     peso: "6 – 10 kg",
@@ -781,7 +783,7 @@ const ESPECIES = [
     peso: "90 – 130 g",
     emoji: "🐦",
     sonido: "selva",
-    desc: "La chara sinaloense o de Beechey es un córvido que habita el bosque tropical seco de la costa del Pacífico entre Nayarit y Jalisco. De plumaje negro, azul y blanco con marcas faciales contrastantes, es un pájaro inteligente y ruidoso que vive en grupos familiares y almacena semillas como reserva alimentaria.",
+    desc: "La chara de San Blas es un córvido endémico de México que habita el bosque tropical seco de la costa del Pacífico entre Nayarit y Jalisco. De plumaje negro, azul y blanco con marcas faciales contrastantes, es un pájaro inteligente y ruidoso que vive en grupos familiares y almacena semillas como reserva alimentaria.",
     amenazas: [
       "Deforestación del bosque tropical seco en la costa de Nayarit y Jalisco.",
       "Reducción de la cobertura vegetal por expansión turística costera.",
@@ -795,7 +797,7 @@ const ESPECIES = [
   },
   {
     id: "caracol-cuatro-cienegas",
-    nombre: "Caracol de lodo",
+    nombre: "Caracol de Cuatro Ciénegas",
     cient: "Mexipyrgus carranzae",
     estado: "P",
     categoria: "Molusco • Gasterópodo",
@@ -805,7 +807,7 @@ const ESPECIES = [
     peso: "< 1 g",
     emoji: "🐚",
     sonido: "oceano",
-    desc: "El caracol de lodo es un pequeño gasterópodo endémico del sistema de pozas del Valle de Cuatro Ciénegas en Coahuila, uno de los ecosistemas acuáticos más biodiversos de Norteamérica. Estas pozas son relictos de mares antiguos. El caracol está adaptado a las condiciones de alta salinidad y temperatura de estas aguas.",
+    desc: "El caracol de Cuatro Ciénegas es un pequeño gasterópodo endémico del sistema de pozas del Valle de Cuatro Ciénegas en Coahuila, uno de los ecosistemas acuáticos más biodiversos de Norteamérica. Estas pozas son relictos de mares antiguos. El caracol está adaptado a las condiciones de alta salinidad y temperatura de estas aguas.",
     amenazas: [
       "Extracción excesiva de agua subterránea para la agricultura que seca las pozas.",
       "Introducción de peces exóticos como carpas que depredan al caracol.",
@@ -823,15 +825,15 @@ const ESPECIES = [
     cient: "Panthera onca",
     estado: "P",
     categoria: "Mamífero • Félido",
-    habitat: "Vertiente del pacífico y en el Golfo",
-    poblacion: "~4,800",
+    habitat: "Selvas húmedas del SE México",
+    poblacion: "~4,000 en México",
     tamaño: "1.5 – 1.8 m",
     peso: "56 – 96 kg",
     emoji: "🐆",
     sonido: "selva",
-    desc: "El jaguar es el félido más grande de América y el tercero del mundo. Fue sagrado para las civilizaciones mesoamericanas. Es el único gran felino americano capaz de rugir. Ama el agua y nada con facilidad. Es un depredador de cúspide que regula poblaciones de herbívoros.",
+    desc: "El jaguar es el félido más grande de América y el tercero del mundo. Fue sagrado para las civilizaciones mesoamericanas. Habita selvas húmedas y zonas ribereñas del sureste mexicano. Es el único gran felino americano capaz de rugir. Ama el agua y nada con facilidad. Es un depredador de cúspide que regula poblaciones de herbívoros.",
     amenazas: [
-      "Destrucción y fragmentación de hábitat.",
+      "Destrucción y fragmentación de la selva en el sureste de México.",
       "Caza ilegal por conflictos con ganaderos o tráfico de partes.",
       "Aislamiento de poblaciones por carreteras y zonas agropecuarias."
     ],
@@ -847,13 +849,13 @@ const ESPECIES = [
     cient: "Cynomys mexicanus",
     estado: "P",
     categoria: "Mamífero • Roedor",
-    habitat: "Centro-norte de México, Coahuila",
+    habitat: "Pastizales de Coahuila, NL y Tamaulipas",
     poblacion: "~100,000 individuos",
     tamaño: "35 – 42 cm",
     peso: "0.7 – 1.4 kg",
     emoji: "🐿️",
     sonido: "viento",
-    desc: "El perrito de las padreras o perro llanero mexicano es la única especie de perrito de las praderas endémica de México. Habita en colonias llamadas 'pueblos' en pastizales del noreste. Se comunica con un sofisticado sistema de ladridos que incluye información sobre el tamaño, color y velocidad de los depredadores.",
+    desc: "El perrito llanero mexicano es la única especie de perrito de las praderas endémica de México. Habita en colonias llamadas 'pueblos' en pastizales del noreste. Se comunica con un sofisticado sistema de ladridos que incluye información sobre el tamaño, color y velocidad de los depredadores.",
     amenazas: [
       "Fumigación masiva de sus colonias por ganaderos que los consideran plagas.",
       "Conversión de pastizales para agricultura y ganadería intensiva.",
@@ -871,7 +873,7 @@ const ESPECIES = [
     cient: "Caretta caretta",
     estado: "P",
     categoria: "Reptil • Tortuga marina",
-    habitat: "Aguas tropicales y subtropicales del mundo",
+    habitat: "Océano Atlántico y Pacífico",
     poblacion: "~50,000 hembras",
     tamaño: "70 – 95 cm",
     peso: "80 – 200 kg",
@@ -896,17 +898,17 @@ const ESPECIES = [
     cient: "Glaucidium sanchezi",
     estado: "P",
     categoria: "Ave • Strigidae",
-    habitat: "Bosque de niebla de Tamaulipas",
+    habitat: "Bosque mesófilo de Tamaulipas",
     poblacion: "< 2,500 individuos",
     tamaño: "13 – 15 cm",
     peso: "45 – 65 g",
     emoji: "🦉",
     sonido: "selva",
-    desc: "El tecole tamaulipeco es el búho más pequeño y amenazado del noreste de México, endémico de los bosques húmedos de montaña. Se distribuye principalmente en Tamaulipas con algunos registros en Hidalgo y San Luis Potosí. Caza insectos grandes, arañas y pequeños vertebrados con gran efectividad.",
+    desc: "El tecolotito tamaulipeco es el búho más pequeño y amenazado del noreste de México, endémico de los bosques húmedos de montaña de Tamaulipas. Su distribución se limita a la Sierra de Tamaulipas y la Sierra Madre Oriental tamaulipeca. Caza insectos grandes, arañas y pequeños vertebrados con gran efectividad.",
     amenazas: [
-      "Deforestación del bosque de montaña en Tamaulipas.",
-      "Distribución extremadamente restringida.",
-      "Poco estudiado ya que se desconocen aspectos básicos de su biología reproductiva."
+      "Deforestación del bosque mesófilo de montaña en Tamaulipas.",
+      "Distribución extremadamente restringida a dos sierras en un solo estado.",
+      "Poco estudiado: se desconocen aspectos básicos de su biología reproductiva."
     ],
     curiosidades: [
       { t: "Falsos ojos", txt: "Tiene manchas en la nuca que semejan ojos, confundiendo a los depredadores que atacan desde atrás." },
@@ -950,11 +952,11 @@ const ESPECIES = [
     peso: "8 – 18 kg",
     emoji: "🐆",
     sonido: "selva",
-    desc: "El ocelote es un félido mediano de extraordinaria belleza, con un pelaje de manchas y rayas únicas en cada individuo. Se distribuye en México, Sinaloa y Chiapas. Es de hábitos nocturnos y solitario. Excelente trepador y nadador, caza desde pequeños roedores hasta venados pequeños.",
+    desc: "El ocelote es un félido mediano de extraordinaria belleza, con un pelaje de manchas y rayas únicas en cada individuo. Habita desde el sur de Texas hasta Argentina. Es de hábitos nocturnos y solitario. Excelente trepador y nadador, caza desde pequeños roedores hasta venados pequeños.",
     amenazas: [
       "Tráfico ilegal para comercio de pieles y animales vivos.",
       "Fragmentación del hábitat por carreteras y zonas agrícolas.",
-      "Atropellamiento en carreteras en el noreste de México."
+      "Atropellamiento en carreteras en el noreste de México y sur de Texas."
     ],
     curiosidades: [
       { t: "Manchas únicas", txt: "El patrón de manchas de cada ocelote es único y permite identificar individuos en estudios con cámaras trampa." },
@@ -992,13 +994,13 @@ const ESPECIES = [
     cient: "Ateles geoffroyi",
     estado: "P",
     categoria: "Mamífero • Primate",
-    habitat: "Selvas húmedas de México",
+    habitat: "Selvas húmedas del SE México",
     poblacion: "Reducida, fragmentada",
     tamaño: "38 – 55 cm",
     peso: "6 – 9 kg",
     emoji: "🐒",
     sonido: "selva",
-    desc: "El mono araña es uno de los primates más amenazados de México. Su nombre se debe a su aspecto al moverse entre ramas, con extremidades largas y cola prensil que recuerdan a arañas gigantes. Es el primate más ágil de las selvas americanas. Se alimenta principalmente de frutos maduros, siendo dispersor de semillas fundamental. Se distribuye en Oaxaca, CHiapas, Tabasco, Yucatán y Campeche",
+    desc: "El mono araña de Geoffroy es uno de los primates más amenazados de México. Su nombre se debe a su aspecto al moverse entre ramas, con extremidades largas y cola prensil que recuerdan a arañas gigantes. Es el primate más ágil de las selvas americanas. Se alimenta principalmente de frutos maduros, siendo dispersor de semillas fundamental.",
     amenazas: [
       "Deforestación masiva de las selvas húmedas en el sureste mexicano.",
       "Cacería para consumo y captura de crías como mascotas ilegales.",
@@ -1040,7 +1042,7 @@ const ESPECIES = [
     cient: "Harpia harpyja",
     estado: "P",
     categoria: "Ave • Accipitridae",
-    habitat: "Selvas húmedas de México",
+    habitat: "Selvas húmedas del SE de México",
     poblacion: "Muy reducida en México",
     tamaño: "86 – 107 cm",
     peso: "4 – 9 kg",
@@ -1048,7 +1050,7 @@ const ESPECIES = [
     sonido: "selva",
     desc: "El águila arpía es el ave rapaz más poderosa del mundo y la de mayor masa de América. Su disco facial de plumas grises dirige el sonido hacia sus oídos. Las garras del tamaño de las de un oso pardo pueden ejercer una presión de 50 kg por cm². Caza monos, perezosos y otros mamíferos arbóreos en la selva.",
     amenazas: [
-      "Deforestación de la selva húmeda en Chiapas.",
+      "Deforestación de la selva húmeda en Chiapas y la península de Yucatán.",
       "Cacería por ganaderos que la perciben como amenaza al ganado.",
       "Necesita territorios muy grandes de selva continua para sobrevivir."
     ],
@@ -1064,15 +1066,16 @@ const ESPECIES = [
     cient: "Oreophasis derbianus",
     estado: "P",
     categoria: "Ave • Cracidae",
-    habitat: "Sierra Madre de Chiapas y bosques de niebla",
+    habitat: "Selvas húmedas del SE México",
     poblacion: "Reducida",
     tamaño: "82 – 92 cm",
     peso: "3.5 – 4.8 kg",
     emoji: "🦃",
     sonido: "selva",
-    desc: "El pavón es el cracid más grande de México. El macho luce plumaje negro brillante con vientre blanco y una protuberancia nasal amarilla llamativa. Se distribuye en la sierra madre de Chiapas y bosques de niebla. Se alimenta de frutos, semillas y pequeños animales del suelo.",
+    desc: "El pavón o hocofaisán grande es el cracid más grande de México. El macho luce plumaje negro brillante con vientre blanco y una protuberancia nasal amarilla llamativa. Habita en selvas húmedas desde México hasta Ecuador. Se alimenta de frutos, semillas y pequeños animales del suelo.",
     amenazas: [
       "Cacería intensa para consumo; es una de las aves más cazadas de la selva.",
+      "Pérdida de la selva húmeda en Chiapas, Tabasco y Yucatán.",
       "Captura de polluelos para criarlos como aves de traspatio."
     ],
     curiosidades: [
@@ -1087,7 +1090,7 @@ const ESPECIES = [
     cient: "Tetrapleurodon spadiceus",
     estado: "P",
     categoria: "Pez • Petromyzontidae",
-    habitat: "Lago de Chapala en Jalisco y Michoacán",
+    habitat: "Lago de Chapala y ríos afluentes",
     poblacion: "Desconocida, muy reducida",
     tamaño: "15 – 25 cm",
     peso: "10 – 40 g",
@@ -1135,13 +1138,13 @@ const ESPECIES = [
     cient: "Dasyprocta mexicana",
     estado: "CR",
     categoria: "Mamífero • Roedor",
-    habitat: "Bosques tropicales ",
+    habitat: "Bosques tropicales de Veracruz, Oaxaca, Tabasco y Chiapas",
     poblacion: "Desconocida; tendencia decreciente",
     tamaño: "40 – 55 cm",
     peso: "2 – 4 kg",
     emoji: "🐿️",
     sonido: "selva",
-    desc: "El guaqueque mexicano es un roedor endémico del sur de México en los estados de Veracruz, Oaxaca, Tabasco y Chiapas. Su distribución se concentra en tierras bajas tropicales de estos estados. Tiene cuerpo esbelto, patas largas y pelaje oscuro a pardo negruzco. Vive en el suelo de selvas y fragmentos de bosque, donde consume frutos, semillas y otros materiales vegetales.",
+    desc: "El Guaqueque Mexicano es endémico del sur de México. Es uno de los roedores más grandes de México y los adultos pesan entre 2.0 y 4.0 kg. El cuerpo es compacto, con extremidades delgadas y cola apenas visible. El color del dorso es gris oscuro, con una franja de pelos negros, más largos, a lo largo de la línea media; el vientre es de color gris. Su distribución incluye parte de los estados de Veracruz, Oaxaca, Tabasco y Chiapas. En este último, hay una pequeña población en el sur de Tuxtla Gutiérrez, que se estableció a partir de algunos individuos que escaparon de su encierro en el Zoológico Miguel Álvarez del Toro (ZOOMAT).",
     amenazas: [
       "Pérdida y fragmentación de selvas tropicales en Veracruz, Oaxaca, Tabasco y Chiapas por agricultura, ganadería y expansión urbana.",
       "Cacería para consumo local en algunas comunidades rurales.",
@@ -1159,19 +1162,20 @@ const ESPECIES = [
     cient: "Xenospiza baileyi",
     estado: "P",
     categoria: "Ave • Passerellidae",
-    habitat: "Pastizales de alta montaña",
+    habitat: "Bosques secos de Oaxaca",
     poblacion: "< 10,000 individuos",
     tamaño: "13 – 15 cm",
     peso: "17 – 22 g",
     emoji: "🐦",
     sonido: "viento",
-    desc: "El gorrión serrano es una pequeña ave endémica que habita en pastizales de alta montaña. Se alimenta principalmente de semillas de gramíneas e insectos. Es una especie poco estudiada con distribución geográfica muy restringida.",
+    desc: "El gorrión oaxaqueño es una pequeña ave endémica del sur de Oaxaca que habita en matorrales y bosques secos de montaña. Se alimenta principalmente de semillas de gramíneas e insectos. Es una especie poco estudiada con distribución geográfica muy restringida.",
     amenazas: [
-      "Pérdida de pastizales por expansión de agricultura y ganadería.",
+      "Pérdida de bosque seco y matorral en las sierras de Oaxaca.",
       "Cambio de uso de suelo para milpa y pastoreo.",
       "Distribución muy limitada que la hace vulnerable a perturbaciones locales."
     ],
     curiosidades: [
+      { t: "Endémico de Oaxaca", txt: "Toda su distribución mundial se limita al estado de Oaxaca, siendo una de las aves más localizadas geográficamente de México." },
       { t: "Especialista de gramíneas", txt: "Depende de pastizales y matorrales con abundantes gramíneas nativas; los cambios por pastoreo lo afectan directamente." },
       { t: "Poco conocido", txt: "Su biología reproductiva, genética y estructura poblacional son aún mal conocidas, dificultando diseñar estrategias de conservación." }
     ]
@@ -1182,7 +1186,7 @@ const ESPECIES = [
     cient: "Lepus flavigularis",
     estado: "P",
     categoria: "Mamífero • Lagomorfo",
-    habitat: "Istmo de Tehuantepec, Oaxaca",
+    habitat: "Praderas costeras del Istmo de Tehuantepec",
     poblacion: "< 1,000 individuos",
     tamaño: "47 – 60 cm",
     peso: "2.4 – 3.9 kg",
@@ -1230,7 +1234,7 @@ const ESPECIES = [
     cient: "Myotis vivesi",
     estado: "P",
     categoria: "Mamífero • Quiróptero",
-    habitat: "Península de Baja California",
+    habitat: "Costas y ríos tropicales de México",
     poblacion: "Reducida",
     tamaño: "Envergadura 50 – 60 cm",
     peso: "50 – 90 g",
@@ -1278,27 +1282,27 @@ const ESPECIES = [
     cient: "Chiropterotriton lavae",
     estado: "P",
     categoria: "Anfibio • Salamandra",
-    habitat: "Bosques de niebla de Veracruz",
+    habitat: "Bosques de niebla de Tamaulipas",
     poblacion: "< 250 estimados",
     tamaño: "6 – 10 cm",
     peso: "1 – 4 g",
     emoji: "🦎",
     sonido: "lluvia",
-    desc: "La salamandra pie plano pigmea es una de las salamandras más raras y pequeñas de México. Endémica de los bosques de niebla de Veracruz, se caracteriza por sus patas aplanadas con dedos muy desarrollados para trepar sobre rocas húmedas. Es completamente terrestre y respira exclusivamente a través de la piel.",
+    desc: "La salamandra pie plano pigmea es una de las salamandras más raras y pequeñas de México. Endémica de los bosques de niebla de la Sierra Madre Oriental en Tamaulipas, se caracteriza por sus patas aplanadas con dedos muy desarrollados para trepar sobre rocas húmedas. Es completamente terrestre y respira exclusivamente a través de la piel.",
     amenazas: [
-      "Distribución extremadamente limitada a pocas localidades en Veracruz.",
+      "Distribución extremadamente limitada a pocas localidades en Tamaulipas.",
       "Deforestación del bosque mesófilo de montaña.",
       "Extrema sensibilidad a la desecación del ambiente."
     ],
     curiosidades: [
-      { t: "Pies especializados", txt: "Sus patas aplanadas con dedos anchos son una adaptación única para desplazarse sobre rocas mojadas y musgosas en el bosque." },
+      { t: "Pies especializados", txt: "Sus patas aplanadas con dedos anchos son una adaptación única para desplazarse sobre rocas mojadas y musgosas en el bosque nebuloso." },
       { t: "Respiración cutánea", txt: "Carece de pulmones funcionales y respira completamente a través de la piel húmeda; si se seca, muere en minutos." },
-      { t: "Una sola localidad", txt: "Fue conocida durante décadas de un solo sitio en Veracruz; su área de distribución total posiblemente no supera los 100 km²." }
+      { t: "Una sola localidad", txt: "Fue conocida durante décadas de un solo sitio en Tamaulipas; su área de distribución total posiblemente no supera los 100 km²." }
     ]
   },
   {
     id: "tortuga-cuatro-cienegas",
-    nombre: "Tortuga de Cuatrociénegas",
+    nombre: "Tortuga de Cuatro Ciénegas",
     cient: "Terrapene coahuila",
     estado: "P",
     categoria: "Reptil • Tortuga de agua dulce",
@@ -1308,7 +1312,7 @@ const ESPECIES = [
     peso: "0.5 – 2 kg",
     emoji: "🐢",
     sonido: "oceano",
-    desc: "La tortuga de Cuatrociénegas habita en las cristalinas pozas del Valle de Cuatro Ciénegas en Coahuila. Sus colores verdes con líneas amarillas son inconfundibles. Se alimenta de plantas acuáticas y algas en las pozas termales del valle, un ecosistema único en el mundo.",
+    desc: "La tortuga de Cuatro Ciénegas habita en las cristalinas pozas del Valle de Cuatro Ciénegas en Coahuila. Sus colores verdes con líneas amarillas son inconfundibles. Se alimenta de plantas acuáticas y algas en las pozas termales del valle, un ecosistema único en el mundo.",
     amenazas: [
       "Extracción masiva de agua subterránea que seca las pozas donde vive.",
       "Introducción de tortugas exóticas y otros reptiles acuáticos.",
@@ -1326,7 +1330,7 @@ const ESPECIES = [
     cient: "Typhliasina pearsei",
     estado: "P",
     categoria: "Pez • Characidae",
-    habitat: "Cuevas y cenotes de la península de Yucatán",
+    habitat: "Cuevas de San Luis Potosí y Tamaulipas",
     poblacion: "Muy reducida",
     tamaño: "5 – 9 cm",
     peso: "2 – 8 g",
@@ -1350,20 +1354,21 @@ const ESPECIES = [
     cient: "Mexipedium xerophyticum",
     estado: "P",
     categoria: "Planta • Orquídea",
-    habitat: "Bosques de pino-encino",
+    habitat: "Bosques de pino-encino de México",
     poblacion: "Reducida",
     tamaño: "30 – 80 cm",
     peso: "N/A",
     emoji: "🌺",
     sonido: "selva",
-    desc: "La zapatilla de dama es una de las más espectaculares de México, con flores que forman una bolsa o labelo de color amarillo-verdoso que simula un recipiente. Esta estructura es una trampa para los insectos polinizadores que deben salir por una ruta específica, recogiendo el polen.",
+    desc: "La zapatilla de dama o sandalia de Venus es una de las orquídeas más espectaculares de México, con flores que forman una bolsa o labelo de color amarillo-verdoso que simula un recipiente. Esta estructura es una trampa para los insectos polinizadores que deben salir por una ruta específica, recogiendo el polen.",
     amenazas: [
-      "Colecta ilegal para jardinería y coleccionistas de plantas.",
+      "Colecta ilegal para jardinería y coleccionistas de orquídeas.",
       "Pérdida del bosque de pino-encino en sus áreas de distribución.",
       "Dependencia de hongos micorrízicos específicos para germinar."
     ],
     curiosidades: [
       { t: "Trampa floral", txt: "Su labelo en forma de zapatilla es una trampa: los insectos caen en ella y solo pueden salir por una ruta que los unta de polen." },
+      { t: "Orquídea protegida", txt: "Todas las orquídeas del género Cypripedium están en el Apéndice I de CITES, el nivel más alto de protección comercial internacional." },
       { t: "Micorriza obligada", txt: "Sus semillas solo pueden germinar en presencia de hongos micorrízicos específicos; sin ellos no prosperan aunque el suelo y clima sean perfectos." }
     ]
   },
@@ -1373,13 +1378,13 @@ const ESPECIES = [
     cient: "Ambystoma mexicanum",
     estado: "P",
     categoria: "Anfibio • Salamandra",
-    habitat: "Lago de Xochimilco",
+    habitat: "Canales de Xochimilco, CDMX",
     poblacion: "< 1,000 en estado silvestre",
     tamaño: "15 – 30 cm",
     peso: "60 – 220 g",
     emoji: "🦎",
     sonido: "oceano",
-    desc: "El ajolote mexicano o de Xochimilco es el anfibio más famoso de México y símbolo de la biodiversidad del país. Nunca completa su metamorfosis, conservando branquias externas durante toda la vida adulta. Tiene una capacidad regenerativa extraordinaria: puede regenerar extremidades, porciones del corazón y del cerebro. Solo existe en los canales de Xochimilco en la Ciudad de México.",
+    desc: "El ajolote de Xochimilco es el anfibio más famoso de México y símbolo de la biodiversidad del país. Nunca completa su metamorfosis, conservando branquias externas durante toda la vida adulta. Tiene una capacidad regenerativa extraordinaria: puede regenerar extremidades, porciones del corazón y del cerebro. Solo existe en los canales de Xochimilco en la Ciudad de México.",
     amenazas: [
       "Introducción de carpas y tilapias que depredan huevos y juveniles.",
       "Contaminación de los canales de Xochimilco por aguas residuales y basura.",
@@ -1403,7 +1408,7 @@ const ESPECIES = [
     peso: "1 – 3 g",
     emoji: "🪲",
     sonido: "selva",
-    desc: "El escarabajo joya verde es uno de los coleópteros más hermosos de México, con élitros de color verde esmeralda y rayas plateadas o doradas. Habita en selvas húmedas y bosques de encino del sureste de México.",
+    desc: "El escarabajo joya verde es uno de los coleópteros más hermosos de México, con élitros de color verde esmeralda iridiscente y rayas plateadas o doradas. Habita en selvas húmedas y bosques de encino del sureste de México. Las larvas viven en madera en descomposición dentro del suelo.",
     amenazas: [
       "Colecta intensiva para el comercio de insectos en México y el extranjero.",
       "Pérdida de la selva húmeda y bosques de encino donde habita.",
@@ -1427,7 +1432,7 @@ const ESPECIES = [
     peso: "N/A",
     emoji: "🌿",
     sonido: "oceano",
-    desc: "El mangle  es el árbol emblemático de los ecosistemas de manglar en las costas tropicales mexicanas. Sus raíces aéreas crean un laberinto protector donde se reproducen cientos de especies de peces y crustáceos de importancia comercial. Los manglares capturan más carbono por hectárea que cualquier bosque tropical.",
+    desc: "El mangle rojo es el árbol emblemático de los ecosistemas de manglar en las costas tropicales mexicanas. Sus raíces aéreas arqueadas crean un laberinto protector donde se reproducen cientos de especies de peces y crustáceos de importancia comercial. Los manglares capturan más carbono por hectárea que cualquier bosque tropical.",
     amenazas: [
       "Desmonte para desarrollos turísticos, acuícola y urbanización costera.",
       "Contaminación de estuarios y lagunas costeras por residuos industriales.",
@@ -1445,13 +1450,13 @@ const ESPECIES = [
     cient: "Astyanax jordani",
     estado: "A",
     categoria: "Pez • Characidae",
-    habitat: "Lagunas y pozas de cavernas en San Luis Potosí y Tamaulipas",
+    habitat: "Cuevas y aguas subterráneas de la cuenca del Pánuco, San Luis Potosí",
     poblacion: "Desconocida, muy reducida",
     tamaño: "4 – 8 cm",
     peso: "< 3 g",
     emoji: "🐟",
     sonido: "cueva",
-    desc: "La sardinita ciega es un pequeño pez cavernícola mexicano de la familia Characidae. Se asocia con cuevas y aguas subterráneas de la cuenca del río Pánuco, especialmente en la región de San Luis Potosí. Ha perdido los ojos funcionales y gran parte de la pigmentación como adaptación a ambientes oscuros.",
+    desc: "La sardinita ciega es un pequeño pez cavernícola mexicano de la familia Characidae. Se asocia con cuevas y aguas subterráneas de la cuenca del río Pánuco, especialmente en la región de San Luis Potosí, no con cenotes de Yucatán. Ha perdido los ojos funcionales y gran parte de la pigmentación como adaptación a ambientes oscuros.",
     amenazas: [
       "Contaminación de aguas subterráneas por descargas urbanas, agrícolas o ganaderas.",
       "Extracción de agua que altera el nivel y flujo de los sistemas cavernícolas.",
@@ -1469,13 +1474,13 @@ const ESPECIES = [
     cient: "Xiphophorus clemenciae",
     estado: "A",
     categoria: "Pez • Poeciliidae",
-    habitat: "Río Uxpanapa, río Grijalva en Chiapas",
+    habitat: "Arroyos y manantiales del sistema Coatzacoalcos-Uxpanapa",
     poblacion: "No disponible",
     tamaño: "3 – 4 cm",
     peso: "< 1 g",
     emoji: "🐟",
     sonido: "rio",
-    desc: "La espada de Clemencia es un pez dulceacuícola mexicano del género Xiphophorus, emparentado con los colas de espada. Habita arroyos claros, manantiales y tributarios de corriente lenta a moderada, principalmente en sistemas relacionados con Uxpanapa en Oaxaca y Veracruz, con registros adicionales en Chiapas.",
+    desc: "La espada de Clemencia es un pez dulceacuícola mexicano del género Xiphophorus, emparentado con los colas de espada. Habita arroyos claros, manantiales y tributarios de corriente lenta a moderada en el sureste de México, principalmente en sistemas relacionados con el alto Coatzacoalcos y Uxpanapa en Oaxaca y Veracruz, con registros adicionales en Chiapas.",
     amenazas: [
       "Contaminación de arroyos por descargas urbanas, agroquímicos y sedimentos.",
       "Modificación de manantiales y cauces por obras locales, extracción de agua o cambio de uso de suelo.",
@@ -1484,7 +1489,7 @@ const ESPECIES = [
     curiosidades: [
       { t: "Cola de espada", txt: "Los machos presentan la prolongación inferior de la aleta caudal que da nombre común al grupo de los colas de espada." },
       { t: "Nombre dedicado", txt: "El epíteto clemenciae honra a Clemencia, esposa del ictiólogo José Álvarez del Villar, descriptor de la especie." },
-      { t: "Interés evolutivo", txt: "Se ha estudiado por su historia evolutiva dentro de Uxpanapa, un género importante para entender especiación e hibridación." }
+      { t: "Interés evolutivo", txt: "Se ha estudiado por su historia evolutiva dentro de Xiphophorus, un género importante para entender especiación e hibridación." }
     ]
   },
   {
@@ -1493,21 +1498,21 @@ const ESPECIES = [
     cient: "Abronia lythrochila",
     estado: "A",
     categoria: "Reptil • Lagartija",
-    habitat: "Bosques de pino-encino de Chiapas",
+    habitat: "Bosques de montaña de Chiapas",
     poblacion: "Desconocida",
     tamaño: "Hasta ~30 cm",
     peso: "Desconocido",
     emoji: "🦎",
     sonido: "selva",
-    desc: "El escorpión arborícola de labios rojos es una lagartija del género Abronia, también llamada dragoncito de labios rojos. Es endémica de Chiapas y vive asociada a bosques de pino-encino, donde se mueve entre ramas, bromelias y vegetación arbórea. Su nombre común se debe a la coloración rojiza alrededor de la boca.",
+    desc: "El escorpión arborícola de labios rojos no es un arácnido: es una lagartija del género Abronia, también llamada dragoncito o lagarto alicante de labios rojos. Es endémica de Chiapas y vive asociada a bosques húmedos de montaña, donde se mueve entre ramas, bromelias y vegetación arbórea. Su nombre común se debe a la coloración rojiza alrededor de la boca.",
     amenazas: [
-      "Pérdida y fragmentación del bosque por tala, agricultura y cambio de uso de suelo.",
+      "Pérdida y fragmentación del bosque de montaña por tala, agricultura y cambio de uso de suelo.",
       "Colecta ilegal para el comercio de reptiles exóticos.",
       "Distribución restringida y poca información poblacional disponible."
     ],
     curiosidades: [
       { t: "Dragoncito arborícola", txt: "Muchas Abronia viven entre árboles y bromelias, con cuerpo robusto y cola prensil o semiprensil para moverse en la vegetación." },
-      { t: "No es venenoso", txt: "Aunque algunos nombres locales como escorpión generan temor, es una lagartija y no un escorpión." },
+      { t: "No es venenoso", txt: "Aunque algunos nombres locales como escorpión o alicante generan temor, es una lagartija y no un escorpión." },
       { t: "Color variable", txt: "La especie muestra variación de coloración; los labios rojizos son uno de los rasgos que inspiraron su nombre común." }
     ]
   },
@@ -1517,13 +1522,13 @@ const ESPECIES = [
     cient: "Crax rubra",
     estado: "A",
     categoria: "Ave • Cracidae",
-    habitat: "Selvas de Chiapas, Oaxaca, Veracruz y Yucatán",
+    habitat: "Selvas húmedas del S y SE México",
     poblacion: "Reducida",
     tamaño: "80 – 95 cm",
     peso: "3.1 – 4.8 kg",
     emoji: "🦃",
     sonido: "selva",
-    desc: "El hocofaisán es un ave de gran tamaño, con el macho de plumaje negro lustroso, vientre blanco y una protuberancia nasal amarilla. Habita en selvas húmedas desde el sur de Tamaulipas y Veracruz hasta el sur de Oaxaca y Chiapas. Se alimenta de frutos, semillas e invertebrados del suelo.",
+    desc: "El hocofaisán es el cracid más conspicuo de México, con el macho de plumaje negro lustroso, vientre blanco y una protuberancia nasal amarilla. Habita en selvas húmedas desde el sur de Tamaulipas y Veracruz hasta el sur de Oaxaca y Chiapas. Se alimenta de frutos, semillas e invertebrados del suelo.",
     amenazas: [
       "Cacería furtiva como alimento en comunidades rurales de la selva.",
       "Fragmentación de la selva húmeda que aísla poblaciones.",
@@ -1541,16 +1546,16 @@ const ESPECIES = [
     cient: "Psalmopoeus victori",
     estado: "A",
     categoria: "Arácnido • Araña",
-    habitat: "Selva húmeda en Veracruz",
+    habitat: "Bosque tropical de Guerrero y Michoacán",
     poblacion: "Muy reducida",
     tamaño: "Cuerpo 5 – 7 cm",
     peso: "20 – 40 g",
     emoji: "🕷️",
     sonido: "selva",
-    desc: "La tarántula arborícola mexicana es una especie endémica de México y primer registro arborícola del país. Exhibe un cuerpo negro aterciopelado con un llamativo abdomen cubierto de vellosidades rojizas. Ágil, rápida y adaptada por completo a la vida de los troncos del bosque tropical.",
+    desc: "La tarántula de rodillas de llama o tarántula roja mexicana es una tarántula endémica de las costas de Guerrero y Michoacán, con llamativas franjas rojo-naranja en las patas que contrastan con el cuerpo negro. Es una de las tarántulas más escasas de México debido a la colecta masiva y la pérdida de hábitat.",
     amenazas: [
       "Colecta ilegal masiva para el mercado internacional de tarántulas mascota.",
-      "Pérdida del bosque tropical.",
+      "Pérdida del bosque tropical en Guerrero y Michoacán.",
       "Muy poco conocida; apenas se realizan estudios poblacionales en campo."
     ],
     curiosidades: [
@@ -1565,16 +1570,16 @@ const ESPECIES = [
     cient: "Pterourus esperanza",
     estado: "A",
     categoria: "Insecto • Lepidóptero",
-    habitat: "Bosque tropical seco de Oaxaca",
+    habitat: "Bosque tropical seco de Oaxaca y Guerrero",
     poblacion: "Desconocida",
     tamaño: "5 – 6 cm envergadura",
     peso: "< 1 g",
     emoji: "🦋",
     sonido: "selva",
-    desc: "La mariposa esperanza o mariposa tigre oaxaqueña es la mariposa más primitiva del mundo viva, considerada un fósil viviente entre los lepidópteros. Es la única especie de la familia Baronidae. Solo vive en bosques tropicales secos de Oaxaca. Sus orugas se alimentan exclusivamente del copal (Bursera).",
+    desc: "La mariposa esperanza o cola de golondrina ancestral es la mariposa más primitiva del mundo viva, considerada un fósil viviente entre los lepidópteros. Es la única especie de la familia Baronidae. Solo vive en bosques tropicales secos de Oaxaca y Guerrero. Sus orugas se alimentan exclusivamente del copal (Bursera).",
     amenazas: [
       "Pérdida del bosque tropical seco donde crecen sus plantas huésped de Bursera.",
-      "Colecta por coleccionistas de mariposas raras.",
+      "Colecta por lepidopteristas y coleccionistas de mariposas raras.",
       "Especialización extrema: solo puede reproducirse donde existe Bursera."
     ],
     curiosidades: [
@@ -1590,12 +1595,12 @@ const ESPECIES = [
     estado: "Pr",
     categoria: "Planta • Triuridaceae",
     habitat: "Selva Lacandona, Chiapas",
-    poblacion: "Reducida",
+    poblacion: "< 3 localidades conocidas",
     tamaño: "2 – 6 cm",
     peso: "N/A",
     emoji: "🌺",
     sonido: "selva",
-    desc: "La lacandonia es una de las plantas más extraordinarias y raras del mundo, endémica de la Selva Lacandona en Ocosingo,Chiapas. Sin clorofila, no hace fotosíntesis y vive parasitando hongos del suelo. Su flor tiene los órganos sexuales invertidos: los estambres (masculinos) están en el centro y los pistilos (femeninos) alrededor, al contrario de cualquier otra planta del mundo.",
+    desc: "La lacandonia es una de las plantas más extraordinarias y raras del mundo, endémica de la Selva Lacandona en Chiapas. Sin clorofila, no hace fotosíntesis y vive parasitando hongos del suelo. Su flor tiene los órganos sexuales invertidos: los estambres (masculinos) están en el centro y los pistilos (femeninos) alrededor, al contrario de cualquier otra planta del mundo.",
     amenazas: [
       "Deforestación de la Selva Lacandona por comunidades colonizadoras.",
       "Solo se conoce en tres localidades en todo el mundo.",
@@ -1619,14 +1624,14 @@ const ESPECIES = [
     peso: "N/A",
     emoji: "🌸",
     sonido: "selva",
-    desc: "La dalia de montaña es la dalia más grande del mundo, pudiendo alcanzar 5 m de altura con troncos semi-leñosos. Endémica de los bosques húmedos de montaña de México, florece masivamente en otoño cubriendo las laderas con flores rosadas o lilas. Es el ancestro silvestre de todas las dalias de jardín del mundo.",
+    desc: "La dalia de árbol o dalia imperial es la dalia más grande del mundo, pudiendo alcanzar 5 m de altura con troncos semi-leñosos. Endémica de los bosques húmedos de montaña de México y Guatemala, florece masivamente en otoño cubriendo las laderas con flores rosadas o lilas. Es el ancestro silvestre de todas las dalias de jardín del mundo.",
     amenazas: [
       "Pérdida del bosque de montaña donde habita por deforestación.",
       "Extracción de tubérculos para consumo y ornamento.",
       "Invasión de pastizales y cambio de uso de suelo en zonas montañosas."
     ],
     curiosidades: [
-      { t: "Madre de las dalias", txt: "Todas las variedades de dalia cultivadas en jardines del mundo son descendientes de las especies silvestres mexicanas." },
+      { t: "Madre de las dalias", txt: "Todas las variedades de dahlia cultivadas en jardines del mundo son descendientes de las especies silvestres mexicanas." },
       { t: "Flor nacional", txt: "La dalia es la flor nacional de México por decreto oficial desde 1963, símbolo de la riqueza botánica del país." },
       { t: "Gigante del otoño", txt: "Crece de 1 a 5 metros en una sola temporada de lluvias; florece masivamente en octubre y noviembre cubriendo los bosques de montaña." }
     ]
@@ -1643,7 +1648,7 @@ const ESPECIES = [
     peso: "60 – 150 g",
     emoji: "🐍",
     sonido: "selva",
-    desc: "La coralillo oaxaqueña es una serpiente elapída endémica de las sierras de México en especial Oaxaca, con el característico patrón de anillos rojo, negro y amarillo que advierte de su peligrosidad. Su veneno neurotóxico actúa sobre el sistema nervioso. Es una serpiente tímida que prefiere la hojarasca y el suelo del bosque.",
+    desc: "La coralillo oaxaqueña es una serpiente elapída endémica de las sierras de Oaxaca y Guerrero, con el característico patrón de anillos rojo, negro y amarillo que advierte de su peligrosidad. Su veneno neurotóxico actúa sobre el sistema nervioso. Es una serpiente tímida que prefiere la hojarasca y el suelo del bosque.",
     amenazas: [
       "Matanza indiscriminada por temor en comunidades rurales.",
       "Pérdida del bosque en sus áreas de distribución en las sierras oaxaqueñas.",
@@ -1667,14 +1672,14 @@ const ESPECIES = [
     peso: "20 – 60 g",
     emoji: "🐸",
     sonido: "lluvia",
-    desc: "La rana de la Sierra Madre Occidental es una rana robusta que habita en los ríos y arroyos de la Sierra Madre Occidental, especialmente en Guerrero y Oaxaca. Adaptada a aguas frías y bien oxigenadas de montaña, nada y bucea con destreza. Las ranas tarahumaras son cazadas y consumidas por comunidades rarámuri.",
+    desc: "La rana tarahumara es una rana robusta que habita en los ríos y arroyos de la Sierra Madre Occidental, especialmente en Sonora, Chihuahua y Sinaloa. Adaptada a aguas frías y bien oxigenadas de montaña, nada y bucea con destreza. Las ranas tarahumaras son cazadas y consumidas por comunidades rarámuri.",
     amenazas: [
-      "Colecta para consumo humano.",
+      "Colecta para consumo humano, especialmente en Sonora y Chihuahua.",
       "Contaminación de ríos de montaña por actividades mineras.",
       "Disminución del caudal de ríos por extracción de agua para agricultura."
     ],
     curiosidades: [
-      { t: "Rana de los rarámuri", txt: "Las han consumido como alimento por siglos." },
+      { t: "Rana de los rarámuri", txt: "Las comunidades tarahumara la han consumido como alimento por siglos; su nombre científico honra a este pueblo indígena." },
       { t: "Buceadora experta", txt: "Puede permanecer sumergida varios minutos; absorbe oxígeno a través de la piel en el agua fría y bien oxigenada de los ríos serranos." },
       { t: "Salto poderoso", txt: "Sus patas traseras musculosas le permiten saltar hasta 1.5 m de distancia para escapar de depredadores como serpientes y garzas." }
     ]
@@ -1685,15 +1690,15 @@ const ESPECIES = [
     cient: "Danaus plexippus",
     estado: "Pr",
     categoria: "Insecto • Lepidóptero",
-    habitat: "Canadá,Michoacán y Estado de México",
+    habitat: "Oyamel, Michoacán y Estado de México",
     poblacion: "Reducida, variable",
     tamaño: "8 – 10 cm envergadura",
     peso: "0.3 – 0.5 g",
     emoji: "🦋",
     sonido: "viento",
-    desc: "La mariposa monarca es famosa por su migración anual de hasta 4,500 km desde Canadá y el norte de Estados Unidos hasta los bosques de Michoacán y el Estado de México. Millones de mariposas cubren los árboles formando alfombras anaranjadas. Una misma mariposa no completa la migración: toma cuatro generaciones ir y volver.",
+    desc: "La mariposa monarca es famosa por su migración anual de hasta 4,500 km desde Canadá y el norte de Estados Unidos hasta los bosques de oyamel en Michoacán. Millones de mariposas cubren los árboles formando alfombras anaranjadas. Una misma mariposa no completa la migración: toma cuatro generaciones ir y volver.",
     amenazas: [
-      "Pérdida de bosques en sus sitios de hibernación en México.",
+      "Pérdida de bosques de oyamel en sus sitios de hibernación en México.",
       "Desaparición del algodoncillo (Asclepias) en su ruta migratoria por uso de herbicidas.",
       "Cambio climático que altera las rutas y temporadas de migración."
     ],
@@ -1718,6 +1723,7 @@ const ESPECIES = [
     desc: "La ranita chamula es un pequeño anfibio endémico de los Altos de Chiapas, zona habitada por comunidades tzotziles. Su nombre hace referencia a San Juan Chamula. Habita en bosques de pino-encino húmedos a gran altitud. Su reproducción es directa: no tiene renacuajos acuáticos, las crías emergen directamente del huevo.",
     amenazas: [
       "Deforestación de bosques de pino-encino en los Altos de Chiapas.",
+      "Hongo quitrídeo Batrachochytrium dendrobatidis que ha diezmado anfibios en México.",
       "Distribución extremadamente restringida a una pequeña área geográfica."
     ],
     curiosidades: [
@@ -1732,13 +1738,13 @@ const ESPECIES = [
     cient: "Crocodylus moreletii",
     estado: "Pr",
     categoria: "Reptil • Cocodriliano",
-    habitat: "Vertiente del Golfo de México",
-    poblacion: "~20,000 ",
+    habitat: "Humedales del sureste de México",
+    poblacion: "~20,000 en México",
     tamaño: "2 – 3 m",
     peso: "60 – 200 kg",
     emoji: "🐊",
     sonido: "oceano",
-    desc: "El cocodrilo de pantano o de Moreleti es el cocodrilo más común de México, endémico de la Península de Yucatán y Chiapas. Habita en agua dulce: lagunas, ríos, cenotes y pantanos. Es un depredador de tope en los humedales. Fue cazado al borde de la extinción en el siglo XX.",
+    desc: "El cocodrilo de pantano o de Morelet es el cocodrilo más común de México, endémico de la Península de Yucatán, Chiapas, Tabasco, Campeche, Veracruz y Belice. Habita en agua dulce: lagunas, ríos, cenotes y pantanos. Es un depredador de tope en los humedales. Fue cazado al borde de la extinción en el siglo XX.",
     amenazas: [
       "Cacería histórica por su piel, que casi lo extingue en los años 60-70.",
       "Pérdida de humedales y zonas inundables por drenaje y agricultura.",
@@ -1762,7 +1768,7 @@ const ESPECIES = [
     peso: "N/A",
     emoji: "🌵",
     sonido: "viento",
-    desc: "La biznaga barril es un cactus globoso o cilíndrico endémico del altiplano mexicano, presente en Durango y Veracruz. Históricamente fue explotada para hacer 'acitrón', un dulce tradicional de Semana Santa que hoy está prohibido por la protección de la especie.",
+    desc: "La biznaga barril es un cactus globoso o cilíndrico endémico del altiplano mexicano, presente en San Luis Potosí, Querétaro, Hidalgo y Guanajuato. Históricamente fue explotada para hacer 'acitrón', un dulce tradicional de Semana Santa que hoy está prohibido por la protección de la especie.",
     amenazas: [
       "Extracción de tejido pulposo para fabricar acitrón, actualmente prohibida por ley.",
       "Pastoreo que destruye plántulas y ejemplares jóvenes.",
@@ -1780,13 +1786,13 @@ const ESPECIES = [
     cient: "Beaucarnea recurvata",
     estado: "A",
     categoria: "Planta • Asparagaceae",
-    habitat: "Bosques secos y selvas bajas",
+    habitat: "Bosques secos y selvas bajas del oriente de México",
     poblacion: "Reducida",
     tamaño: "Hasta 9 m",
     peso: "N/A",
     emoji: "🌴",
     sonido: "viento",
-    desc: "La pata de elefante es una planta arborescente mexicana de crecimiento lento, famosa por la base del tronco enormemente engrosada que almacena agua. Su distribución silvestre se concentra en el oriente de México, especialmente en Veracruz y Oaxaca. Sus hojas largas y delgadas forman coronas en las ramas.",
+    desc: "La pata de elefante es una planta arborescente mexicana de crecimiento lento, famosa por la base del tronco enormemente engrosada que almacena agua. Su distribución silvestre se concentra en el oriente de México, especialmente en Veracruz, con reportes taxonómicos más amplios para Oaxaca, Puebla, San Luis Potosí y Tamaulipas según la fuente consultada. Sus hojas largas y delgadas forman coronas en las ramas.",
     amenazas: [
       "Extracción masiva de ejemplares silvestres para el comercio ornamental global.",
       "Pérdida de selvas bajas y bosques secos en su área de distribución natural.",
@@ -1806,11 +1812,11 @@ const ESPECIES = [
     categoria: "Planta • Helecho arborescente",
     habitat: "Bosques húmedos de montaña",
     poblacion: "Reducida",
-    tamaño: "Hasta 12 m de alto",
+    tamaño: "Varios metros de altura",
     peso: "N/A",
     emoji: "🌿",
     sonido: "lluvia",
-    desc: "El maquique es un helecho que pertenece a los arborescentes y forma un tallo erecto coronado por frondas grandes. En México se asocia con bosques húmedos y de montaña, donde requiere sombra, humedad constante y suelos con materia orgánica.",
+    desc: "El maquique es un helecho arborescente, no un ave. Cyathea fulva pertenece a los helechos arborescentes y forma un tallo erecto coronado por frondas grandes. En México se asocia con bosques húmedos y de montaña, donde requiere sombra, humedad constante y suelos con materia orgánica.",
     amenazas: [
       "Tala y fragmentación de bosques húmedos de montaña.",
       "Extracción de ejemplares o partes vegetales para uso ornamental.",
@@ -1828,13 +1834,13 @@ const ESPECIES = [
     cient: "Eryngium proteiflorum",
     estado: "Pr",
     categoria: "Planta • Apiaceae",
-    habitat: "Pastizales de alta montaña del centro de México",
+    habitat: "Pastizales y claros de alta montaña del centro de México",
     poblacion: "Reducida",
     tamaño: "20 – 60 cm",
     peso: "N/A",
     emoji: "🌺",
     sonido: "selva",
-    desc: "La flor de montaña o hierba del sapo es una herbácea perenne del género Eryngium, familia Apiaceae. Es nativa de México, con distribución a las montañas altas del centro del país y crece en ambientes frescos de montaña. Sus inflorescencias forman cabezuelas llamativas rodeadas de brácteas espinosas que le dan aspecto de flor grande.",
+    desc: "La flor de montaña o rosa de las nieves es una herbácea perenne del género Eryngium, familia Apiaceae; no es una orquídea. Es nativa de México, con distribución reportada de Veracruz a Michoacán, y crece en ambientes frescos de montaña. Sus inflorescencias forman cabezuelas llamativas rodeadas de brácteas espinosas que le dan aspecto de flor grande.",
     amenazas: [
       "Pisoteo y extracción de plantas en zonas de visita turística de alta montaña.",
       "Pérdida o degradación de pastizales y claros montanos por cambio de uso de suelo.",
@@ -1852,13 +1858,13 @@ const ESPECIES = [
     cient: "Lophophora williamsii",
     estado: "Pr",
     categoria: "Planta • Cactácea",
-    habitat: "Regiones desérticas de México",
+    habitat: "Desierto chihuahuense, SLP a Tamaulipas",
     poblacion: "Reducida",
     tamaño: "2 – 7 cm",
     peso: "N/A",
     emoji: "🌵",
     sonido: "viento",
-    desc: "El peyote es un cactus pequeño y sin espinas que se distribuye en regiones desérticas de México como Chihuahua, Coahuila, Nuevo León y Sonora. Contiene mescalina y decenas de alcaloides y es sagrado para los pueblos wixáritari (huicholes), que lo usan en ceremonias espirituales desde hace milenios.",
+    desc: "El peyote es un cactus pequeño y sin espinas endémico del Desierto Chihuahuense entre México y Texas. Contiene mescalina y decenas de alcaloides y es sagrado para los pueblos wixáritari (huicholes), rarámuri y otros grupos indígenas que lo usan en ceremonias espirituales desde hace milenios.",
     amenazas: [
       "Extracción ilegal masiva por turistas y comerciantes de psicotrópicos.",
       "Colecta ritual excesiva que supera la capacidad de regeneración natural.",
