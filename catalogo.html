@@ -513,7 +513,7 @@
 
     /* Colores de estado */
     /* NOM-059 */
-    .s-P  { background: #B71C1C; }   /* P  — En Peligro de Extinción  */
+    .s-P  { background: #B71C1C; }   /* P  — En Peligro de Extinción
     .s-A  { background: #F9A825; }   /* A  — Amenazada (amarillo tablilla) */
     .s-Pr { background: #1B5E20; }   /* Pr — Protección Especial       */
     /* UICN */
@@ -641,6 +641,13 @@
           autocorrect="off" spellcheck="false" />
       </div>
       <div class="filters">
+        <button class="filter-btn active" data-filter="all">Todas</button>
+        <button class="filter-btn fp"  data-filter="P" >● P</button>
+        <button class="filter-btn fa"  data-filter="A" >● A</button>
+        <button class="filter-btn fpr" data-filter="Pr">● Pr</button>
+        <button class="filter-btn fcr" data-filter="CR">● CR</button>
+        <button class="filter-btn fvu" data-filter="VU">● VU</button>
+        <button class="filter-btn flc" data-filter="LC">● LC</button>
       </div>
     </div>
 
