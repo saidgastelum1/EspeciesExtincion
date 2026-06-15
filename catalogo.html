@@ -9,7 +9,6 @@
   <meta name="theme-color" content="#000" />
   <title>Especies en Peligro</title>
 
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HQHBBNZWB5"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -237,7 +236,7 @@
       background: rgba(0, 0, 0, 0.80);
     }
 
-    /*SCROLL PARA MÓVILES*/
+    /*SCROLL PARA MÓVILES COMPLETAMENTE INTACTO*/
     .filters {
       width: 100%;
       overflow-x: auto !important; /* scroll horizontal */
@@ -257,7 +256,7 @@
     }
 
     .filter-btn {
-      flex: 1;
+      flex-shrink: 0; /* AJUSTE CRÍTICO: Evita que el botón se comprima en teléfonos */
       min-width: 0;
       padding: 7px 6px;
       border-radius: 999px;
@@ -513,13 +512,13 @@
 
     /* Colores de estado */
     /* NOM-059 */
-    .s-P  { background: #B71C1C; }   /* P  — En Peligro de Extinción
+    .s-P  { background: #B71C1C; }   /* P  — En Peligro de Extinción */
     .s-A  { background: #F9A825; }   /* A  — Amenazada (amarillo tablilla) */
     .s-Pr { background: #1B5E20; }   /* Pr — Protección Especial       */
     /* UICN */
     .s-CR { background: #880E4F; }   /* CR — En Peligro Crítico        */
     .s-VU { background: #E65100; }   /* VU — Vulnerable (naranja) */
-    .s-LC { background: #1565C0; }   /* LC — Preocupación Menor (azul marino) */   /* LC — Preocupación Menor        */
+    .s-LC { background: #1565C0; }   /* LC — Preocupación Menor (azul marino) */
 
     /* Vacío */
     .empty {
@@ -616,7 +615,6 @@
 
   <div id="page">
 
-    <!-- Header -->
     <div class="header">
       <div class="header-top">
         <a class="btn-back" href="index.html">
@@ -633,7 +631,6 @@
 
     </div>
 
-    <!-- Buscador + Filtros (estáticos, se van con el scroll) -->
     <div class="search-filters-static">
       <div class="search-wrap">
         <span class="search-ico">🔍</span>
@@ -642,12 +639,12 @@
       </div>
       <div class="filters">
         <button class="filter-btn active" data-filter="all">Todas</button>
-        <button class="filter-btn fp"  data-filter="P" >● P</button>
-        <button class="filter-btn fa"  data-filter="A" >● A</button>
-        <button class="filter-btn fpr" data-filter="Pr">● Pr</button>
-        <button class="filter-btn fcr" data-filter="CR">● CR</button>
-        <button class="filter-btn fvu" data-filter="VU">● VU</button>
-        <button class="filter-btn flc" data-filter="LC">● LC</button>
+        <button class="filter-btn fp"  data-filter="P" >● En Peligro de Extinción</button>
+        <button class="filter-btn fa"  data-filter="A" >● Amenazada</button>
+        <button class="filter-btn fpr" data-filter="Pr">● Protección Especial</button>
+        <button class="filter-btn fcr" data-filter="CR">● En Peligro Crítico</button>
+        <button class="filter-btn fvu" data-filter="VU">● Vulnerable</button>
+        <button class="filter-btn flc" data-filter="LC">● Preocupación Menor</button>
       </div>
     </div>
 
@@ -657,7 +654,6 @@
       </div>
     </div>
 
-    <!-- Grid -->
     <div class="grid" id="grid"></div>
 
   </div>
@@ -742,7 +738,6 @@
            onclick="navegar('especie.html?id=${e.id}', '${e.nombre.replace(/'/g, "\\'")}')"
            style="--card-color:${co.color}; animation-delay:${delay}s">
 
-        <!-- Zona imagen -->
         <div class="card-img">
           <span class="card-num">${String(i + 1).padStart(2, '0')}</span>
           <span class="card-status-dot ${co.cls}"></span>
@@ -759,7 +754,6 @@
           <div class="card-emoji">${e.emoji}</div>
         </div>
 
-        <!-- Info -->
         <div class="card-body">
           <div class="card-nombre">${e.nombre}</div>
           <div class="card-cient">${e.cient}</div>
