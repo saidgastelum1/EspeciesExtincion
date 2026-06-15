@@ -236,13 +236,13 @@
       background: rgba(0, 0, 0, 0.80);
     }
 
-    /*SCROLL PARA MÓVILES COMPLETAMENTE INTACTO*/
+    /* CONTENEDOR DE FILTROS AJUSTADO */
     .filters {
       width: 100%;
-      overflow-x: auto !important; /* scroll horizontal */
+      overflow-x: auto !important;
       overflow-y: hidden;
       white-space: nowrap;
-      padding: 6px 14px 14px 14px;
+      padding: 6px 0 14px 0; /* padding izquierdo en 0 evita espacio hacia atrás de Todas */
       display: flex;
       gap: 8px;
       align-items: center;
@@ -256,9 +256,9 @@
     }
 
     .filter-btn {
-      flex-shrink: 0; /* AJUSTE CRÍTICO: Evita que el botón se comprima en teléfonos */
+      flex-shrink: 0;
       min-width: 0;
-      padding: 7px 6px;
+      padding: 6px 14px; /* Un padding interno más balanceado para su tamaño */
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.35);
       background: rgba(0, 0, 0, 0.75);
@@ -266,7 +266,7 @@
       -webkit-backdrop-filter: blur(16px);
       color: rgba(255, 255, 255, 0.90);
       font-family: 'Share Tech Mono', monospace;
-      font-size: .52rem;
+      font-size: .8rem; /* IGUAL AL TAMAÑO DE ESPECIES ENCONTRADAS */
       font-weight: bold;
       letter-spacing: .06em;
       text-transform: uppercase;
@@ -318,7 +318,7 @@
       align-items: center;
       gap: 6px;
       font-family: 'Share Tech Mono', monospace;
-      font-size: .8rem;
+      font-size: .8rem; /* TAMAÑO DE REFERENCIA IGUALADO PARA LOS FILTROS */
       letter-spacing: .1em;
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.9);
@@ -472,7 +472,6 @@
       font-size: .88rem;
       font-weight: 700;
       line-height: 1.25;
-      /* Nombre completo, sin truncar */
       white-space: normal;
       word-break: break-word;
       hyphens: auto;
@@ -511,14 +510,12 @@
     }
 
     /* Colores de estado */
-    /* NOM-059 */
-    .s-P  { background: #B71C1C; }   /* P  — En Peligro de Extinción */
-    .s-A  { background: #F9A825; }   /* A  — Amenazada (amarillo tablilla) */
-    .s-Pr { background: #1B5E20; }   /* Pr — Protección Especial       */
-    /* UICN */
-    .s-CR { background: #880E4F; }   /* CR — En Peligro Crítico        */
-    .s-VU { background: #E65100; }   /* VU — Vulnerable (naranja) */
-    .s-LC { background: #1565C0; }   /* LC — Preocupación Menor (azul marino) */
+    .s-P  { background: #B71C1C; }   
+    .s-A  { background: #F9A825; }   
+    .s-Pr { background: #1B5E20; }   
+    .s-CR { background: #880E4F; }   
+    .s-VU { background: #E65100; }   
+    .s-LC { background: #1565C0; }   
 
     /* Vacío */
     .empty {
@@ -571,27 +568,13 @@
     }
 
     @keyframes blink {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: .2
-      }
+      0%, 100% { opacity: 1 }
+      50% { opacity: .2 }
     }
 
     @keyframes float-small {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-6px);
-      }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
     @keyframes card-in {
@@ -599,7 +582,6 @@
         opacity: 0;
         transform: translateY(14px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
@@ -628,7 +610,6 @@
           <p>Especies en riesgo · México</p>
         </div>
       </div>
-
     </div>
 
     <div class="search-filters-static">
@@ -662,11 +643,9 @@
 
   <script>
     const COLS = {
-      // NOM-059-SEMARNAT-2010
       "P":  { color: "#B71C1C", cls: "s-P",  label: "P — En Peligro" },
       "A":  { color: "#F9A825", cls: "s-A",  label: "A — Amenazada"  },
       "Pr": { color: "#1B5E20", cls: "s-Pr", label: "Pr — Protección Especial" },
-      // UICN
       "CR": { color: "#880E4F", cls: "s-CR", label: "CR — En Peligro Crítico" },
       "VU": { color: "#E65100", cls: "s-VU", label: "VU — Vulnerable" },
       "LC": { color: "#1565C0", cls: "s-LC", label: "LC — Preocupación Menor" },
@@ -675,7 +654,6 @@
     let currentFilter = "all";
     let currentSearch = "";
 
-    /** Comparación sin distinguir mayúsculas ni acentos (águila ≈ aguila). */
     function sinAcentos(str) {
       return String(str)
         .toLowerCase()
@@ -683,7 +661,6 @@
         .replace(/[\u0300-\u036f]/g, '');
     }
 
-    /** Normaliza texto de búsqueda (nombres comunes y científicos). */
     function normalizarTexto(str) {
       return sinAcentos(str)
         .replace(/[._]/g, ' ')
@@ -763,13 +740,11 @@
       }).join('');
     }
 
-    /* Búsqueda */
     document.getElementById('search').addEventListener('input', e => {
       currentSearch = e.target.value.trim();
       render();
     });
 
-    /* Filtros */
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -779,7 +754,6 @@
       });
     });
 
-    /* Ocultar buscador y filtros al hacer scroll */
     (function(){
       const page=document.getElementById('page');
       const header=document.querySelector('.header');
@@ -792,10 +766,8 @@
       },{passive:true});
     })();
 
-    /* Renderizar especies inmediatamente para evitar pantalla negra */
     render();
 
-    /* Scroll al cargar: inicio (buscador) o posición guardada */
     const irInicio = sessionStorage.getItem('catalogInicio');
     const savedScroll = sessionStorage.getItem('catalogScroll');
     if (irInicio) {
@@ -814,7 +786,6 @@
       });
     }
 
-    /* Cámara — Diferida ligeramente para no bloquear el renderizado inicial de la UI */
     setTimeout(async () => {
       try {
         const s = await navigator.mediaDevices.getUserMedia({
@@ -826,16 +797,13 @@
       } catch (e) { }
     }, 50);
 
-    /* Transición al salir */
     function navegar(url, especieNombre) {
-      // Evento de Google Analytics: clic en especie
       if (typeof gtag === 'function' && especieNombre) {
         gtag('event', 'click_especie', {
           'especie_nombre': especieNombre
         });
       }
 
-      // Guardar el scroll actual antes de salir
       const page = document.getElementById('page');
       if (page) sessionStorage.setItem('catalogScroll', page.scrollTop);
 
